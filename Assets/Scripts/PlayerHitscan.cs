@@ -48,7 +48,7 @@ public class PlayerHitscan : Weapon
                 }
                 else
                 {
-                    lr.SetPosition(lr.positionCount + -1, Camera.main.transform.forward * 1000f);
+                    lr.SetPosition(lr.positionCount + -1, Camera.main.transform.forward * 100f);
                     projectile.SetActive(false);
                 }
                 
@@ -63,7 +63,7 @@ public class PlayerHitscan : Weapon
             }
             else
             {
-                lr.SetPosition(lr.positionCount + -1, Camera.main.transform.forward * 1000f);
+                lr.SetPosition(lr.positionCount + -1, Camera.main.transform.forward * 100f);
             }
             //Debug.Log("Click Shot");
         }

@@ -7,10 +7,12 @@ using DG.Tweening;
 
 public class Player : MonoBehaviour
 {
+    #region vars
     [SerializeField] private float mouseSensitivity = 10f;
     [SerializeField] private Rigidbody rb;
     [SerializeField] private Animator anim;
     [SerializeField] private AudioSource aus;
+    [SerializeField] private Transform axisRef;
     [Header("Weapons")]
     [SerializeField] private GameObject[] weapons = new GameObject[0];
     [SerializeField] private Sprite[] reticles = new Sprite[2];
@@ -38,6 +40,8 @@ public class Player : MonoBehaviour
     public bool canMove = true;
     [SerializeField] private float hSpeed;
     [SerializeField] private float vSpeed;
+    [SerializeField] private Vector3 moveVector;
+    [SerializeField] private float verticalValue;
     [SerializeField] private float dashSpeed;
     [SerializeField] private float dashDuration;
     private float dashTimer = 0f;
@@ -52,10 +56,12 @@ public class Player : MonoBehaviour
 
     public Transform cam;
     Vector2 rotation = Vector2.zero;
+    #endregion
 
     // Start is called before the first frame update
     void Start()
     {
+        cam = Camera.main.transform;
         for (int i = 0; i < weapons.Length; i++)
         {
             weapons[i].SetActive(false);
@@ -65,6 +71,14 @@ public class Player : MonoBehaviour
         anim.SetInteger("Weapon", 1);
         reticleHUD.sprite = reticles[currentWeapon];
         reticleHUD.color = reticleColor[currentWeapon];
+    }
+
+    private void FixedUpdate()
+    {
+        rb.velocity = (axisRef.forward * moveVector.y + axisRef.right * moveVector.x) * hSpeed + new Vector3(0f, verticalValue * vSpeed, 0f);
+        //rb.velocity = moveVector;
+
+        //Debug.Log(cam.forward);
     }
 
     // Update is called once per frame
@@ -85,7 +99,7 @@ public class Player : MonoBehaviour
 
         if (canMove)
         {
-            Flight();
+            //Flight();
         }
         if (canLookAround)
         {
@@ -113,8 +127,10 @@ public class Player : MonoBehaviour
     #region input messages
     private void OnMouseLook()
     {
-        Vector2 targetMouseDelta = Mouse.current.delta.ReadValue() * Time.deltaTime * mouseSensitivity;
-        cam = Camera.main.transform;
+        //Debug.Log("using mouselook new");
+        if (!canLookAround) { return;}
+        Vector2 targetMouseDelta = Mouse.current.delta.ReadValue() * mouseSensitivity;
+        
 
         //rotation.y += Input.GetAxis("Mouse X");
         //rotation.x += -Input.GetAxis("Mouse Y");
@@ -138,16 +154,18 @@ public class Player : MonoBehaviour
 
     private void OnStrafing(InputValue value)
     {
-        float x = Input.GetAxis("Horizontal");
-        float y = Input.GetAxis("Vertical");
+        if (!canMove) { return;}
+
+        /*float x = Input.GetAxis("Horizontal");
+        float y = Input.GetAxis("Vertical");*/
 
         Vector2 movement = value.Get<Vector2>();
+        
+        //Debug.Log(movement.ToString());
+        //float up = 0f;
+        //float down = 0f;
 
-        Debug.Log(movement.ToString());
-        float up = 0f;
-        float down = 0f;
-
-        if (Input.GetKey(KeyCode.Space))
+        /*if (Input.GetKey(KeyCode.Space))
         {
             up = 1f;
         }
@@ -162,16 +180,33 @@ public class Player : MonoBehaviour
         else
         {
             down = 0f;
-        }
+        }*/
 
         //rb.velocity = new Vector3(x * hSpeed, (up + down)* vSpeed, y * hSpeed);
 
-        Vector3 direction = cam.forward * y * hSpeed + cam.right * x * hSpeed + cam.up * (up + down) * vSpeed;
-        Vector3 finalvelocity = direction; //* hSpeed;
-        //finalvelocity.y += (up + down) * vSpeed;
+        //Vector3 direction = cam.forward * y * hSpeed + cam.right * x * hSpeed + cam.up * (up + down) * vSpeed;
+        //Vector3 finalvelocity = direction; //* hSpeed;
 
-        rb.velocity = finalvelocity;
-        movingV = finalvelocity;
+        //moveVector =  new Vector3(movement.x, cam.forward.normalized.y * movement.y);
+
+
+
+        //moveVector = (cam.forward * movement.y + cam.right * movement.x) * hSpeed;
+        moveVector = new Vector2(movement.x, movement.y);
+
+        //moveVector.x = cam.forward.normalized.x * movement.x * hSpeed;
+        //moveVector.z = cam.forward.normalized.y * movement.y * hSpeed;
+
+        ///////////finalvelocity.y += (up + down) * vSpeed;
+
+        //rb.velocity = finalvelocity;
+        //movingV = finalvelocity;
+    }
+
+    private void OnElevation(InputValue value)
+    {
+        //rb.velocity = new Vector3(rb.velocity.x, 1f * vSpeed, rb.velocity.z);
+        verticalValue = value.Get<float>();
     }
     #endregion
 

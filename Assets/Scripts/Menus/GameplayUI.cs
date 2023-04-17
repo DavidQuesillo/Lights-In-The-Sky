@@ -20,14 +20,17 @@ public class GameplayUI : MonoBehaviour
     [Header("Health Points")]
     [SerializeField] private RectTransform hpPos;
     [SerializeField] private Image[] hpDots = new Image[3];
+    [SerializeField] private Image[] hpCorner = new Image[3];
     [SerializeField] private Color hpColor;
     [SerializeField] private Color hpLostColor;
     private bool displayingHp = false;
     [SerializeField] private float hpOnScreenDuration;
     private float hpDisplayTimer;
+    //private bool hpVisible;
 
     [Header("Shield Meter")]
     [SerializeField] private RectTransform shieldPos;
+    [SerializeField] private Image shieldCorner;
     private bool displayingShield = false;
 
 
@@ -92,7 +95,7 @@ public class GameplayUI : MonoBehaviour
     {
         displayingWeapons = false;
         //weaponsPos.DOMove(Vector3.left * 1f, 0.1f);
-        weaponsPos.DOAnchorPos(Vector2.left * 100f, 0.1f);
+        weaponsPos.DOAnchorPos(Vector2.down * 15f, 0.1f);
         weaponsPos.GetComponent<Image>().DOFade(0f, 0.1f);
 
         for (int i = 0; i < weaponsList.Length; i++)
@@ -117,19 +120,25 @@ public class GameplayUI : MonoBehaviour
 
     public void DisplayHp()
     {
-        displayingHp = true;
-        hpDisplayTimer = hpOnScreenDuration;
+        
+        hpDisplayTimer = hpOnScreenDuration;        
         //hpPos.DOMove(Vector3.zero, 0.1f);
-        hpPos.DOAnchorPos(Vector2.zero, 0.1f);
-        hpDots[0].DOFade(1f, 0.1f);
-        hpDots[1].DOFade(1f, 0.1f);
-        hpDots[2].DOFade(1f, 0.1f);
+        //hpPos.DOAnchorPos(Vector2.zero, 0.1f);
+        
+        if (!displayingHp)
+        {
+            hpDots[0].DOFade(1f, 0.1f);
+            hpDots[1].DOFade(1f, 0.1f);
+            hpDots[2].DOFade(1f, 0.1f);
+            displayingHp = true;
+        }
+        
     }
     public void HideHp()
     {
         displayingHp = false;
         //hpPos.DOMove(Vector3.right * 100f , 0.1f);
-        hpPos.DOAnchorPos(Vector2.right * 100f, 0.1f);
+        //hpPos.DOAnchorPos(Vector2.right * 100f, 0.1f);
         hpDots[0].DOFade(0f, 0.1f);
         hpDots[1].DOFade(0f, 0.1f);
         hpDots[2].DOFade(0f, 0.1f);
@@ -147,32 +156,42 @@ public class GameplayUI : MonoBehaviour
     }
     public void HpDamage(int hp)
     {
-        hpDots[hp % 3].color = hpLostColor;
+        //hpDots[hp % 3].color = hpLostColor;
         DisplayHp();
+        hpDots[hp % 3].DOColor(hpLostColor, 0.2f);
+        hpCorner[hp % 3].DOColor(hpLostColor, 0.2f);
+        //DisplayHp();
         
     }
     public void HpHeal(int hp)
     {
-        hpDots[hp % 3].color = hpColor;
+        //hpDots[hp % 3].color = hpColor;
         DisplayHp();
+        hpDots[hp % 3].DOColor(hpColor, 0.2f);
+        hpCorner[hp % 3].DOColor(hpColor, 0.2f);
+        //DisplayHp();
     }
 
-    public void UsingShield()
+    public void UsingShield(float currentShield)
     {
-        shieldPos.DOAnchorPos(Vector2.zero, 0.1f);
-        shieldPos.gameObject.GetComponent<Image>().DOFade(0.5f, 0.1f);
+        shieldCorner.fillAmount = currentShield * 0.01f;
+        shieldPos.GetComponent<Image>().fillAmount = currentShield * 0.01f;
+        //shieldPos.DOAnchorPos(Vector2.zero, 0.1f);
+        shieldPos.gameObject.GetComponent<Image>().DOFade(0.85f, 0.1f);        
         displayingShield = true;
     }
-    public void ChargingShield()
+    public void ChargingShield(float currentShield)
     {
-        shieldPos.GetComponent<Image>().DOFade(0.2f, 0.1f);
+        shieldCorner.fillAmount = currentShield * 0.01f;
+        shieldPos.GetComponent<Image>().fillAmount = currentShield * 0.01f;
+        shieldPos.GetComponent<Image>().DOFade(0.40f, 0.1f);
     }
     public void HideShield()
     {
         if (displayingShield)
         {
             displayingShield = false;
-            shieldPos.DOAnchorPos(Vector3.down * 200f, 0.1f);
+            //shieldPos.DOAnchorPos(Vector3.down * 200f, 0.1f);
             shieldPos.gameObject.GetComponent<Image>().DOFade(0f, 0.1f);
         }
     }

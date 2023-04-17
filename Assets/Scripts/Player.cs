@@ -114,14 +114,14 @@ public class Player : MonoBehaviour
 
         //Shoot();
 
-        /*if (Input.GetKeyDown(KeyCode.Z))
+        if (Input.GetKeyDown(KeyCode.Z))
         {
             TakeDamage();
         }
         if (Input.GetKeyDown(KeyCode.X))
         {
             GainHealth();
-        }*/
+        }
     }
 
     #region input messages
@@ -353,7 +353,7 @@ public class Player : MonoBehaviour
 
     private void HoldShield()
     {
-        shieldUI.fillAmount = shieldMeter * 0.01f;
+        //shieldUI.fillAmount = shieldMeter * 0.01f;
 
         if (Input.GetKey(KeyCode.Mouse1) && shieldMeter > 0f && !shieldDepleted)
         {
@@ -362,7 +362,7 @@ public class Player : MonoBehaviour
             weapons[currentWeapon].SetActive(false);
             anim.SetBool("Shielding", true);
             shieldMeter -= Time.deltaTime * shieldDrain;
-            GameManager.instance.UiScript.UsingShield();
+            GameManager.instance.UiScript.UsingShield(shieldMeter);
         }
         else
         {
@@ -376,7 +376,7 @@ public class Player : MonoBehaviour
             }
             if (shieldMeter < 100f)
             {
-                GameManager.instance.UiScript.ChargingShield();
+                GameManager.instance.UiScript.ChargingShield(shieldMeter);
                 shieldMeter += Time.deltaTime * shieldGain;
                 if (shieldMeter >= minShieldRecharge)
                 {

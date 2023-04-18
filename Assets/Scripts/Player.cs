@@ -42,9 +42,15 @@ public class Player : MonoBehaviour
     [SerializeField] private float vSpeed;
     [SerializeField] private float hSlow;
     [SerializeField] private float vSlow;
+    [SerializeField] private float smoothingSpeed = 0.1f;
+    private Vector2 smoothedVector;
     [SerializeField] private bool movingSlow;
     [SerializeField] private Vector3 moveVector;
     [SerializeField] private float verticalValue;
+    private float smoothedVertical;
+    private Vector2 smoothInputVelocity;
+    private float smoothVertVelocity;
+    //old
     [SerializeField] private float dashSpeed;
     [SerializeField] private float dashDuration;
     private float dashTimer = 0f;
@@ -78,13 +84,26 @@ public class Player : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (smoothedVertical != verticalValue)
+        {
+            smoothedVertical = Mathf.SmoothDamp(smoothedVertical, verticalValue, ref smoothVertVelocity, 0.1f);
+        }
+        if(smoothedVector != (Vector2)moveVector)
+        {
+            smoothedVector = Vector2.SmoothDamp(smoothedVector, moveVector, ref smoothInputVelocity, 0.1f);
+        }
+        
+        
         if (!movingSlow)
         {
-            rb.velocity = (axisRef.forward * moveVector.y + axisRef.right * moveVector.x) * hSpeed + new Vector3(0f, verticalValue * vSpeed, 0f);
+            //rb.velocity = (axisRef.forward * moveVector.y + axisRef.right * moveVector.x) * hSpeed + new Vector3(0f, verticalValue * vSpeed, 0f);            
+            rb.velocity = (axisRef.forward * smoothedVector.y + axisRef.right * smoothedVector.x) * hSpeed + new Vector3(0f, smoothedVertical * vSpeed, 0f);
+
         }
         else
         {
-            rb.velocity = (axisRef.forward * moveVector.y + axisRef.right * moveVector.x) * hSlow + new Vector3(0f, verticalValue * vSlow, 0f);
+            //rb.velocity = (axisRef.forward * moveVector.y + axisRef.right * moveVector.x) * hSlow + new Vector3(0f, verticalValue * vSlow, 0f);
+            rb.velocity = (axisRef.forward * smoothedVector.y + axisRef.right * smoothedVector.x) * hSlow + new Vector3(0f, smoothedVertical * vSlow, 0f);
         }
         
         //rb.velocity = moveVector;

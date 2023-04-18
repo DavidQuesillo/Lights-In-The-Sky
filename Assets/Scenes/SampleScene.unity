@@ -8920,6 +8920,7 @@ MonoBehaviour:
   vSpeed: 12
   hSlow: 6
   vSlow: 6
+  smoothingSpeed: 0.1
   movingSlow: 0
   moveVector: {x: 0, y: 0, z: 0}
   verticalValue: 0
@@ -10138,7 +10139,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1296750875
 Transform:
   m_ObjectHideFlags: 0

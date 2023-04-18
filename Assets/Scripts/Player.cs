@@ -40,6 +40,9 @@ public class Player : MonoBehaviour
     public bool canMove = true;
     [SerializeField] private float hSpeed;
     [SerializeField] private float vSpeed;
+    [SerializeField] private float hSlow;
+    [SerializeField] private float vSlow;
+    [SerializeField] private bool movingSlow;
     [SerializeField] private Vector3 moveVector;
     [SerializeField] private float verticalValue;
     [SerializeField] private float dashSpeed;
@@ -75,7 +78,15 @@ public class Player : MonoBehaviour
 
     private void FixedUpdate()
     {
-        rb.velocity = (axisRef.forward * moveVector.y + axisRef.right * moveVector.x) * hSpeed + new Vector3(0f, verticalValue * vSpeed, 0f);
+        if (!movingSlow)
+        {
+            rb.velocity = (axisRef.forward * moveVector.y + axisRef.right * moveVector.x) * hSpeed + new Vector3(0f, verticalValue * vSpeed, 0f);
+        }
+        else
+        {
+            rb.velocity = (axisRef.forward * moveVector.y + axisRef.right * moveVector.x) * hSlow + new Vector3(0f, verticalValue * vSlow, 0f);
+        }
+        
         //rb.velocity = moveVector;
 
         //Debug.Log(cam.forward);
@@ -207,6 +218,18 @@ public class Player : MonoBehaviour
     {
         //rb.velocity = new Vector3(rb.velocity.x, 1f * vSpeed, rb.velocity.z);
         verticalValue = value.Get<float>();
+    }
+
+    private void OnSlow(InputValue value)
+    {
+        if (value.isPressed)
+        {
+            movingSlow = true;
+        }
+        else
+        {
+            movingSlow = false;
+        }
     }
     #endregion
 

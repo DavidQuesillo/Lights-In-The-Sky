@@ -24,6 +24,10 @@ public class Valkyrie : EnemyBase
         wanderTimer = 0.4f;
         startPoint = new Vector3(Random.Range(worldBoundariesMin.x, worldBoundariesMax.x), Random.Range(worldBoundariesMin.y, worldBoundariesMax.y), Random.Range(worldBoundariesMin.z, worldBoundariesMax.z));
         FindNewPosition();
+
+        //debug
+        canTakeDamage = true;
+        health = 20;
     }
 
     private void FindNewPosition()
@@ -122,6 +126,7 @@ public class Valkyrie : EnemyBase
 
     public override void TakeDamage(float dmg)
     {
+        Debug.Log("hit");
         if (canTakeDamage)
         {
             base.TakeDamage(dmg);

@@ -62,7 +62,7 @@ public class GameplayUI : MonoBehaviour
         }
         weaponsList[currentWeapon].DOColor(disabledColor, 0.1f);
         weaponsList[currentWeapon].GetComponent<RectTransform>().DOScale(0.8f, 0.1f);
-        weaponsList[currentWeapon].gameObject.GetComponentInChildren<TextMeshProUGUI>().DOColor(disabledColor, 0.1f);
+        weaponsList[currentWeapon].gameObject.GetComponentInChildren<TextMeshProUGUI>().DOColor(new Color(disabledColor.r, disabledColor.g, disabledColor.b, 0f), 0.1f);
 
         currentWeapon = weapon;
         weaponsList[currentWeapon].DOColor(enabledColor, 0.1f);

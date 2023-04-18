@@ -3,19 +3,25 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - PlayerShot
+  - PlayerShield
+  - EnemyShot
+  - Enemy
+  - Boss
+  - EnemyActivate
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - PlayerHands
   - Water
   - UI
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Player
+  - Enemy
+  - Stage
+  - EnemyBullets
+  - PlayerBullets
   - 
   - 
   - 

@@ -23,8 +23,12 @@ public class PlayerProjectile : Weapon
     {
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
-            GameObject shot = Instantiate(projectile, transform.position, GameManager.instance.player.transform.rotation);
+            //GameObject shot = Instantiate(projectile, transform.position + Vector3.down * 0.6f, GameManager.instance.player.transform.rotation);
+            GameObject shot = IceDaggerPool.Instance.RequestPoolObject();
+            shot.transform.rotation = GameManager.instance.player.transform.rotation;
+            shot.transform.position = transform.position + Vector3.down * 0.6f;
             shot.GetComponent<PlayerBullet>().SetDamage(damage);
+            shot.SetActive(true);
             shot.GetComponent<Rigidbody>().AddForce(cam.forward * projectileSpeed, ForceMode.VelocityChange);
             Debug.Log("Click Shot");
         }
@@ -37,8 +41,13 @@ public class PlayerProjectile : Weapon
             }
             else
             {
-                GameObject shot = Instantiate(projectile, transform.position + Vector3.down*0.2f , GameManager.instance.player.transform.rotation);
+                //GameObject shot = Instantiate(projectile, transform.position + Vector3.down*0.6f , GameManager.instance.player.transform.rotation);
+                GameObject shot = IceDaggerPool.Instance.RequestPoolObject();
+                shot.transform.rotation = GameManager.instance.player.transform.rotation;
+                shot.transform.position = transform.position + Vector3.down * 0.6f;
                 shot.GetComponent<PlayerBullet>().SetDamage(damage);
+                shot.GetComponent<Rigidbody>().velocity = Vector3.zero;
+                shot.SetActive(true);
                 shot.GetComponent<Rigidbody>().AddForce(cam.forward * projectileSpeed, ForceMode.VelocityChange);
                 currentCooldown = fireRate;
                 Debug.Log("Held shot");

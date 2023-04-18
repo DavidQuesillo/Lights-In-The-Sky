@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 2324909443499214037}
   - component: {fileID: 2534135459015733969}
   - component: {fileID: -8207485127458732489}
-  m_Layer: 11
+  m_Layer: 9
   m_Name: Fireball
   m_TagString: EnemyShot
   m_Icon: {fileID: 0}
@@ -237,7 +237,7 @@ GameObject:
   - component: {fileID: 1131601023745794052}
   - component: {fileID: 1131601023745794054}
   - component: {fileID: 1131601023745794053}
-  m_Layer: 11
+  m_Layer: 9
   m_Name: Particle System
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5049,7 +5049,7 @@ GameObject:
   - component: {fileID: 7484824806033432034}
   - component: {fileID: 2229737652133499948}
   - component: {fileID: 6725281995481757332}
-  m_Layer: 11
+  m_Layer: 9
   m_Name: Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}

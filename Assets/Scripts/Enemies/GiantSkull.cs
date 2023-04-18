@@ -9,17 +9,21 @@ public class GiantSkull : EnemyBase
     [SerializeField] private Animator animControl;
     private Vector3 startPoint = Vector3.zero;
     [SerializeField] private float zPlacement;
-    [SerializeField] private float maxX;
-    [SerializeField] private float maxY;
+    /*[SerializeField] private float maxX;
+    [SerializeField] private float maxY;*/
+    [SerializeField] private Vector3 worldBoundariesMin;
+    [SerializeField] private Vector3 worldBoundariesMax;
 
     private void OnEnable()
     {
         DOTween.Init();
+        zPlacement = transform.position.z + Random.Range(-1.5f, 1f);
         wanderTimer = 0.4f;
         startPoint = new Vector3(transform.position.x, transform.position.y, zPlacement);
-        moveDir = new Vector3(Random.Range(-maxX, maxX), Random.Range(-maxY, maxY), zPlacement);
+        moveDir = new Vector3(Random.Range(worldBoundariesMin.x, worldBoundariesMax.x), Random.Range(worldBoundariesMin.y, worldBoundariesMax.y), zPlacement);
         wanderTimer = moveTime;
-        canTakeDamage = false;
+        canTakeDamage = true;
+        health = baseHealth;
     }
 
     // Update is called once per frame
@@ -54,7 +58,7 @@ public class GiantSkull : EnemyBase
         }
         else
         {
-            moveDir = new Vector3(Random.Range(-maxX, maxX), Random.Range(-maxY, maxY), zPlacement);
+            moveDir = new Vector3(Random.Range(worldBoundariesMin.x, worldBoundariesMax.x), Random.Range(worldBoundariesMax.y, worldBoundariesMax.y), zPlacement);
         }
     }
 
@@ -68,7 +72,9 @@ public class GiantSkull : EnemyBase
     }
     public void InstantiateProjectile()
     {
-        GameObject shot = Instantiate(shotPrefab, shootPoint.position, Quaternion.identity, null);
+        //GameObject shot = Instantiate(shotPrefab, shootPoint.position, Quaternion.identity, null);
+        GameObject shot = GiantSkullShotPool.Instance.RequestPoolObject();
+        shot.transform.position = shootPoint.position;
         shot.GetComponent<Rigidbody>().AddForce(Vector3.back * projectileSpeed, ForceMode.VelocityChange);
         attacking = false;
     }

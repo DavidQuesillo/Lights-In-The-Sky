@@ -10,6 +10,7 @@ public class EnemyBase : MonoBehaviour
     [SerializeField] protected GameObject shotPrefab;
     [SerializeField] protected Transform shootPoint;
     [SerializeField] protected float health;
+    [SerializeField] protected float baseHealth;
     [SerializeField] protected float speed;
     [SerializeField] protected float projectileSpeed;
     [SerializeField] protected float moveTime;

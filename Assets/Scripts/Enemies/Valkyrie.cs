@@ -13,6 +13,7 @@ public class Valkyrie : EnemyBase
     private Vector3 startPoint = Vector3.zero;
     [SerializeField] private Vector3 worldBoundariesMin;
     [SerializeField] private Vector3 worldBoundariesMax;
+    [SerializeField] private AnimationCurve speedCurve;
     private float startX;
     private float startY;
 
@@ -51,10 +52,46 @@ public class Valkyrie : EnemyBase
 
         if (wanderTimer <= 0f)
         {
+            if (transform.position.z >= GameManager.instance.player.transform.position.z)
+            {
+                if (Mathf.Abs(transform.position.z - GameManager.instance.player.transform.position.z) > Mathf.Abs(transform.position.x - GameManager.instance.player.transform.position.x))
+                {
+                    whereFrom = sideComingFrom.Forward;
+                }
+                else
+                {
+                    if (transform.position.x > GameManager.instance.player.transform.position.x)
+                    {
+                        whereFrom = sideComingFrom.Right;
+                    }
+                    else
+                    {
+                        whereFrom = sideComingFrom.Left;
+                    }                    
+                }
+            }
+            else
+            {
+                if (Mathf.Abs(transform.position.z - GameManager.instance.player.transform.position.z) > Mathf.Abs(transform.position.x - GameManager.instance.player.transform.position.x))
+                {
+                    whereFrom = sideComingFrom.Behind;
+                }
+                else
+                {
+                    if (transform.position.x > GameManager.instance.player.transform.position.x)
+                    {
+                        whereFrom = sideComingFrom.Right;
+                    }
+                    else
+                    {
+                        whereFrom = sideComingFrom.Left;
+                    }
+                }
+            }
             Attack();
             wanderTimer = Random.Range(moveTime + -moveVarRange, moveTime + moveVarRange); //debug for loop behavior
             FindNewPosition();
-            rb.DOMove(moveDir, speed);
+            rb.DOMove(moveDir, speed).SetEase(speedCurve);
         }
         else
         {
@@ -71,22 +108,83 @@ public class Valkyrie : EnemyBase
 
         if (Random.Range(-1f, 1f) < 0f)
         {
-            GameObject hShot = Instantiate(hSlash, shootPoint.position, Quaternion.LookRotation(GameManager.instance.player.transform.position - transform.position));
+            //GameObject hShot = Instantiate(hSlash, shootPoint.position, Quaternion.LookRotation(GameManager.instance.player.transform.position - transform.position));
+            GameObject hShot = ValhSlashPool.Instance.RequestPoolObject();
+            hShot.transform.position = shootPoint.position;
+            hShot.GetComponent<Rigidbody>().velocity = Vector3.zero;
             anim.SetTrigger("hSlash");
-            if (whereFrom == sideComingFrom.Forward)
+            /*if (whereFrom == sideComingFrom.Forward)
             {
                 hShot.GetComponent<Rigidbody>().AddForce(Vector3.back * projectileSpeed, ForceMode.VelocityChange);
-            }
+            }*/
             //hShot.GetComponent<Rigidbody>().AddForce((GameManager.instance.player.transform.position - transform.position).normalized * projectileSpeed, ForceMode.VelocityChange);
+
+            switch (whereFrom)
+            {
+                case sideComingFrom.Forward:
+                    hShot.transform.rotation = Quaternion.LookRotation(Vector3.back);
+                    hShot.GetComponent<Rigidbody>().AddForce(Vector3.back * projectileSpeed, ForceMode.VelocityChange);
+                    break;
+                case sideComingFrom.Left:
+                    hShot.transform.rotation = Quaternion.LookRotation(Vector3.right);
+                    hShot.GetComponent<Rigidbody>().AddForce(Vector3.right * projectileSpeed, ForceMode.VelocityChange);
+                    break;
+                case sideComingFrom.Behind:
+                    hShot.transform.rotation = Quaternion.LookRotation(Vector3.forward);
+                    hShot.GetComponent<Rigidbody>().AddForce(Vector3.forward * projectileSpeed, ForceMode.VelocityChange);
+                    break;
+                case sideComingFrom.Right:
+                    hShot.transform.rotation = Quaternion.LookRotation(Vector3.left);
+                    hShot.GetComponent<Rigidbody>().AddForce(Vector3.left * projectileSpeed, ForceMode.VelocityChange);
+                    break;
+                default:
+                    hShot.SetActive(false);
+                    break;
+            }
         }
         else
         {
-            GameObject vShot = Instantiate(vSlash, shootPoint.position, Quaternion.LookRotation(GameManager.instance.player.transform.position - transform.position));
+            
+            //also old
+            //GameObject vShot = Instantiate(vSlash, shootPoint.position, Quaternion.LookRotation(GameManager.instance.player.transform.position - transform.position));
+            
+            GameObject vShot = ValvSlashPool.Instance.RequestPoolObject();
+            vShot.transform.position = shootPoint.position;
+            vShot.GetComponent<Rigidbody>().velocity = Vector3.zero;
             anim.SetTrigger("vSlash");
+           
+            
+            //previously discarded code
             //vShot.GetComponent<Rigidbody>().AddForce((GameManager.instance.player.transform.position - transform.position).normalized * projectileSpeed, ForceMode.VelocityChange);
-            if (whereFrom == sideComingFrom.Forward)
+            
+            //old mechanism
+            /*if (whereFrom == sideComingFrom.Forward)
             {
                 vShot.GetComponent<Rigidbody>().AddForce(Vector3.back * projectileSpeed, ForceMode.VelocityChange);
+            }*/
+
+            //new
+            switch (whereFrom)
+            {
+                case sideComingFrom.Forward:
+                    vShot.transform.rotation = Quaternion.LookRotation(Vector3.back);
+                    vShot.GetComponent<Rigidbody>().AddForce(Vector3.back * projectileSpeed, ForceMode.VelocityChange);
+                    break;
+                case sideComingFrom.Left:
+                    vShot.transform.rotation = Quaternion.LookRotation(Vector3.right);
+                    vShot.GetComponent<Rigidbody>().AddForce(Vector3.right * projectileSpeed, ForceMode.VelocityChange);
+                    break;
+                case sideComingFrom.Behind:
+                    vShot.transform.rotation = Quaternion.LookRotation(Vector3.forward);
+                    vShot.GetComponent<Rigidbody>().AddForce(Vector3.forward * projectileSpeed, ForceMode.VelocityChange);
+                    break;
+                case sideComingFrom.Right:
+                    vShot.transform.rotation = Quaternion.LookRotation(Vector3.left);
+                    vShot.GetComponent<Rigidbody>().AddForce(Vector3.left * projectileSpeed, ForceMode.VelocityChange);
+                    break;
+                default:
+                    vShot.SetActive(false);
+                    break;
             }
         }
     }

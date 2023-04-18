@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 441696063227219864}
   - component: {fileID: 9155772065679427158}
   - component: {fileID: 4371668042983826670}
-  m_Layer: 11
+  m_Layer: 10
   m_Name: Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -97,7 +97,7 @@ GameObject:
   - component: {fileID: 6451528006526467296}
   - component: {fileID: 4737211117561419439}
   - component: {fileID: -4407539155250847573}
-  m_Layer: 11
+  m_Layer: 10
   m_Name: CyclopsShot
   m_TagString: EnemyShot
   m_Icon: {fileID: 0}
@@ -211,3 +211,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ebedeec9472421c48a3e72124b6d0c9f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dissipateTimer: 5
+  rb: {fileID: 6451528006526467296}

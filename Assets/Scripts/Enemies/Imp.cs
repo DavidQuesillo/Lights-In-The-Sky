@@ -10,6 +10,7 @@ public class Imp : EnemyBase
     [SerializeField] private float maxSpeed;
     [SerializeField] private float sameDirTimer = 1f;
     [SerializeField] private int barrageAmount = 7;
+    [SerializeField] private float barrageSpread = 0.4f;
     private int barrageProg;
     private float flyTimer;
 
@@ -69,7 +70,7 @@ public class Imp : EnemyBase
         //GameObject shot = Instantiate(shotPrefab, shootPoint.position, Quaternion.identity, null);
         GameObject shot = FireballPool.Instance.RequestPoolObject();
         shot.transform.position = shootPoint.position;
-        shot.GetComponent<Rigidbody>().AddForce((new Vector3(Random.Range(-0.4f, 0.4f), Random.Range(-0.4f, 0.4f), 0f) 
+        shot.GetComponent<Rigidbody>().AddForce((new Vector3(Random.Range(-barrageSpread, barrageSpread), Random.Range(-barrageSpread, barrageSpread), 0f) 
                                                     + GameManager.instance.player.transform.position - shootPoint.position).normalized
                                                         * projectileSpeed, ForceMode.VelocityChange);
     }
@@ -164,7 +165,7 @@ public class Imp : EnemyBase
         while (true)
         {
             flyTimer = sameDirTimer;
-            while (!Physics.Raycast(transform.position, moveDir.normalized, 3f, boundaryMask))
+            while (!Physics.Raycast(transform.position, moveDir.normalized, 5f, boundaryMask))
             {
                 flyTimer -= Time.deltaTime;
                 Debug.Log("moving successfully");

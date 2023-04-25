@@ -2,15 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ImpPool : pool
+public class GoldValkPool : pool
 {
     //public GameObject obj;
     //public List<GameObject> objList;
 
     //public int poolsize = 5;
 
-    private static ImpPool instance;
-    public static new ImpPool Instance { get { return instance; } }
+    private static GoldValkPool instance;
+    public static new GoldValkPool Instance { get { return instance; } }
 
     private void Awake()
     {
@@ -30,7 +30,13 @@ public class ImpPool : pool
         AddObjToPool(poolsize);
     }
 
-    /*public void AddObjToPool(int amount)
+    // Update is called once per frame
+    void Update()
+    {
+        
+    }
+
+    public override void AddObjToPool(int amount)
     {
         for (int i = 0; i < amount; i++)
         {
@@ -40,7 +46,7 @@ public class ImpPool : pool
         }
     }
 
-    public GameObject RequestPoolObject()
+    public override GameObject RequestPoolObject()
     {
         for (int i = 0; i < objList.Count; i++)
         {
@@ -53,5 +59,5 @@ public class ImpPool : pool
         AddObjToPool(1);
         objList[objList.Count - 1].SetActive(true);
         return objList[objList.Count - 1]; //creates a new object and adds it to the pool to return it to the function
-    }*/
+    }
 }

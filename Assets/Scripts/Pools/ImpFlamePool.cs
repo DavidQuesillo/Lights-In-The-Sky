@@ -2,15 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ImpPool : pool
+public class ImpFlamePool : pool
 {
     //public GameObject obj;
     //public List<GameObject> objList;
 
     //public int poolsize = 5;
 
-    private static ImpPool instance;
-    public static new ImpPool Instance { get { return instance; } }
+    private static ImpFlamePool instance;
+    public static new ImpFlamePool Instance { get { return instance; } }
 
     private void Awake()
     {
@@ -28,6 +28,12 @@ public class ImpPool : pool
     void Start()
     {
         AddObjToPool(poolsize);
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        
     }
 
     /*public void AddObjToPool(int amount)

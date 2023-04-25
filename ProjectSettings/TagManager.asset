@@ -22,7 +22,7 @@ TagManager:
   - Stage
   - EnemyBullets
   - PlayerBullets
-  - 
+  - TriggerCollisionCheck
   - 
   - 
   - 

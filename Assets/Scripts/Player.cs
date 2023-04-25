@@ -330,7 +330,7 @@ public class Player : MonoBehaviour
                 health -= 1f;
                 GameManager.instance.UiScript.HpDamage((int)health);
                 aus.Play();
-                Debug.Log(((int)health % 3) * 1);
+                //Debug.Log(((int)health % 3) * 1);
             }
 
             if (health <= 0)

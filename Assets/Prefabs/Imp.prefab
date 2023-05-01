@@ -88,6 +88,7 @@ MonoBehaviour:
   moveTime: 0.8
   moveVarRange: 7
   inPosition: 1
+  wanderTimer: 1
   attacking: 0
   whereFrom: 0
   anim: {fileID: 7770760999689772208}
@@ -98,7 +99,8 @@ MonoBehaviour:
     m_Bits: 256
   maxSpeed: 8
   sameDirTimer: 1
-  barrageAmount: 7
+  barrageAmount: 3
+  barrageSpread: 0.4
 --- !u!1 &7770761000078462809
 GameObject:
   m_ObjectHideFlags: 0
@@ -1751,6 +1753,7 @@ MonoBehaviour:
   moveTime: 0.8
   moveVarRange: 7
   inPosition: 0
+  wanderTimer: 0
   attacking: 0
   whereFrom: 0
   anim: {fileID: 7770760999689772208}
@@ -1762,6 +1765,7 @@ MonoBehaviour:
   maxSpeed: 0
   sameDirTimer: 1
   barrageAmount: 7
+  barrageSpread: 0.4
 --- !u!4 &7808661796948720470 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: fe3e99f182e2d7640a1942874897a81d,

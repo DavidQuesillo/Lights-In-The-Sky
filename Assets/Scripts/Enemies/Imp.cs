@@ -61,7 +61,7 @@ public class Imp : EnemyBase
         }*/
         rb.AddForce(moveDir * speed * Time.deltaTime, ForceMode.Acceleration);
         //Debug.Log((moveDir * speed * Time.deltaTime).ToString());
-        Debug.Log(moveDir);
+        //Debug.Log(moveDir);
         rb.rotation = Quaternion.LookRotation(GameManager.instance.player.transform.position - rb.position, Vector3.up);
     }
 

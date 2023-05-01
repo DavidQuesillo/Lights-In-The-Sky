@@ -17,7 +17,7 @@ public class EnemyBase : MonoBehaviour
     [SerializeField] protected float moveVarRange;
     [SerializeField] protected bool inPosition = false;
     protected bool canTakeDamage = true;
-    protected float wanderTimer = 0f;
+    [SerializeField] protected float wanderTimer = 0f;
     protected Vector3 moveDir;
     [SerializeField] protected bool attacking = false;
     [SerializeField] protected sideComingFrom whereFrom = sideComingFrom.Forward;

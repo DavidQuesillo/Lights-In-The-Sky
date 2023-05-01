@@ -6,23 +6,28 @@ public class GravityBullets : MonoBehaviour
 {
     [SerializeField] private float lifetimeAfterTouch = 0.1f;
     [SerializeField] private float lifetimeVariance = 0.05f;
-    private float timer;
+    [SerializeField] private float timer;
     [SerializeField] private bool touched = false;
 
     private void Start()
     {
-        StartCoroutine(VanishCoroutine());
+        //StartCoroutine(VanishCoroutine());
     }
 
     private void OnEnable()
     {
+        StopCoroutine(VanishCoroutine());
+        touched = false;
         timer = lifetimeAfterTouch + Random.Range(-lifetimeVariance, lifetimeVariance);
+        transform.localScale = Vector3.one;
+        StartCoroutine(VanishCoroutine());
     }
 
     private void OnCollisionEnter(Collision collision)
     {
         //Debug.Log("bonked smth");
         touched = true;
+        Debug.Log("fireball touched");
     }
     private void OnTriggerEnter(Collider other)
     {
@@ -31,6 +36,14 @@ public class GravityBullets : MonoBehaviour
             gameObject.SetActive(false);
         }
     }
+    /*private void OnCollisionExit(Collision collision)
+    {
+        
+    }
+    private void OnCollisionStay(Collision collision)
+    {
+        
+    }*/
 
     private IEnumerator VanishCoroutine()
     {
@@ -39,14 +52,20 @@ public class GravityBullets : MonoBehaviour
             while (touched)
             {
                 timer -= Time.deltaTime;
+                transform.localScale = Vector3.one * timer;
                 if (timer <= 0f)
                 {
+                    gameObject.SetActive(false);
                     break;
                 }
-                gameObject.SetActive(false);
-                yield return null;
+                else
+                {
+                    yield return null;
+                }
+                //gameObject.SetActive(false);
             }            
             yield return null;
         }
+        Debug.Log("Exited coroutine");
     }
 }

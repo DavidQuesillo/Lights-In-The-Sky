@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.VFX;
 
 public class Imp : EnemyBase
 {
@@ -26,6 +27,10 @@ public class Imp : EnemyBase
 
     private void OnEnable()
     {
+        GameObject spawnVfx = ImpSpawnVfxPool.Instance.RequestPoolObject();
+        spawnVfx.transform.position = transform.position;
+        spawnVfx.GetComponent<VisualEffect>().Play();
+
         if (rb.position.x > 0f)
         {
             moveDir = Vector3.left;
@@ -89,9 +94,15 @@ public class Imp : EnemyBase
             base.TakeDamage(dmg);
             if (health <= 0f)
             {
-                gameObject.SetActive(false);
+                //gameObject.SetActive(false);
+                Death();
             }
         }
+    }
+    protected override void Death()
+    {
+        base.Death();
+        gameObject.SetActive(false);
     }
 
     private void BecomeActive()

@@ -8,7 +8,9 @@ public class EnemyBase : MonoBehaviour
 
     [SerializeField] protected Rigidbody rb;
     [SerializeField] protected GameObject shotPrefab;
+    [SerializeField] protected GameObject SpawnFX;
     [SerializeField] protected Transform shootPoint;
+    [SerializeField] private bool isPartOfWave;
     [SerializeField] protected float health;
     [SerializeField] protected float baseHealth;
     [SerializeField] protected float speed;
@@ -21,17 +23,6 @@ public class EnemyBase : MonoBehaviour
     protected Vector3 moveDir;
     [SerializeField] protected bool attacking = false;
     [SerializeField] protected sideComingFrom whereFrom = sideComingFrom.Forward;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
 
     protected virtual void Attack()
     {
@@ -45,7 +36,10 @@ public class EnemyBase : MonoBehaviour
 
     protected virtual void Death()
     {
-
+        if (isPartOfWave)
+        {
+            SendMessageUpwards("EnemyDefeated");
+        }
     }
 
     public virtual void TakeDamage(float dmg)

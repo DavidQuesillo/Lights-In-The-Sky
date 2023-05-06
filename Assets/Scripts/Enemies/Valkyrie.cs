@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using UnityEngine.VFX;
 
 public class Valkyrie : EnemyBase
 {
@@ -17,9 +18,18 @@ public class Valkyrie : EnemyBase
     private float startX;
     private float startY;
 
-    private void OnEnable()
+
+    private void Start()
     {
         DOTween.Init();
+    }
+    private void OnEnable()
+    {
+        GameObject spawnVfx = ValkSpawnVfxPool.Instance.RequestPoolObject();
+        spawnVfx.transform.position = transform.position;
+        spawnVfx.GetComponent<VisualEffect>().Play();
+
+        
         startX = transform.position.x;
         startY = transform.position.y;
         wanderTimer = 0.4f;
@@ -28,7 +38,7 @@ public class Valkyrie : EnemyBase
 
         //debug
         canTakeDamage = true;
-        health = 20;
+        health = baseHealth;
     }
 
     private void FindNewPosition()
@@ -230,8 +240,14 @@ public class Valkyrie : EnemyBase
             base.TakeDamage(dmg);
             if (health <= 0f)
             {
-                gameObject.SetActive(false);
+                //gameObject.SetActive(false);
+                Death();
             }
         }
+    }
+    protected override void Death()
+    {
+        base.Death();
+        gameObject.SetActive(false);
     }
 }

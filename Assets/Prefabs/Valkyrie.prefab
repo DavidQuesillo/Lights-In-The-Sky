@@ -1159,7 +1159,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rb: {fileID: 3962849003260490191}
   shotPrefab: {fileID: 0}
+  SpawnFX: {fileID: 2642934622135378814, guid: f5436af0a38cbf24aba9932a643e67bc, type: 3}
   shootPoint: {fileID: 3962849004298542451}
+  isPartOfWave: 0
   health: 20
   baseHealth: 20
   speed: 1.5
@@ -1167,6 +1169,7 @@ MonoBehaviour:
   moveTime: 2
   moveVarRange: 0.2
   inPosition: 1
+  wanderTimer: 0
   attacking: 0
   whereFrom: 0
   model: {fileID: 3303700788348057382}

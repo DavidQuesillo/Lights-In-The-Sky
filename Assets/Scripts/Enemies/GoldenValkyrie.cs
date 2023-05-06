@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.VFX;
 
 public class GoldenValkyrie : EnemyBase
 {
@@ -29,6 +30,15 @@ public class GoldenValkyrie : EnemyBase
         StartCoroutine(RepeatAttack());
         StartCoroutine(UpdateWanderVector());
         canTakeDamage = true;
+    }
+
+    private void OnEnable()
+    {
+        GameObject spawnVfx = GoldValkSpawnVfxPool.Instance.RequestPoolObject();
+        spawnVfx.transform.position = transform.position;
+        spawnVfx.GetComponent<VisualEffect>().Play();
+
+        health = baseHealth;
     }
 
     private void FixedUpdate()

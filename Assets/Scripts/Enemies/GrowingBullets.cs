@@ -2,11 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyBullets : MonoBehaviour
+public class GrowingBullets : EnemyBullets
 {
-    [SerializeField] protected float dissipateTimer = 5f;
-    protected float timer;
-    [SerializeField] protected Rigidbody rb;
+    [SerializeField] private float maxSize;
+    [SerializeField] private float growthSpeed;
 
     private void OnEnable()
     {
@@ -17,6 +16,11 @@ public class EnemyBullets : MonoBehaviour
     void Update()
     {
         timer -= Time.deltaTime;
+        if (transform.localScale.magnitude < (Vector3.one * maxSize).magnitude)
+        {
+            transform.localScale += Vector3.one * (Time.deltaTime * growthSpeed);
+        }
+        
         if (timer <= 0f)
         {
             timer = dissipateTimer;

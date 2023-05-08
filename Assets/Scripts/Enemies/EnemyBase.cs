@@ -8,7 +8,8 @@ public class EnemyBase : MonoBehaviour
 
     [SerializeField] protected Rigidbody rb;
     [SerializeField] protected GameObject shotPrefab;
-    [SerializeField] protected GameObject SpawnFX;
+    [SerializeField] protected AudioClip spawnSoundFX;
+    [SerializeField] protected AudioSource aus;
     [SerializeField] protected Transform shootPoint;
     [SerializeField] private bool isPartOfWave;
     [SerializeField] protected float health;

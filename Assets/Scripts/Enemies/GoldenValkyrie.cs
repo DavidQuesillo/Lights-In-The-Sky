@@ -37,6 +37,7 @@ public class GoldenValkyrie : EnemyBase
         GameObject spawnVfx = GoldValkSpawnVfxPool.Instance.RequestPoolObject();
         spawnVfx.transform.position = transform.position;
         spawnVfx.GetComponent<VisualEffect>().Play();
+        aus.PlayOneShot(spawnSoundFX);
 
         health = baseHealth;
     }

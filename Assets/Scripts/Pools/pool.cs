@@ -40,7 +40,7 @@ public class pool : MonoBehaviour
     {
         for (int i = 0; i < amount; i++)
         {
-            GameObject gO = Instantiate(obj, transform);
+            GameObject gO = Instantiate(obj, transform.position, Quaternion.identity, transform);
             gO.SetActive(false);
             objList.Add(gO);
         }

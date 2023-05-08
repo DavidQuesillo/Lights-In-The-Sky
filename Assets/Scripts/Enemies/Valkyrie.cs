@@ -28,8 +28,9 @@ public class Valkyrie : EnemyBase
         GameObject spawnVfx = ValkSpawnVfxPool.Instance.RequestPoolObject();
         spawnVfx.transform.position = transform.position;
         spawnVfx.GetComponent<VisualEffect>().Play();
+        aus.PlayOneShot(spawnSoundFX);
 
-        
+
         startX = transform.position.x;
         startY = transform.position.y;
         wanderTimer = 0.4f;

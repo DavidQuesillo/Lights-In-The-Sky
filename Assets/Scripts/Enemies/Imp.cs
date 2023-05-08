@@ -30,6 +30,7 @@ public class Imp : EnemyBase
         GameObject spawnVfx = ImpSpawnVfxPool.Instance.RequestPoolObject();
         spawnVfx.transform.position = transform.position;
         spawnVfx.GetComponent<VisualEffect>().Play();
+        aus.PlayOneShot(spawnSoundFX);
 
         if (rb.position.x > 0f)
         {

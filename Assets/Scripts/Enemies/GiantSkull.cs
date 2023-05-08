@@ -58,6 +58,22 @@ public class GiantSkull : EnemyBase
         }
         else
         {
+            switch (whereFrom)
+            {
+                case sideComingFrom.Forward:
+                    moveDir = new Vector3(zPlacement, Random.Range(worldBoundariesMax.y, worldBoundariesMax.y), Random.Range(worldBoundariesMin.x, worldBoundariesMax.x));
+                    break;
+                case sideComingFrom.Left:
+                    break;
+                case sideComingFrom.Behind:
+                    moveDir = new Vector3(Random.Range(worldBoundariesMin.x, worldBoundariesMax.x), Random.Range(worldBoundariesMax.y, worldBoundariesMax.y), zPlacement);
+                    break;
+                case sideComingFrom.Right:
+                    moveDir = new Vector3(zPlacement, Random.Range(worldBoundariesMax.y, worldBoundariesMax.y), Random.Range(worldBoundariesMin.x, worldBoundariesMax.x));
+                    break;
+                default:
+                    break;
+            }
             moveDir = new Vector3(Random.Range(worldBoundariesMin.x, worldBoundariesMax.x), Random.Range(worldBoundariesMax.y, worldBoundariesMax.y), zPlacement);
         }
     }
@@ -65,7 +81,6 @@ public class GiantSkull : EnemyBase
     protected override void Attack()
     {
         //base.Attack();
-
         animControl.SetTrigger("Attack");
         attacking = true;
         Invoke("InstantiateProjectile", 0.3f);
@@ -75,7 +90,24 @@ public class GiantSkull : EnemyBase
         //GameObject shot = Instantiate(shotPrefab, shootPoint.position, Quaternion.identity, null);
         GameObject shot = GiantSkullShotPool.Instance.RequestPoolObject();
         shot.transform.position = shootPoint.position;
-        shot.GetComponent<Rigidbody>().AddForce(Vector3.back * projectileSpeed, ForceMode.VelocityChange);
+        
+        switch (whereFrom)
+        {
+            case sideComingFrom.Forward:
+                shot.GetComponent<Rigidbody>().AddForce(Vector3.back * projectileSpeed, ForceMode.VelocityChange);
+                break;
+            case sideComingFrom.Left:
+                shot.GetComponent<Rigidbody>().AddForce(Vector3.right * projectileSpeed, ForceMode.VelocityChange);
+                break;
+            case sideComingFrom.Behind:
+                shot.GetComponent<Rigidbody>().AddForce(Vector3.forward * projectileSpeed, ForceMode.VelocityChange);
+                break;
+            case sideComingFrom.Right:
+                shot.GetComponent<Rigidbody>().AddForce(Vector3.left * projectileSpeed, ForceMode.VelocityChange);
+                break;
+            default:
+                break;
+        }
         attacking = false;
     }
 

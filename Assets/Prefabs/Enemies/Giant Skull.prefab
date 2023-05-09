@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4924609952293811404}
   - component: {fileID: 2221648727955093238}
   - component: {fileID: 3593410018305558420}
-  m_Layer: 9
+  m_Layer: 7
   m_Name: Giant Skull
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -55,7 +55,7 @@ MonoBehaviour:
   spawnSoundFX: {fileID: 8300000, guid: fecc9524d863c284d9efc2ed9a9b8fb7, type: 3}
   aus: {fileID: 3593410018305558420}
   shootPoint: {fileID: 4924609952346706121}
-  isPartOfWave: 0
+  isPartOfWave: 1
   health: 200
   baseHealth: 200
   speed: 4
@@ -70,7 +70,6 @@ MonoBehaviour:
   mr2: {fileID: 3357604069575905152}
   mr3: {fileID: 4400015262296052110}
   animControl: {fileID: 4924609952372648280}
-  zPlacement: 0
   worldBoundariesMin: {x: -15, y: -1, z: 19}
   worldBoundariesMax: {x: 15, y: 23, z: 21}
 --- !u!54 &4924609952293811404
@@ -208,7 +207,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4924609952346706121}
-  m_Layer: 9
+  m_Layer: 7
   m_Name: ShootPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}

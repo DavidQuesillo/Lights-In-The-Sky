@@ -61,8 +61,20 @@ public class PlayerBullet : MonoBehaviour
         Destroy(gameObject, 0.02f);*/
 
         //Instantiate(particles, transform.position, Quaternion.LookRotation(-transform.forward), null);
+        
+        
+        /*if (LayerMask.GetMask(LayerMask.LayerToName(other.gameObject.layer)) == ignoreMask)
+        {
+            GameObject particle = IceDagParticlesPool.Instance.RequestPoolObject();
+            particle.transform.SetPositionAndRotation(transform.position, Quaternion.LookRotation(-transform.forward));
+            Debug.Log(other.name);
+            gameObject.SetActive(false);
+            //Destroy(gameObject, 0.02f);
+        }*/
+
         GameObject particle = IceDagParticlesPool.Instance.RequestPoolObject();
         particle.transform.SetPositionAndRotation(transform.position, Quaternion.LookRotation(-transform.forward));
+        Debug.Log(other.name);
         gameObject.SetActive(false);
         //Destroy(gameObject, 0.02f);
     }

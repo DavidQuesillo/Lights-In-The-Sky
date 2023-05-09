@@ -121,9 +121,15 @@ public class GoldenValkyrie : EnemyBase
             base.TakeDamage(dmg);
             if (health <= 0f)
             {
-                gameObject.SetActive(false);
+                //gameObject.SetActive(false);
+                Death();
             }
         }
+    }
+    protected override void Death()
+    {
+        base.Death();
+        gameObject.SetActive(false);
     }
 
     private IEnumerator RepeatAttack()

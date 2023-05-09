@@ -28,16 +28,17 @@ public class PlayerProjectile : Weapon
             shot.transform.rotation = GameManager.instance.player.transform.rotation;
             shot.transform.position = transform.position + Vector3.down * 0.6f;
             shot.GetComponent<PlayerBullet>().SetDamage(damage);
+            shot.GetComponent<Rigidbody>().velocity = Vector3.zero;
             shot.SetActive(true);
             shot.GetComponent<Rigidbody>().AddForce(cam.forward * projectileSpeed, ForceMode.VelocityChange);
-            Debug.Log("Click Shot");
+            //Debug.Log("Click Shot");
         }
         if (Input.GetKey(KeyCode.Mouse0))
         {
             if (currentCooldown > 0f)
             {
                 currentCooldown -= Time.deltaTime;
-                Debug.Log("cooling down");
+                //Debug.Log("cooling down");
             }
             else
             {
@@ -50,7 +51,7 @@ public class PlayerProjectile : Weapon
                 shot.SetActive(true);
                 shot.GetComponent<Rigidbody>().AddForce(cam.forward * projectileSpeed, ForceMode.VelocityChange);
                 currentCooldown = fireRate;
-                Debug.Log("Held shot");
+                //Debug.Log("Held shot");
             }
         }
     }

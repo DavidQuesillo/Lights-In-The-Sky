@@ -81,10 +81,10 @@ MonoBehaviour:
   rb: {fileID: 7770760999923613931}
   shotPrefab: {fileID: 1073382297120792335, guid: dd677f9d51d87d3408840eaccca8bc5a,
     type: 3}
-  spawnSoundFX: {fileID: 8300000, guid: e32fc9317df53aa438897b4c04606bbd, type: 3}
+  spawnSoundFX: {fileID: 8300000, guid: fecc9524d863c284d9efc2ed9a9b8fb7, type: 3}
   aus: {fileID: -523927393010704340}
   shootPoint: {fileID: 7770761000078462810}
-  isPartOfWave: 0
+  isPartOfWave: 1
   health: 25
   baseHealth: 25
   speed: 300

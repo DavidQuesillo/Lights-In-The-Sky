@@ -1273,10 +1273,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rb: {fileID: 4979381252304180624}
   shotPrefab: {fileID: 0}
-  spawnSoundFX: {fileID: 8300000, guid: 27e2b17b68cee5443af5a855a6d1f2c6, type: 3}
+  spawnSoundFX: {fileID: 8300000, guid: fecc9524d863c284d9efc2ed9a9b8fb7, type: 3}
   aus: {fileID: 7849437600019637404}
   shootPoint: {fileID: 4979381250389653804}
-  isPartOfWave: 0
+  isPartOfWave: 1
   health: 200
   baseHealth: 200
   speed: 0.55

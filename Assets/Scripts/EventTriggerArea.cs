@@ -11,10 +11,14 @@ public class EventTriggerArea : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        onEnter?.Invoke();
-        if (!moreThanOnce)
+        if (LayerMask.GetMask(LayerMask.LayerToName(other.gameObject.layer)) == checkLayers)
         {
-            gameObject.SetActive(false);
-        }
+            onEnter?.Invoke();
+            Debug.Log("Area triggered");
+            if (!moreThanOnce)
+            {
+                gameObject.SetActive(false);
+            }
+        }        
     }
 }

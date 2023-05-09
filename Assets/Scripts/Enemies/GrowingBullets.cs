@@ -6,9 +6,11 @@ public class GrowingBullets : EnemyBullets
 {
     [SerializeField] private float maxSize;
     [SerializeField] private float growthSpeed;
+    [SerializeField] private float startScale = 1.3f;
 
     private void OnEnable()
     {
+        transform.localScale = Vector3.one * startScale;
         timer = dissipateTimer;
         rb.velocity = Vector3.zero;
     }
@@ -30,7 +32,7 @@ public class GrowingBullets : EnemyBullets
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("PlayerShield"))
+        if (other.CompareTag("PlayerShield") || other.CompareTag("Player"))
         {
             //Destroy(gameObject);
             gameObject.SetActive(false);

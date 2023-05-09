@@ -2,13 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using UnityEngine.VFX;
 
 public class GiantSkull : EnemyBase
 {
     [SerializeField] private SkinnedMeshRenderer mr1, mr2, mr3;
     [SerializeField] private Animator animControl;
-    private Vector3 startPoint = Vector3.zero;
-    [SerializeField] private float zPlacement;
+    //private Vector3 startPoint = Vector3.zero;
+    //[SerializeField] private float zPlacement;
     /*[SerializeField] private float maxX;
     [SerializeField] private float maxY;*/
     [SerializeField] private Vector3 worldBoundariesMin;
@@ -17,10 +18,31 @@ public class GiantSkull : EnemyBase
     private void OnEnable()
     {
         DOTween.Init();
-        zPlacement = transform.position.z + Random.Range(-1.5f, 1f);
+        GameObject spawnVfx = GSkullSpawnVfxPool.Instance.RequestPoolObject();
+        spawnVfx.transform.position = transform.position;
+        spawnVfx.GetComponent<VisualEffect>().Play();
+        //zPlacement = transform.position.z + Random.Range(-1.5f, 1f);
         wanderTimer = 0.4f;
-        startPoint = new Vector3(transform.position.x, transform.position.y, zPlacement);
-        moveDir = new Vector3(Random.Range(worldBoundariesMin.x, worldBoundariesMax.x), Random.Range(worldBoundariesMin.y, worldBoundariesMax.y), zPlacement);
+        //startPoint = new Vector3(transform.position.x, transform.position.y, zPlacement);
+        //moveDir = new Vector3(Random.Range(worldBoundariesMin.x, worldBoundariesMax.x), Random.Range(worldBoundariesMin.y, worldBoundariesMax.y), Random.Range(worldBoundariesMin.z, worldBoundariesMax.z));
+        switch (whereFrom)
+        {
+            case sideComingFrom.Forward:
+                moveDir = new Vector3(Random.Range(worldBoundariesMin.x, worldBoundariesMax.x), Random.Range(worldBoundariesMin.y, worldBoundariesMax.y), Random.Range(worldBoundariesMin.z, worldBoundariesMax.z));
+                break;
+            case sideComingFrom.Left:
+                moveDir = new Vector3(Random.Range(worldBoundariesMin.z, worldBoundariesMax.z), Random.Range(worldBoundariesMin.y, worldBoundariesMax.y), Random.Range(worldBoundariesMin.x, worldBoundariesMax.x));
+                break;
+            case sideComingFrom.Behind:
+                moveDir = new Vector3(Random.Range(worldBoundariesMin.x, worldBoundariesMax.x), Random.Range(worldBoundariesMax.y, worldBoundariesMax.y), Random.Range(worldBoundariesMin.z, worldBoundariesMax.z));
+                break;
+            case sideComingFrom.Right:
+                moveDir = new Vector3(Random.Range(worldBoundariesMin.z, worldBoundariesMax.z), Random.Range(worldBoundariesMin.y, worldBoundariesMax.y), Random.Range(worldBoundariesMin.x, worldBoundariesMax.x));
+                break;
+            default:
+                moveDir = new Vector3(Random.Range(worldBoundariesMin.x, worldBoundariesMax.x), Random.Range(worldBoundariesMin.y, worldBoundariesMax.y), Random.Range(worldBoundariesMin.z, worldBoundariesMax.z));
+                break;
+        }
         wanderTimer = moveTime;
         canTakeDamage = true;
         health = baseHealth;
@@ -61,20 +83,21 @@ public class GiantSkull : EnemyBase
             switch (whereFrom)
             {
                 case sideComingFrom.Forward:
-                    moveDir = new Vector3(zPlacement, Random.Range(worldBoundariesMax.y, worldBoundariesMax.y), Random.Range(worldBoundariesMin.x, worldBoundariesMax.x));
+                    moveDir = new Vector3(Random.Range(worldBoundariesMin.x, worldBoundariesMax.x), Random.Range(worldBoundariesMin.y, worldBoundariesMax.y), Random.Range(worldBoundariesMin.z, worldBoundariesMax.z));
                     break;
                 case sideComingFrom.Left:
+                    moveDir = new Vector3(Random.Range(worldBoundariesMin.z, worldBoundariesMax.z), Random.Range(worldBoundariesMin.y, worldBoundariesMax.y), Random.Range(worldBoundariesMin.x, worldBoundariesMax.x));
                     break;
                 case sideComingFrom.Behind:
-                    moveDir = new Vector3(Random.Range(worldBoundariesMin.x, worldBoundariesMax.x), Random.Range(worldBoundariesMax.y, worldBoundariesMax.y), zPlacement);
+                    moveDir = new Vector3(Random.Range(worldBoundariesMin.x, worldBoundariesMax.x), Random.Range(worldBoundariesMax.y, worldBoundariesMax.y), Random.Range(worldBoundariesMin.z, worldBoundariesMax.z));
                     break;
                 case sideComingFrom.Right:
-                    moveDir = new Vector3(zPlacement, Random.Range(worldBoundariesMax.y, worldBoundariesMax.y), Random.Range(worldBoundariesMin.x, worldBoundariesMax.x));
+                    moveDir = new Vector3(Random.Range(worldBoundariesMin.z, worldBoundariesMax.z), Random.Range(worldBoundariesMin.y, worldBoundariesMax.y), Random.Range(worldBoundariesMin.x, worldBoundariesMax.x));
                     break;
                 default:
                     break;
             }
-            moveDir = new Vector3(Random.Range(worldBoundariesMin.x, worldBoundariesMax.x), Random.Range(worldBoundariesMax.y, worldBoundariesMax.y), zPlacement);
+            
         }
     }
 
@@ -111,7 +134,7 @@ public class GiantSkull : EnemyBase
         attacking = false;
     }
 
-    private IEnumerator GetInPosition()
+    /*private IEnumerator GetInPosition()
     {
         rb.DOMove(startPoint, 0.5f);
         while (!inPosition)
@@ -125,7 +148,7 @@ public class GiantSkull : EnemyBase
             }
             yield return null;
         }
-    }
+    }*/
 
     public override void TakeDamage(float dmg)
     {
@@ -135,14 +158,21 @@ public class GiantSkull : EnemyBase
 
             if (health <= 0f)
             {
-                gameObject.SetActive(false);
+                //gameObject.SetActive(false);
+                Death();
             }
         }
     }
 
+    protected override void Death()
+    {
+        base.Death();
+        gameObject.SetActive(false);
+    }
+
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("EnemyActivate"))
+        /*if (other.CompareTag("EnemyActivate"))
         {
             canTakeDamage = true;
             mr1.enabled = true;
@@ -151,7 +181,7 @@ public class GiantSkull : EnemyBase
             transform.parent = null;
             GetComponent<AudioSource>().Play();
             StartCoroutine(GetInPosition());
-        }
+        }*/
         if (other.CompareTag("PlayerShot"))
         {
             TakeDamage(other.GetComponent<PlayerBullet>().GetDamage());

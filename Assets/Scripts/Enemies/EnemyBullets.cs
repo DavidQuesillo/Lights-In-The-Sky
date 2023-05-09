@@ -26,7 +26,7 @@ public class EnemyBullets : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("PlayerShield"))
+        if (other.CompareTag("PlayerShield") || other.CompareTag("Player"))
         {
             //Destroy(gameObject);
             gameObject.SetActive(false);

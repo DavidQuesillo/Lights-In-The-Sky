@@ -180,7 +180,7 @@ public class Imp : EnemyBase
             while (!Physics.Raycast(transform.position, moveDir.normalized, 5f, boundaryMask))
             {
                 flyTimer -= Time.deltaTime;
-                Debug.Log("moving successfully");
+                //Debug.Log("moving successfully");
                 if (flyTimer <= 0f)
                 {
                     break;

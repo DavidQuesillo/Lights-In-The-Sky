@@ -53,6 +53,7 @@ MonoBehaviour:
   shotPrefab: {fileID: 37617558171821248, guid: db0fb9cc0afe9884893e966cedf7faf5,
     type: 3}
   spawnSoundFX: {fileID: 8300000, guid: fecc9524d863c284d9efc2ed9a9b8fb7, type: 3}
+  deathSoundFX: {fileID: 0}
   aus: {fileID: 3593410018305558420}
   shootPoint: {fileID: 4924609952346706121}
   isPartOfWave: 1
@@ -604,3 +605,36 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1594932996861321008
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5230600534159479818}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3607b816614dbd84082a80f372d6ea80, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  event1:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4924609952293811411}
+        m_TargetAssemblyTypeName: EnemyBase, Assembly-CSharp
+        m_MethodName: TurnInactive
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  event2:
+    m_PersistentCalls:
+      m_Calls: []
+  event3:
+    m_PersistentCalls:
+      m_Calls: []

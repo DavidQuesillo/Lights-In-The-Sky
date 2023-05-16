@@ -82,6 +82,7 @@ MonoBehaviour:
   shotPrefab: {fileID: 1073382297120792335, guid: dd677f9d51d87d3408840eaccca8bc5a,
     type: 3}
   spawnSoundFX: {fileID: 8300000, guid: fecc9524d863c284d9efc2ed9a9b8fb7, type: 3}
+  deathSoundFX: {fileID: 0}
   aus: {fileID: -523927393010704340}
   shootPoint: {fileID: 7770761000078462810}
   isPartOfWave: 1
@@ -1830,45 +1831,39 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &7770760999689772211
+--- !u!114 &6500907421256126089
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7428159978025443820}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7c3206a9e1be2d840883fb7e5ae9bdca, type: 3}
+  m_Script: {fileID: 11500000, guid: 3607b816614dbd84082a80f372d6ea80, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rb: {fileID: 7770760999923613931}
-  shotPrefab: {fileID: 1073382297120792335, guid: dd677f9d51d87d3408840eaccca8bc5a,
-    type: 3}
-  spawnSoundFX: {fileID: 0}
-  aus: {fileID: 0}
-  shootPoint: {fileID: 7770761000078462810}
-  isPartOfWave: 0
-  health: 30
-  baseHealth: 0
-  speed: 13
-  projectileSpeed: 30
-  moveTime: 0.8
-  moveVarRange: 7
-  inPosition: 0
-  wanderTimer: 0
-  attacking: 0
-  whereFrom: 0
-  anim: {fileID: 7770760999689772208}
-  mr: {fileID: 2235809040583874851}
-  mr2: {fileID: 78927623724202598}
-  boundaryMask:
-    serializedVersion: 2
-    m_Bits: 0
-  maxSpeed: 0
-  sameDirTimer: 1
-  barrageAmount: 7
-  barrageSpread: 0.4
+  event1:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7770760999923613930}
+        m_TargetAssemblyTypeName: Imp, Assembly-CSharp
+        m_MethodName: TurnInactive
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  event2:
+    m_PersistentCalls:
+      m_Calls: []
+  event3:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!4 &7808661796948720470 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: fe3e99f182e2d7640a1942874897a81d,

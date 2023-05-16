@@ -21,7 +21,7 @@ public class Imp : EnemyBase
         //health = baseHealth;
         /*StartCoroutine(UpdateFlyVector());
         canTakeDamage = true;
-        StartCoroutine(RepeatAttack());*/
+        StartCoroutine(RepeatAttack());*/        
         canTakeDamage = true;
     }
 
@@ -42,6 +42,8 @@ public class Imp : EnemyBase
         }
         health = baseHealth;
         rb.velocity = Vector3.zero;
+        anim.SetBool("Dead", false);
+        GetComponent<Collider>().enabled = true;
         StartCoroutine(UpdateFlyVector());
         //canTakeDamage = true;
         StartCoroutine(RepeatAttack());
@@ -103,8 +105,14 @@ public class Imp : EnemyBase
     protected override void Death()
     {
         base.Death();
-        gameObject.SetActive(false);
+        anim.SetBool("Dead", true);
+        GetComponent<Collider>().enabled = false;
+        //gameObject.SetActive(false);
     }
+    /*public void TurnInactive()
+    {
+        gameObject.SetActive(false);
+    }*/
 
     private void BecomeActive()
     {

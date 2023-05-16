@@ -9,6 +9,7 @@ public class EnemyBase : MonoBehaviour
     [SerializeField] protected Rigidbody rb;
     [SerializeField] protected GameObject shotPrefab;
     [SerializeField] protected AudioClip spawnSoundFX;
+    [SerializeField] protected AudioClip deathSoundFX;
     [SerializeField] protected AudioSource aus;
     [SerializeField] protected Transform shootPoint;
     [SerializeField] private bool isPartOfWave;
@@ -41,6 +42,10 @@ public class EnemyBase : MonoBehaviour
         {
             SendMessageUpwards("EnemyDefeated");
         }
+    }
+    public virtual void TurnInactive()
+    {
+        gameObject.SetActive(false);
     }
 
     public virtual void TakeDamage(float dmg)

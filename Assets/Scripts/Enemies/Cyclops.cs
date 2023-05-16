@@ -1,14 +1,26 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.VFX;
 
 public class Cyclops : EnemyBase
 {
     [SerializeField] private SkinnedMeshRenderer mr;
+    [SerializeField] private Animator anim;
     private void OnEnable()
     {
         wanderTimer = 0f;
         GetFromForwardVector();
+
+        GameObject spawnVfx = CyclopsSpawnVfxPool.Instance.RequestPoolObject();
+        spawnVfx.transform.position = transform.position;
+        spawnVfx.GetComponent<VisualEffect>().Play();
+        aus.PlayOneShot(spawnSoundFX);
+
+        health = baseHealth;
+        rb.velocity = Vector3.zero;
+        anim.SetBool("Dead", false);
+        GetComponent<Collider>().enabled = true;
     }
 
     private void GetFromForwardVector()
@@ -107,9 +119,18 @@ public class Cyclops : EnemyBase
             base.TakeDamage(dmg);
             if (health <= 0f)
             {
-                gameObject.SetActive(false);
+                //gameObject.SetActive(false);
+                Death();
             }
         }
+    }
+
+    protected override void Death()
+    {
+        base.Death();
+        //gameObject.SetActive(false);
+        anim.SetBool("Dead", true);
+        GetComponent<Collider>().enabled = false;
     }
 
     private void GroundCheck()

@@ -167,7 +167,10 @@ public class GiantSkull : EnemyBase
     protected override void Death()
     {
         base.Death();
+        animControl.SetBool("Dead", true);
+        GetComponent<Collider>().enabled = false;
         gameObject.SetActive(false);
+
     }
 
     private void OnTriggerEnter(Collider other)

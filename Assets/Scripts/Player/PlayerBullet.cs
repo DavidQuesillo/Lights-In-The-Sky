@@ -72,6 +72,20 @@ public class PlayerBullet : MonoBehaviour
             //Destroy(gameObject, 0.02f);
         }*/
 
+        if (other.CompareTag("Enemy"))
+        {
+            if (other.GetComponent<EnemyBase>().GetHP() <= damage)
+            {
+                //GameObject particle = IceDagParticlesPool.Instance.RequestPoolObject();
+
+                GameObject killParticle = IceDagKillParticlesPool.Instance.RequestPoolObject();
+                killParticle.transform.SetPositionAndRotation(transform.position, Quaternion.LookRotation(-transform.forward));
+                Debug.Log(other.name);
+                gameObject.SetActive(false);
+                return;
+            }
+        }
+
         GameObject particle = IceDagParticlesPool.Instance.RequestPoolObject();
         particle.transform.SetPositionAndRotation(transform.position, Quaternion.LookRotation(-transform.forward));
         Debug.Log(other.name);

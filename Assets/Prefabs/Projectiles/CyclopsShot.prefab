@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 441696063227219864}
   - component: {fileID: 9155772065679427158}
   - component: {fileID: 4371668042983826670}
-  m_Layer: 10
+  m_Layer: 9
   m_Name: Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -97,7 +97,7 @@ GameObject:
   - component: {fileID: 6451528006526467296}
   - component: {fileID: 4737211117561419439}
   - component: {fileID: -4407539155250847573}
-  m_Layer: 10
+  m_Layer: 9
   m_Name: CyclopsShot
   m_TagString: EnemyShot
   m_Icon: {fileID: 0}

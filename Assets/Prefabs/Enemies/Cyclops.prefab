@@ -1,5 +1,140 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &6715864800938614511
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 60722277574693455}
+  - component: {fileID: 6470554436734541894}
+  - component: {fileID: 6816826698138981150}
+  m_Layer: 7
+  m_Name: MeleeHitbox
+  m_TagString: EnemyShot
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &60722277574693455
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6715864800938614511}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.02, z: 0.96}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8902863674930571345}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &6470554436734541894
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6715864800938614511}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2, y: 5, z: 2}
+  m_Center: {x: 0, y: 1.3895632, z: 1.18}
+--- !u!114 &6816826698138981150
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6715864800938614511}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c53daa62385dd84fadb92a5e973c072, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &7019705901646682915
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7120454439581132812}
+  - component: {fileID: 9209535871667491021}
+  - component: {fileID: 2683225199727161849}
+  m_Layer: 7
+  m_Name: MeleeDetection
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7120454439581132812
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7019705901646682915}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.02, z: 0.96}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8902863674930571345}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &9209535871667491021
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7019705901646682915}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2, y: 5, z: 2}
+  m_Center: {x: 0, y: 1.3895632, z: 1.18}
+--- !u!114 &2683225199727161849
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7019705901646682915}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 304fcfd7e7aff5649962529fb9637bbe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onEnter:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8902863674930571350}
+        m_TargetAssemblyTypeName: Cyclops, Assembly-CSharp
+        m_MethodName: PlayerInMeleeRange
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  checkLayers:
+    serializedVersion: 2
+    m_Bits: 64
+  moreThanOnce: 1
 --- !u!1 &7102369618845774055
 GameObject:
   m_ObjectHideFlags: 0
@@ -108,7 +243,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8902863674215555066}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.932, z: 0.793}
+  m_LocalPosition: {x: 0, y: 2.629, z: 1.277}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -163,6 +298,8 @@ Transform:
   m_Children:
   - {fileID: 54685951356140156}
   - {fileID: 8902863674215555067}
+  - {fileID: 60722277574693455}
+  - {fileID: 7120454439581132812}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -188,12 +325,12 @@ MonoBehaviour:
   isPartOfWave: 1
   health: 5
   baseHealth: 0
-  speed: 450
+  speed: 350
   projectileSpeed: 20
-  moveTime: 1
+  moveTime: 1.4
   moveVarRange: 0.5
   inPosition: 1
-  wanderTimer: 0
+  wanderTimer: 0.58
   attacking: 0
   whereFrom: 0
   mr: {fileID: 7496421842751096558}
@@ -224,10 +361,10 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.5
-  m_Height: 2
+  m_Radius: 0.9081024
+  m_Height: 4.051407
   m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: 1.0257034, z: 0}
 --- !u!95 &6087272100024292621
 Animator:
   serializedVersion: 5
@@ -360,17 +497,17 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: a9a6a60e0b01596428441201df445eec,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.16975054
+      value: 0.3426214
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a9a6a60e0b01596428441201df445eec,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.16975054
+      value: 0.3426214
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a9a6a60e0b01596428441201df445eec,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.16975054
+      value: 0.3426214
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a9a6a60e0b01596428441201df445eec,
         type: 3}

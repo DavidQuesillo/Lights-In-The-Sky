@@ -46,6 +46,8 @@ public class GiantSkull : EnemyBase
         wanderTimer = moveTime;
         canTakeDamage = true;
         health = baseHealth;
+        animControl.SetBool("Dead", false);
+        GetComponent<Collider>().enabled = true;
     }
 
     // Update is called once per frame
@@ -168,8 +170,9 @@ public class GiantSkull : EnemyBase
     {
         base.Death();
         animControl.SetBool("Dead", true);
+        //animControl.SetTrigger("Dead");
         GetComponent<Collider>().enabled = false;
-        gameObject.SetActive(false);
+        //gameObject.SetActive(false);
 
     }
 

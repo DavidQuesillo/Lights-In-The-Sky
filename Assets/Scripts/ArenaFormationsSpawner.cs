@@ -17,6 +17,7 @@ public class ArenaFormationsSpawner : MonoBehaviour
     public void BeginWave()
     {
         StartCoroutine(SpawnEnemies());
+        enemyCount = enemies.Count;
     }
     public void EnemyDefeated()
     {

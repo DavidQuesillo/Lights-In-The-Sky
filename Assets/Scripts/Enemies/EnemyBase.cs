@@ -66,4 +66,9 @@ public class EnemyBase : MonoBehaviour
             Debug.Log("Damage taken");
         }
     }
+
+    public virtual float GetHP()
+    {
+        return health;
+    }
 }

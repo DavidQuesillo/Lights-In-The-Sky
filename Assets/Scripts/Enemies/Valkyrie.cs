@@ -40,6 +40,7 @@ public class Valkyrie : EnemyBase
         //debug
         canTakeDamage = true;
         health = baseHealth;
+        GetComponent<Collider>().enabled = true;
     }
 
     private void FindNewPosition()
@@ -241,8 +242,8 @@ public class Valkyrie : EnemyBase
             base.TakeDamage(dmg);
             if (health <= 0f)
             {
-                //gameObject.SetActive(false);
-                Death();
+                gameObject.SetActive(false);
+                Death(); //ITS NOT READY YET
             }
         }
     }
@@ -250,5 +251,7 @@ public class Valkyrie : EnemyBase
     {
         base.Death();
         gameObject.SetActive(false);
+
+        GetComponent<Collider>().enabled = false;
     }
 }

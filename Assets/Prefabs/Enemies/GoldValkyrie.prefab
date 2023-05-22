@@ -838,7 +838,7 @@ SkinnedMeshRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3728728442106415613}
   m_Enabled: 1
-  m_CastShadows: 1
+  m_CastShadows: 0
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
   m_StaticShadowCaster: 0
@@ -1248,7 +1248,7 @@ Animator:
   m_GameObject: {fileID: 4979381252304180626}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 29e574c58683ae344b347f81862363d8, type: 2}
+  m_Controller: {fileID: 9100000, guid: 28560bf8b8f63644a87f6b723fad6ece, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -1274,6 +1274,7 @@ MonoBehaviour:
   rb: {fileID: 4979381252304180624}
   shotPrefab: {fileID: 0}
   spawnSoundFX: {fileID: 8300000, guid: fecc9524d863c284d9efc2ed9a9b8fb7, type: 3}
+  deathSoundFX: {fileID: 0}
   aus: {fileID: 7849437600019637404}
   shootPoint: {fileID: 4979381250389653804}
   isPartOfWave: 1
@@ -1752,7 +1753,7 @@ SkinnedMeshRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6497874328974068288}
   m_Enabled: 1
-  m_CastShadows: 1
+  m_CastShadows: 0
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
   m_StaticShadowCaster: 0

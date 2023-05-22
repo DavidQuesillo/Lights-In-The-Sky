@@ -59,7 +59,7 @@ MonoBehaviour:
   isPartOfWave: 1
   health: 200
   baseHealth: 200
-  speed: 4
+  speed: 7
   projectileSpeed: 6.8
   moveTime: 2
   moveVarRange: 0

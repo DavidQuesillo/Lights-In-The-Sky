@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.VFX;
 
 public class PlayerBullet : MonoBehaviour
 {
@@ -80,6 +81,9 @@ public class PlayerBullet : MonoBehaviour
 
                 GameObject killParticle = IceDagKillParticlesPool.Instance.RequestPoolObject();
                 killParticle.transform.SetPositionAndRotation(transform.position, Quaternion.LookRotation(-transform.forward));
+                //killParticle.GetComponent<VisualEffect>()?.Play();
+                //killParticle.GetComponent<VisualEffect>().Stop()
+                killParticle.GetComponent<AudioSource>()?.Play();
                 Debug.Log(other.name);
                 gameObject.SetActive(false);
                 return;
@@ -88,7 +92,8 @@ public class PlayerBullet : MonoBehaviour
 
         GameObject particle = IceDagParticlesPool.Instance.RequestPoolObject();
         particle.transform.SetPositionAndRotation(transform.position, Quaternion.LookRotation(-transform.forward));
-        Debug.Log(other.name);
+        particle.GetComponent<AudioSource>()?.Play();
+        //Debug.Log(other.name);
         gameObject.SetActive(false);
         //Destroy(gameObject, 0.02f);
     }

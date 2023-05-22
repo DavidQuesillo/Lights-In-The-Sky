@@ -27,7 +27,7 @@ public class GravityBullets : MonoBehaviour
     {
         //Debug.Log("bonked smth");
         touched = true;
-        Debug.Log("fireball touched");
+        //Debug.Log("fireball touched");
     }
     private void OnTriggerEnter(Collider other)
     {

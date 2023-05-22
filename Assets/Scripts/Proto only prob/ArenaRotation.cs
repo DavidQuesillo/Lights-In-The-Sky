@@ -6,7 +6,7 @@ using DG.Tweening;
 public class ArenaRotation : MonoBehaviour
 {
     [SerializeField] private List<Arena> arenasList;
-    private int currentArena;
+    private int currentArena = 99999;
     private bool arenaExiting;
     private bool arenaEntering;
     private bool arenaReady;
@@ -74,6 +74,8 @@ public class ArenaRotation : MonoBehaviour
             {
                 //EnterNewArena();
                 currentArena = GetNextArena();
+                //Debug.Log("Arena drawn: " + currentArena.ToString());
+                //Debug.Log("Count of the list: " + arenasList.Count.ToString());
                 arenasList[currentArena].EnterNewArena(enterTime);
                 yield return new WaitForSeconds(enterTime);                
                 arenasList[currentArena].SpawnEnemies();

@@ -597,7 +597,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2710783023022179658}
-  m_LocalRotation: {x: 0.7071066, y: -0.000654718, z: -0.00064869254, w: 0.7071065}
+  m_LocalRotation: {x: 0.6886498, y: -0.0006377852, z: -0.0006653311, w: 0.7250935}
   m_LocalPosition: {x: -3.3451214e-11, y: 0.0208198, z: -5.2456102e-11}
   m_LocalScale: {x: 0.99999994, y: 1, z: 0.99999994}
   m_ConstrainProportionsScale: 0
@@ -605,7 +605,7 @@ Transform:
   - {fileID: 1434809471771329316}
   m_Father: {fileID: 1436234590685459571}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 87.045, y: -2.047, z: -2.049}
 --- !u!1 &2737736435546348047
 GameObject:
   m_ObjectHideFlags: 0
@@ -1098,7 +1098,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &3962849003260489779
 Transform:
   m_ObjectHideFlags: 0
@@ -1179,7 +1179,7 @@ MonoBehaviour:
   vSlash: {fileID: 4138689683375472599, guid: 07d23de78f5c8224daa18008dc3a2891, type: 3}
   hSlash: {fileID: 4138689683375472599, guid: a13e28342fed68b48bbef82209525f6d, type: 3}
   anim: {fileID: 6609154747239819636}
-  worldBoundariesMin: {x: -15, y: 5, z: -15}
+  worldBoundariesMin: {x: -15, y: -4, z: -15}
   worldBoundariesMax: {x: 15, y: 15, z: 15}
   speedCurve:
     serializedVersion: 2

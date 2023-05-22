@@ -887,7 +887,28 @@ AnimationClip:
     path: MeleeHitbox
     classID: 65
     script: {fileID: 0}
-  m_PPtrCurves: []
+  m_PPtrCurves:
+  - curve:
+    - time: 0
+      value: {fileID: 2100000, guid: 5d57a70eb1f167540a61a48c16be6801, type: 2}
+    attribute: m_Materials.Array.data[0]
+    path: Cyclops unwrapped/body
+    classID: 137
+    script: {fileID: 0}
+  - curve:
+    - time: 0
+      value: {fileID: 2100000, guid: 5d57a70eb1f167540a61a48c16be6801, type: 2}
+    attribute: m_Materials.Array.data[0].m_FileID
+    path: Cyclops unwrapped/body
+    classID: 137
+    script: {fileID: 0}
+  - curve:
+    - time: 0
+      value: {fileID: 2100000, guid: 5d57a70eb1f167540a61a48c16be6801, type: 2}
+    attribute: m_Materials.Array.data[0].m_PathID
+    path: Cyclops unwrapped/body
+    classID: 137
+    script: {fileID: 0}
   m_SampleRate: 60
   m_WrapMode: 0
   m_Bounds:
@@ -1022,6 +1043,27 @@ AnimationClip:
       customType: 0
       isPPtrCurve: 0
     - serializedVersion: 2
+      path: 880579593
+      attribute: 0
+      script: {fileID: 0}
+      typeID: 137
+      customType: 21
+      isPPtrCurve: 1
+    - serializedVersion: 2
+      path: 880579593
+      attribute: 0
+      script: {fileID: 0}
+      typeID: 137
+      customType: 21
+      isPPtrCurve: 1
+    - serializedVersion: 2
+      path: 880579593
+      attribute: 0
+      script: {fileID: 0}
+      typeID: 137
+      customType: 21
+      isPPtrCurve: 1
+    - serializedVersion: 2
       path: 2737092485
       attribute: 4
       script: {fileID: 0}
@@ -1042,7 +1084,10 @@ AnimationClip:
       typeID: 65
       customType: 0
       isPPtrCurve: 0
-    pptrCurveMapping: []
+    pptrCurveMapping:
+    - {fileID: 2100000, guid: 5d57a70eb1f167540a61a48c16be6801, type: 2}
+    - {fileID: 2100000, guid: 5d57a70eb1f167540a61a48c16be6801, type: 2}
+    - {fileID: 2100000, guid: 5d57a70eb1f167540a61a48c16be6801, type: 2}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}

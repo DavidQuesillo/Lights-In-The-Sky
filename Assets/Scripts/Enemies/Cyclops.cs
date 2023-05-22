@@ -24,6 +24,7 @@ public class Cyclops : EnemyBase
         rb.velocity = Vector3.zero;
         anim.SetBool("Dead", false);
         playerInRange = false;
+        canTakeDamage = true;
         GetComponent<Collider>().enabled = true;
     }
 
@@ -174,7 +175,7 @@ public class Cyclops : EnemyBase
     {
         base.Death();
         //gameObject.SetActive(false);
-        anim.SetBool("Dead", true);
+        anim.SetBool("Dead", true);        
         GetComponent<Collider>().enabled = false;
     }
 

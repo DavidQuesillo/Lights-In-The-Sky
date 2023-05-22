@@ -45,6 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemies: []
+  enemyCount: 2
   OnWaveOver:
     m_PersistentCalls:
       m_Calls: []

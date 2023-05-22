@@ -1233,7 +1233,49 @@ AnimationClip:
     path: valkyrie/Armature/Waist (root)/Chest/Shoulder.R
   m_ScaleCurves: []
   m_FloatCurves: []
-  m_PPtrCurves: []
+  m_PPtrCurves:
+  - curve:
+    - time: 0
+      value: {fileID: 2100000, guid: 64939cb5b2adbf84c8a6f73451b5c0c5, type: 2}
+    attribute: m_Materials.Array.data[0]
+    path: valkyrie/sword
+    classID: 137
+    script: {fileID: 0}
+  - curve:
+    - time: 0
+      value: {fileID: 2100000, guid: 64939cb5b2adbf84c8a6f73451b5c0c5, type: 2}
+    attribute: m_Materials.Array.data[0].m_FileID
+    path: valkyrie/sword
+    classID: 137
+    script: {fileID: 0}
+  - curve:
+    - time: 0
+      value: {fileID: 2100000, guid: 64939cb5b2adbf84c8a6f73451b5c0c5, type: 2}
+    attribute: m_Materials.Array.data[0].m_PathID
+    path: valkyrie/sword
+    classID: 137
+    script: {fileID: 0}
+  - curve:
+    - time: 0
+      value: {fileID: 2100000, guid: 64939cb5b2adbf84c8a6f73451b5c0c5, type: 2}
+    attribute: m_Materials.Array.data[0]
+    path: valkyrie/Body
+    classID: 137
+    script: {fileID: 0}
+  - curve:
+    - time: 0
+      value: {fileID: 2100000, guid: 64939cb5b2adbf84c8a6f73451b5c0c5, type: 2}
+    attribute: m_Materials.Array.data[0].m_FileID
+    path: valkyrie/Body
+    classID: 137
+    script: {fileID: 0}
+  - curve:
+    - time: 0
+      value: {fileID: 2100000, guid: 64939cb5b2adbf84c8a6f73451b5c0c5, type: 2}
+    attribute: m_Materials.Array.data[0].m_PathID
+    path: valkyrie/Body
+    classID: 137
+    script: {fileID: 0}
   m_SampleRate: 60
   m_WrapMode: 0
   m_Bounds:
@@ -1361,6 +1403,48 @@ AnimationClip:
       customType: 4
       isPPtrCurve: 0
     - serializedVersion: 2
+      path: 650160184
+      attribute: 0
+      script: {fileID: 0}
+      typeID: 137
+      customType: 21
+      isPPtrCurve: 1
+    - serializedVersion: 2
+      path: 650160184
+      attribute: 0
+      script: {fileID: 0}
+      typeID: 137
+      customType: 21
+      isPPtrCurve: 1
+    - serializedVersion: 2
+      path: 650160184
+      attribute: 0
+      script: {fileID: 0}
+      typeID: 137
+      customType: 21
+      isPPtrCurve: 1
+    - serializedVersion: 2
+      path: 947292477
+      attribute: 0
+      script: {fileID: 0}
+      typeID: 137
+      customType: 21
+      isPPtrCurve: 1
+    - serializedVersion: 2
+      path: 947292477
+      attribute: 0
+      script: {fileID: 0}
+      typeID: 137
+      customType: 21
+      isPPtrCurve: 1
+    - serializedVersion: 2
+      path: 947292477
+      attribute: 0
+      script: {fileID: 0}
+      typeID: 137
+      customType: 21
+      isPPtrCurve: 1
+    - serializedVersion: 2
       path: 236808819
       attribute: 1
       script: {fileID: 0}
@@ -1521,7 +1605,13 @@ AnimationClip:
       typeID: 4
       customType: 4
       isPPtrCurve: 0
-    pptrCurveMapping: []
+    pptrCurveMapping:
+    - {fileID: 2100000, guid: 64939cb5b2adbf84c8a6f73451b5c0c5, type: 2}
+    - {fileID: 2100000, guid: 64939cb5b2adbf84c8a6f73451b5c0c5, type: 2}
+    - {fileID: 2100000, guid: 64939cb5b2adbf84c8a6f73451b5c0c5, type: 2}
+    - {fileID: 2100000, guid: 64939cb5b2adbf84c8a6f73451b5c0c5, type: 2}
+    - {fileID: 2100000, guid: 64939cb5b2adbf84c8a6f73451b5c0c5, type: 2}
+    - {fileID: 2100000, guid: 64939cb5b2adbf84c8a6f73451b5c0c5, type: 2}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}

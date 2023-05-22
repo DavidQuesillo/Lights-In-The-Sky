@@ -44,6 +44,7 @@ public class Imp : EnemyBase
         rb.velocity = Vector3.zero;
         anim.SetBool("Dead", false);
         GetComponent<Collider>().enabled = true;
+        canTakeDamage = true;
         StartCoroutine(UpdateFlyVector());
         //canTakeDamage = true;
         StartCoroutine(RepeatAttack());
@@ -85,8 +86,12 @@ public class Imp : EnemyBase
     protected override void Attack()
     {
         //base.Attack();
-
-        anim.SetTrigger("Attack");
+        
+        
+        //anim.ResetTrigger("Attack");
+        //anim.SetTrigger("Attack");
+        
+        
         attacking = true;
     }
 
@@ -156,6 +161,7 @@ public class Imp : EnemyBase
         {
             if (attacking)
             {
+                anim.SetBool("Attacking", true);
                 barrageProg = barrageAmount;
                 while (barrageProg > 0)
                 {
@@ -165,7 +171,7 @@ public class Imp : EnemyBase
                 }
                 //Attack();
                 attacking = false;
-
+                anim.SetBool("Attacking", false);
             }
             else
             {

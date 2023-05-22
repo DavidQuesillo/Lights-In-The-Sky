@@ -172,6 +172,7 @@ public class GiantSkull : EnemyBase
         animControl.SetBool("Dead", true);
         //animControl.SetTrigger("Dead");
         GetComponent<Collider>().enabled = false;
+        //canTakeDamage = false; //its in the parent
         //gameObject.SetActive(false);
 
     }

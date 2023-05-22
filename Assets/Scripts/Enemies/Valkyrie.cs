@@ -40,6 +40,7 @@ public class Valkyrie : EnemyBase
         //debug
         canTakeDamage = true;
         health = baseHealth;
+        anim.SetBool("Dead", false);
         GetComponent<Collider>().enabled = true;
     }
 
@@ -242,16 +243,16 @@ public class Valkyrie : EnemyBase
             base.TakeDamage(dmg);
             if (health <= 0f)
             {
-                gameObject.SetActive(false);
-                Death(); //ITS NOT READY YET
+                //gameObject.SetActive(false);
+                Death();
             }
         }
     }
     protected override void Death()
     {
-        base.Death();
-        gameObject.SetActive(false);
-
+        base.Death();        
+        anim.SetBool("Dead", true);
         GetComponent<Collider>().enabled = false;
+        //gameObject.SetActive(false);
     }
 }

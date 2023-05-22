@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.VFX;
 public class PlayerHitscan : Weapon
 {
     [SerializeField] LayerMask ignoreMask;
@@ -94,6 +94,15 @@ public class PlayerHitscan : Weapon
                     projectile.transform.rotation.SetLookRotation(projectile.transform.position - transform.position);
                     if (hit.collider.gameObject.CompareTag("Enemy"))
                     {
+                        //Debug.Log("remaining hp: " + hit.collider.GetComponent<EnemyBase>().GetHP().ToString());
+                        if (hit.collider.gameObject.GetComponent<EnemyBase>()?.GetHP() <= damage)
+                        {
+                             GameObject killVfx = ElecRayKillParticlesPool.Instance.RequestPoolObject();
+                            killVfx.transform.SetPositionAndRotation(hit.point, Quaternion.LookRotation(-transform.forward));
+                            killVfx.SetActive(true);
+                            killVfx.GetComponent<VisualEffect>()?.Play();
+                            killVfx.GetComponent<AudioSource>()?.Play();
+                        }
                         hit.collider.gameObject.GetComponent<EnemyBase>().TakeDamage(damage);
                     }
                     if (hit.collider.gameObject.CompareTag("Boss"))

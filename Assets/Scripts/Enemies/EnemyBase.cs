@@ -42,6 +42,7 @@ public class EnemyBase : MonoBehaviour
         {
             SendMessageUpwards("EnemyDefeated");
         }
+        canTakeDamage = false;
     }
     public virtual void TurnInactive()
     {

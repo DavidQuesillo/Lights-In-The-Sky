@@ -40,6 +40,9 @@ public class GoldenValkyrie : EnemyBase
         aus.PlayOneShot(spawnSoundFX);
 
         health = baseHealth;
+        anim.SetBool("Dead", false);
+        GetComponent<Collider>().enabled = true;
+        canTakeDamage = true;
     }
 
     private void FixedUpdate()
@@ -129,7 +132,9 @@ public class GoldenValkyrie : EnemyBase
     protected override void Death()
     {
         base.Death();
-        gameObject.SetActive(false);
+        anim.SetBool("Dead", true);
+        GetComponent<Collider>().enabled = false;
+        //gameObject.SetActive(false);
     }
 
     private IEnumerator RepeatAttack()

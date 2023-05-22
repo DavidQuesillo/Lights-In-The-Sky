@@ -13,6 +13,9 @@ public class Player : MonoBehaviour
     [SerializeField] private Animator anim;
     [SerializeField] private AudioSource aus;
     [SerializeField] private Transform axisRef;
+    //[SerializeField] private Transform cam;
+    [SerializeField] private Transform hands;
+    [SerializeField] private Renderer HandsModel;
     [Header("Weapons")]
     [SerializeField] private GameObject[] weapons = new GameObject[0];
     [SerializeField] private Sprite[] reticles = new Sprite[2];
@@ -52,10 +55,11 @@ public class Player : MonoBehaviour
     private float smoothVertVelocity;
     //old
     [SerializeField] private float dashSpeed;
-    [SerializeField] private float dashDuration;
-    private float dashTimer = 0f;
-    [SerializeField] private float InvulTime;
-    private float invulTimer;
+    /*[SerializeField] private float dashDuration;
+    private float dashTimer = 0f;*/
+    [SerializeField] private float invulTime;
+    private bool iFramesEnabled;
+    [SerializeField] private float invulTimer;
     private Vector3 movingV;
 
     /*[SerializeField]
@@ -80,6 +84,8 @@ public class Player : MonoBehaviour
         anim.SetInteger("Weapon", 1);
         reticleHUD.sprite = reticles[currentWeapon];
         reticleHUD.color = reticleColor[currentWeapon];
+        canTakeDamage = true;
+        StartCoroutine(InvulFrames());
     }
 
     private void FixedUpdate()
@@ -139,7 +145,7 @@ public class Player : MonoBehaviour
         {
             WeaponSwitch();
             HoldShield();
-            Dash();
+            //Dash();
         }
 
         //Shoot();
@@ -171,6 +177,20 @@ public class Player : MonoBehaviour
         //cam.SetPositionAndRotation(cam.position, new Quaternion(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"), cam.rotation.y, cam.rotation.z));
 
         //Mathf.Clamp(rotation.x, -90f, 90f);
+
+        //////////////////////////////////////////////////////////////
+        //version that rotates player, the old one that 'worked'
+        /*if (rotation.x <= -89.8f)
+        {
+            rotation.x = -89.7f;
+        }
+        if (rotation.x >= 89.8f)
+        {
+            rotation.x = 89.7f;
+        }
+        transform.eulerAngles = rotation;*/
+        //////////////////////////////////////////////////////////////
+
         if (rotation.x <= -89.8f)
         {
             rotation.x = -89.7f;
@@ -179,7 +199,7 @@ public class Player : MonoBehaviour
         {
             rotation.x = 89.7f;
         }
-        transform.eulerAngles = rotation;
+        hands.eulerAngles = rotation;
     }
 
     private void OnStrafing(InputValue value)
@@ -330,6 +350,7 @@ public class Player : MonoBehaviour
                 health -= 1f;
                 GameManager.instance.UiScript.HpDamage((int)health);
                 aus.Play();
+                iFramesEnabled = true;
                 //Debug.Log(((int)health % 3) * 1);
             }
 
@@ -433,7 +454,7 @@ public class Player : MonoBehaviour
         }
     }
 
-    private void Dash()
+    /*private void Dash()
     {
         if (Input.GetKeyDown(KeyCode.LeftShift))
         {
@@ -461,7 +482,7 @@ public class Player : MonoBehaviour
         {
             //Debug.Log("Dash end");
         }
-        }
+    }*/
 
     private void OnTriggerEnter(Collider other)
     {
@@ -470,6 +491,31 @@ public class Player : MonoBehaviour
             TakeDamage();
         }
     }
+
+    private IEnumerator InvulFrames()
+    {
+        while (true)
+        {
+            if (iFramesEnabled)
+            {
+                canTakeDamage = false;
+                invulTimer = invulTime;
+                while (invulTimer > 0f)
+                {
+                    HandsModel.enabled = false;
+                    yield return new WaitForSeconds(0.01f);
+                    HandsModel.enabled = true;
+                    invulTimer -= Time.deltaTime + 0.01f;
+                    yield return null;
+                }
+                canTakeDamage = true;
+                HandsModel.enabled = true;
+                iFramesEnabled = false;
+            }
+            yield return null;
+        }
+    }
+
 
     public int GetCurrentWeapon()
     {

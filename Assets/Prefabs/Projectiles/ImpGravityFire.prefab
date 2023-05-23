@@ -94,6 +94,7 @@ GameObject:
   - component: {fileID: 5471786671539727159}
   - component: {fileID: 5471786671539727152}
   - component: {fileID: 5471786671539727155}
+  - component: {fileID: 5284253387638867370}
   - component: {fileID: 1876975127214229970}
   - component: {fileID: 5471786671539727154}
   - component: {fileID: 5471786671539727153}
@@ -148,8 +149,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lifetimeAfterTouch: 0.1
   lifetimeVariance: 0.05
+  defaultTrailTime: 0.2
   timer: 0
   touched: 0
+  trail: {fileID: 5471786671539727153}
+--- !u!114 &5284253387638867370
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5471786671539727158}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ebedeec9472421c48a3e72124b6d0c9f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dissipateTimer: 5
+  rb: {fileID: 5471786671539727154}
+  shieldDmg: 15
 --- !u!135 &1876975127214229970
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -187,7 +205,7 @@ TrailRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5471786671539727158}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1

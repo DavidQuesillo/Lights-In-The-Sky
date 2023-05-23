@@ -22,6 +22,7 @@ public class Valkyrie : EnemyBase
     private void Start()
     {
         DOTween.Init();
+        //initialPosition = transform.position;
     }
     private void OnEnable()
     {

@@ -7,6 +7,7 @@ public class EnemyBullets : MonoBehaviour
     [SerializeField] protected float dissipateTimer = 5f;
     protected float timer;
     [SerializeField] protected Rigidbody rb;
+    [SerializeField] private float shieldDmg;
 
     private void OnEnable()
     {
@@ -22,6 +23,11 @@ public class EnemyBullets : MonoBehaviour
             timer = dissipateTimer;
             gameObject.SetActive(false);
         }
+    }
+
+    public float GetDmg()
+    {
+        return shieldDmg;
     }
 
     private void OnTriggerEnter(Collider other)

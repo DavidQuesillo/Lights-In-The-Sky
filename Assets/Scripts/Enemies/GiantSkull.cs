@@ -15,6 +15,11 @@ public class GiantSkull : EnemyBase
     [SerializeField] private Vector3 worldBoundariesMin;
     [SerializeField] private Vector3 worldBoundariesMax;
 
+    /*private void Start()
+    {
+        initialPosition = transform.position;
+    }*/
+
     private void OnEnable()
     {
         DOTween.Init();

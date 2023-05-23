@@ -118,6 +118,11 @@ public class GameManager : MonoBehaviour
         aus.volume = 0.15f;
         aus.Play();
     }
+    /*public void PlayMusic() //should probably be able to add argument song input
+    {
+        aus.Play();
+    }*/
+
     public void ChangeScene(int index)
     {
         SceneManager.LoadScene(index);

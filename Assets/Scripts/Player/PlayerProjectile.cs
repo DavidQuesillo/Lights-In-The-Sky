@@ -15,7 +15,7 @@ public class PlayerProjectile : Weapon
     // Update is called once per frame
     void Update()
     {
-        if (canAttack)
+        if (canAttack && GameManager.instance.currentState == EGameStates.Gameplay)
         {
             Fire();
         }

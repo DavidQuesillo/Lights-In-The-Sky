@@ -37,6 +37,11 @@ public class ArenaFormationsSpawner : MonoBehaviour
         for (int i = 0; i < enemies.Count; i++)
         {
             yield return new WaitForSeconds(0.1f);
+            if (enemies[i].GetComponent<EnemyBase>().GetStartPos() == Vector3.zero)
+            {
+                enemies[i].GetComponent<EnemyBase>().SetStartPos();
+            }
+            enemies[i].transform.position = enemies[i].GetComponent<EnemyBase>().GetStartPos();
             enemies[i].SetActive(true);            
         }
     }

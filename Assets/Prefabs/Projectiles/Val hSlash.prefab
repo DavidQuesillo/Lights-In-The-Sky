@@ -5313,6 +5313,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dissipateTimer: 5
   rb: {fileID: 4875291719653333619}
+  shieldDmg: 40
 --- !u!82 &-6304979110876042011
 AudioSource:
   m_ObjectHideFlags: 0

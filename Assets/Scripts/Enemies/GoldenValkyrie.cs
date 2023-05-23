@@ -27,13 +27,17 @@ public class GoldenValkyrie : EnemyBase
     // Start is called before the first frame update
     void Start()
     {
-        StartCoroutine(RepeatAttack());
-        StartCoroutine(UpdateWanderVector());
+        /*StartCoroutine(RepeatAttack());
+        StartCoroutine(UpdateWanderVector());*/
         canTakeDamage = true;
+        //initialPosition = transform.position;
     }
 
     private void OnEnable()
     {
+        StartCoroutine(RepeatAttack());
+        StartCoroutine(UpdateWanderVector());
+
         GameObject spawnVfx = GoldValkSpawnVfxPool.Instance.RequestPoolObject();
         spawnVfx.transform.position = transform.position;
         spawnVfx.GetComponent<VisualEffect>().Play();

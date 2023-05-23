@@ -2522,9 +2522,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Diamond
+  m_text: 'Ice
 
-    Missile'
+    Dagger'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 74691a62ef604a9448564444bc2c6953, type: 2}
   m_sharedMaterial: {fileID: 4770269735263906636, guid: 74691a62ef604a9448564444bc2c6953,
@@ -2660,9 +2660,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Thunder
+  m_text: 'Electric
 
-    Ray'
+    Beam'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 74691a62ef604a9448564444bc2c6953, type: 2}
   m_sharedMaterial: {fileID: 4770269735263906636, guid: 74691a62ef604a9448564444bc2c6953,

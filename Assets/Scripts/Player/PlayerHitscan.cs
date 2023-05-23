@@ -27,6 +27,10 @@ public class PlayerHitscan : Weapon
 
     protected override void Fire()
     {
+        if (GameManager.instance.currentState != EGameStates.Gameplay)
+        {
+            return;
+        }
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
             RaycastHit hit;

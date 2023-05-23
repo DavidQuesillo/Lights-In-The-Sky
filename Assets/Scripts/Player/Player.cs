@@ -454,6 +454,15 @@ public class Player : MonoBehaviour
         }
     }
 
+    public void DamageShield(float dmg)
+    {
+        shieldMeter -= dmg;
+        if (shieldMeter <= 0f)
+        {
+            shieldDepleted = true;
+        }
+    }
+
     /*private void Dash()
     {
         if (Input.GetKeyDown(KeyCode.LeftShift))

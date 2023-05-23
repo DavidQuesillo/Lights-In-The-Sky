@@ -75,7 +75,7 @@ public class TweenToolWorld : MonoBehaviour
         rTween.Kill();
         sTween.Kill();
         tr.localRotation = Quaternion.identity;
-        Debug.Log("disabled");
+        //Debug.Log("disabled");
     }
 
     // Update is called once per frame

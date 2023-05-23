@@ -13,6 +13,7 @@ public class EnemyBase : MonoBehaviour
     [SerializeField] protected AudioSource aus;
     [SerializeField] protected Transform shootPoint;
     [SerializeField] private bool isPartOfWave;
+    [SerializeField] protected Vector3 initialPosition;
     [SerializeField] protected float health;
     [SerializeField] protected float baseHealth;
     [SerializeField] protected float speed;
@@ -25,6 +26,22 @@ public class EnemyBase : MonoBehaviour
     protected Vector3 moveDir;
     [SerializeField] protected bool attacking = false;
     [SerializeField] protected sideComingFrom whereFrom = sideComingFrom.Forward;
+
+    /*protected void Awake()
+    {
+        initialPosition = transform.position;
+        Debug.Log("Ran from parent");
+    }*/
+
+    public void SetStartPos()
+    {
+        initialPosition = transform.position;
+    }
+
+    public Vector3 GetStartPos()
+    {
+        return initialPosition;
+    }
 
     protected virtual void Attack()
     {

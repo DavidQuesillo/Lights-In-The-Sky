@@ -213,3 +213,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dissipateTimer: 5
   rb: {fileID: 6451528006526467296}
+  shieldDmg: 30

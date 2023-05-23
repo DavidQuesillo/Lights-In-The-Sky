@@ -227,6 +227,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dissipateTimer: 15
   rb: {fileID: 3902451785124036522}
+  shieldDmg: 70
   maxSize: 6
   growthSpeed: 1.26
   startScale: 1.3

@@ -6,8 +6,13 @@ public class GravityBullets : MonoBehaviour
 {
     [SerializeField] private float lifetimeAfterTouch = 0.1f;
     [SerializeField] private float lifetimeVariance = 0.05f;
+    [SerializeField] private float defaultTrailTime;
     [SerializeField] private float timer;
     [SerializeField] private bool touched = false;
+    //[SerializeField] private float shieldDmg;
+
+    [SerializeField] private TrailRenderer trail; //this may change in the future
+                                                //gave up on using this,its turned off
 
     private void Start()
     {
@@ -18,6 +23,13 @@ public class GravityBullets : MonoBehaviour
     {
         StopCoroutine(VanishCoroutine());
         touched = false;
+        
+        //trail.enabled = true;
+
+        //trail.Clear();
+        //trail.emitting = true;
+        //trail.time = defaultTrailTime;
+
         timer = lifetimeAfterTouch + Random.Range(-lifetimeVariance, lifetimeVariance);
         transform.localScale = Vector3.one;
         StartCoroutine(VanishCoroutine());
@@ -27,7 +39,7 @@ public class GravityBullets : MonoBehaviour
     {
         //Debug.Log("bonked smth");
         touched = true;
-        //Debug.Log("fireball touched");
+        //MDebug.Log("fireball touched");
     }
     private void OnTriggerEnter(Collider other)
     {
@@ -36,6 +48,7 @@ public class GravityBullets : MonoBehaviour
             gameObject.SetActive(false);
         }
     }
+
     /*private void OnCollisionExit(Collision collision)
     {
         
@@ -53,8 +66,13 @@ public class GravityBullets : MonoBehaviour
             {
                 timer -= Time.deltaTime;
                 transform.localScale = Vector3.one * timer;
+                trail.time = 0.01f;
                 if (timer <= 0f)
                 {
+                    //trail.enabled = false;                    
+                    
+                    //trail.emitting = false;
+                    //trail.Clear();
                     gameObject.SetActive(false);
                     break;
                 }
@@ -66,6 +84,6 @@ public class GravityBullets : MonoBehaviour
             }            
             yield return null;
         }
-        Debug.Log("Exited coroutine");
+        //Debug.Log("Exited coroutine");
     }
 }

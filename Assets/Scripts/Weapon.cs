@@ -11,6 +11,7 @@ public class Weapon : MonoBehaviour
     [SerializeField] protected GameObject projectile;
     [SerializeField] protected float projectileSpeed;
     [SerializeField] protected Color debugColor;
+    [SerializeField] protected int animIndex;
     protected float currentCooldown;
     public bool canAttack = true;
 
@@ -33,5 +34,10 @@ public class Weapon : MonoBehaviour
     public float GetDamage()
     {
         return damage;
+    }
+
+    public int GetAnimIndex()
+    {
+        return animIndex;
     }
 }

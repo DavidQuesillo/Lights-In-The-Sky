@@ -17,7 +17,7 @@ public class Player : MonoBehaviour
     [SerializeField] private Transform hands;
     [SerializeField] private Renderer HandsModel;
     [Header("Weapons")]
-    [SerializeField] private GameObject[] weapons = new GameObject[0];
+    [SerializeField] private Weapon[] weapons = new Weapon[0];
     [SerializeField] private Sprite[] reticles = new Sprite[2];
     [SerializeField] private Color[] reticleColor = new Color[2];
     [SerializeField] private Image reticleHUD;
@@ -77,10 +77,10 @@ public class Player : MonoBehaviour
         cam = Camera.main.transform;
         for (int i = 0; i < weapons.Length; i++)
         {
-            weapons[i].SetActive(false);
+            weapons[i].gameObject.SetActive(false);
         }
         currentWeapon = 0;
-        weapons[0].SetActive(true);
+        weapons[0].gameObject.SetActive(true);
         anim.SetInteger("Weapon", 1);
         reticleHUD.sprite = reticles[currentWeapon];
         reticleHUD.color = reticleColor[currentWeapon];
@@ -143,21 +143,22 @@ public class Player : MonoBehaviour
         }
         if (!GameManager.instance.paused)
         {
-            WeaponSwitch();
+            //WeaponSwitch();
             HoldShield();
             //Dash();
         }
 
         //Shoot();
 
-        if (Input.GetKeyDown(KeyCode.Z))
+        //debug health commands
+        /*if (Input.GetKeyDown(KeyCode.Z))
         {
             TakeDamage();
         }
         if (Input.GetKeyDown(KeyCode.X))
         {
             GainHealth();
-        }
+        }*/
     }
 
     #region input messages
@@ -270,6 +271,9 @@ public class Player : MonoBehaviour
             movingSlow = false;
         }
     }
+    private void OnWeapon1() { WeaponSwitch(0);}
+    private void OnWeapon2() { WeaponSwitch(1); }
+    private void OnWeapon3() { WeaponSwitch(2); }
     #endregion
 
     private void Flight()
@@ -383,18 +387,71 @@ public class Player : MonoBehaviour
         GameManager.instance.GameOver();
     }
 
-    private void WeaponSwitch()
+    private void WeaponSwitch(int weaponIndex)
     {
-        if (Input.GetKeyDown(KeyCode.Alpha1))
+        if (currentWeapon != weaponIndex)
+        {
+            weapons[currentWeapon].gameObject.SetActive(false);
+            currentWeapon = weaponIndex;
+            weapons[currentWeapon].gameObject.SetActive(true);
+            reticleHUD.sprite = reticles[currentWeapon];
+            reticleHUD.color = reticleColor[currentWeapon];
+            anim.SetInteger("Weapon", weapons[currentWeapon].GetAnimIndex());
+            GameManager.instance.UiScript.SwitchActiveWeapon(weaponIndex);
+        }
+
+        /*switch (weaponIndex)
+        {
+            case 0:
+                if (currentWeapon != 0)
+                {
+                    weapons[currentWeapon].gameObject.SetActive(false);
+                    currentWeapon = 0;
+                    weapons[currentWeapon].gameObject.SetActive(true);
+                    reticleHUD.sprite = reticles[currentWeapon];
+                    reticleHUD.color = reticleColor[currentWeapon];
+                    anim.SetInteger("Weapon", weapons[currentWeapon].GetAnimIndex());
+                    GameManager.instance.UiScript.SwitchActiveWeapon(0);
+                }
+                break;
+            case 1:
+                if (currentWeapon != 1)
+                {
+                    weapons[currentWeapon].gameObject.SetActive(false);
+                    currentWeapon = 1;
+                    weapons[currentWeapon].gameObject.SetActive(true);
+                    reticleHUD.sprite = reticles[currentWeapon];
+                    reticleHUD.color = reticleColor[currentWeapon];
+                    anim.SetInteger("Weapon", weapons[currentWeapon].GetAnimIndex());
+                    GameManager.instance.UiScript.SwitchActiveWeapon(1);
+                }
+                break;
+            case 2:
+                if (currentWeapon != 2)
+                {
+                    weapons[currentWeapon].gameObject.SetActive(false);
+                    currentWeapon = 2;
+                    weapons[currentWeapon].gameObject.SetActive(true);
+                    reticleHUD.sprite = reticles[currentWeapon];
+                    reticleHUD.color = reticleColor[currentWeapon];
+                    anim.SetInteger("Weapon", weapons[currentWeapon].GetAnimIndex());
+                    GameManager.instance.UiScript.SwitchActiveWeapon(2);
+                }
+                break;
+            default:
+                break;
+        }*/
+
+        /*if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             if (currentWeapon != 0)
             {
-                weapons[currentWeapon].SetActive(false);
+                weapons[currentWeapon].gameObject.SetActive(false);
                 currentWeapon = 0;
-                weapons[currentWeapon].SetActive(true);
+                weapons[currentWeapon].gameObject.SetActive(true);
                 reticleHUD.sprite = reticles[currentWeapon];
                 reticleHUD.color = reticleColor[currentWeapon];
-                anim.SetInteger("Weapon", 1);
+                anim.SetInteger("Weapon", weapons[currentWeapon].GetAnimIndex());
                 GameManager.instance.UiScript.SwitchActiveWeapon(0);
             }
         }
@@ -402,16 +459,16 @@ public class Player : MonoBehaviour
         {
             if (currentWeapon != 1)
             {
-                weapons[currentWeapon].SetActive(false);
+                weapons[currentWeapon].gameObject.SetActive(false);
                 currentWeapon = 1;
-                weapons[currentWeapon].SetActive(true);
+                weapons[currentWeapon].gameObject.SetActive(true);
                 reticleHUD.sprite = reticles[currentWeapon];
                 reticleHUD.color = reticleColor[currentWeapon];
-                anim.SetInteger("Weapon", 2);
+                anim.SetInteger("Weapon", weapons[currentWeapon].GetAnimIndex());
                 GameManager.instance.UiScript.SwitchActiveWeapon(1);
             }
             
-        }
+        }*/
     }
 
     private void HoldShield()
@@ -422,14 +479,14 @@ public class Player : MonoBehaviour
         {
             canShoot = false;
             shield.SetActive(true);
-            weapons[currentWeapon].SetActive(false);
+            weapons[currentWeapon].gameObject.SetActive(false);
             anim.SetBool("Shielding", true);
             shieldMeter -= Time.deltaTime * shieldDrain;
             GameManager.instance.UiScript.UsingShield(shieldMeter);
         }
         else
         {
-            weapons[currentWeapon].SetActive(true);
+            weapons[currentWeapon].gameObject.SetActive(true);
             shield.SetActive(false);
             anim.SetBool("Shielding", false);
             canShoot = true;

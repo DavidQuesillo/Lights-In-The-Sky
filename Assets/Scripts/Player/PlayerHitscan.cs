@@ -25,6 +25,11 @@ public class PlayerHitscan : Weapon
         }
     }
 
+    private void OnDisable()
+    {
+        lr.enabled = false;
+    }
+
     protected override void Fire()
     {
         if (GameManager.instance.currentState != EGameStates.Gameplay)
@@ -36,7 +41,7 @@ public class PlayerHitscan : Weapon
             RaycastHit hit;
             if (!GameManager.instance.paused)
             {
-                lr.enabled = true;
+                //lr.enabled = true;
                 aus.Play();
             }
             if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, shotRange, ignoreMask.value))
@@ -84,7 +89,7 @@ public class PlayerHitscan : Weapon
                 RaycastHit hit;
                 if (!GameManager.instance.paused && GameManager.instance.currentState == EGameStates.Gameplay)
                 {
-                    lr.enabled = true;
+                    //lr.enabled = true;
                 }
                 else
                 {
@@ -93,6 +98,7 @@ public class PlayerHitscan : Weapon
                 if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, shotRange, ignoreMask.value))
                 {
                     lr.SetPosition(lr.positionCount + -1, hit.point);
+                    lr.enabled = true;
                     projectile.SetActive(true);
                     projectile.transform.position = hit.point;
                     projectile.transform.rotation.SetLookRotation(projectile.transform.position - transform.position);
@@ -125,6 +131,7 @@ public class PlayerHitscan : Weapon
                     Vector3 spotOfChange = lr.GetPosition(i);
                     lr.SetPosition(i, spotOfChange + new Vector3(Random.Range(-lightningEntropy, lightningEntropy), Random.Range(-lightningEntropy, lightningEntropy), Random.Range(-lightningEntropy, lightningEntropy)));
                 }
+                lr.enabled = true;
                 /*for (int i = 1; i < lr.positionCount + -1; i++)
                 {
 
@@ -132,6 +139,10 @@ public class PlayerHitscan : Weapon
                 currentCooldown = fireRate;
                 //Debug.Log("Held shot");
             }
+        }
+        else
+        {
+            lr.enabled = false;
         }
         if (Input.GetKeyUp(KeyCode.Mouse0))
         {

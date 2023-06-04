@@ -5,20 +5,20 @@ using UnityEngine.VFX;
 
 public class PlayerBullet : MonoBehaviour
 {
-    private float damage;
-    [SerializeField] LayerMask ignoreMask;
-    [SerializeField] private GameObject particles;
-    [SerializeField] private float lifetime = 2f;
-    private float timer;
+    [SerializeField] protected float damage;
+    [SerializeField] protected LayerMask ignoreMask;
+    [SerializeField] protected GameObject particles;
+    [SerializeField] protected float lifetime = 2f;
+    protected float lifeTimer;
 
     private void OnEnable()
     {
-        timer = lifetime;
+        lifeTimer = lifetime;
     }
     private void Update()
     {
-        timer -= Time.deltaTime;
-        if (timer <= 0f)
+        lifeTimer -= Time.deltaTime;
+        if (lifeTimer <= 0f)
         {
             gameObject.SetActive(false);
         }
@@ -33,7 +33,7 @@ public class PlayerBullet : MonoBehaviour
         return damage;
     }
 
-    private void OnTriggerEnter(Collider other)
+    protected virtual void OnTriggerEnter(Collider other)
     {
         /*if (other.gameObject.layer != ignoreMask.value)
         {

@@ -38,9 +38,9 @@ MonoBehaviour:
     FramesScrollPosition:
       valueInternal: -40
     FramesZoom:
-      valueInternal: 0.2835474
+      valueInternal: 0.28354737
     PropertiesScrollPosition:
-      valueInternal: 352
+      valueInternal: 0
     PropertiesZoom:
       valueInternal: 1
     CurveYScrollPosition:

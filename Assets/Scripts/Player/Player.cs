@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
+using static UnityEngine.InputSystem.InputAction;
 using DG.Tweening;
 
 public class Player : MonoBehaviour
@@ -24,6 +25,7 @@ public class Player : MonoBehaviour
     private int currentWeapon;
     public bool canLookAround = true;
     public bool canShoot = true;
+    [SerializeField] private bool fireHeld;
     [Header("Shield")]
     [SerializeField] private GameObject shield;
     [SerializeField] private Image shieldUI;
@@ -78,6 +80,7 @@ public class Player : MonoBehaviour
         for (int i = 0; i < weapons.Length; i++)
         {
             weapons[i].gameObject.SetActive(false);
+            weapons[i].SetAnim(anim);
         }
         currentWeapon = 0;
         weapons[0].gameObject.SetActive(true);
@@ -271,9 +274,37 @@ public class Player : MonoBehaviour
             movingSlow = false;
         }
     }
+
+    private void OnFire(InputValue value)
+    {
+        /*if (ctx.performed)
+        {
+            fireHeld = true;
+            weapons[currentWeapon].StartFiring();
+        }
+        if (ctx.canceled)
+        {
+            fireHeld = false;
+            weapons[currentWeapon].StopFiring();
+        }        */
+
+        if (value.isPressed)
+        {
+            fireHeld = true;
+            weapons[currentWeapon].StartFiring();
+        }
+        else
+        {
+            fireHeld = false;
+            weapons[currentWeapon].StopFiring();
+        }
+    }
+
     private void OnWeapon1() { WeaponSwitch(0);}
-    private void OnWeapon2() { WeaponSwitch(1); }
-    private void OnWeapon3() { WeaponSwitch(2); }
+    private void OnWeapon2() { WeaponSwitch(1);}
+    private void OnWeapon3() { WeaponSwitch(2);}
+    private void OnWeapon4() { WeaponSwitch(3);}
+    private void OnWeapon5() { WeaponSwitch(4); }
     #endregion
 
     private void Flight()
@@ -390,10 +421,15 @@ public class Player : MonoBehaviour
     private void WeaponSwitch(int weaponIndex)
     {
         if (currentWeapon != weaponIndex)
-        {
+        {            
+            weapons[currentWeapon].StopFiring();
             weapons[currentWeapon].gameObject.SetActive(false);
             currentWeapon = weaponIndex;
             weapons[currentWeapon].gameObject.SetActive(true);
+            if (fireHeld)
+            {
+                weapons[currentWeapon].StartFiring();
+            }
             reticleHUD.sprite = reticles[currentWeapon];
             reticleHUD.color = reticleColor[currentWeapon];
             anim.SetInteger("Weapon", weapons[currentWeapon].GetAnimIndex());

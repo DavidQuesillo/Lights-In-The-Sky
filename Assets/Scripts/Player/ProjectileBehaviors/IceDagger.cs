@@ -3,7 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class IceDagger : PlayerBullet
-{
+{    
+    private void OnEnable()
+    {
+        rb.AddForce(transform.forward * projSpeed, ForceMode.VelocityChange);
+    }
     // Start is called before the first frame update
     void Start()
     {

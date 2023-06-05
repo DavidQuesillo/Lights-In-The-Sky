@@ -6,9 +6,13 @@ using UnityEngine.VFX;
 public class PlayerBullet : MonoBehaviour
 {
     [SerializeField] protected float damage;
+    [SerializeField] protected float projSpeed;
     [SerializeField] protected LayerMask ignoreMask;
     [SerializeField] protected GameObject particles;
     [SerializeField] protected float lifetime = 2f;
+    //[SerializeField] protected Transform hlOutline; //the mesh that serves as projectile outline
+    //[SerializeField] protected Vector3 startOutlineSize; //the Scale of the transform of the previous obj
+    [SerializeField] protected Rigidbody rb;
     [SerializeField] protected pool hitFxPool;
     [SerializeField] protected pool killFxPool;
     protected float lifeTimer;
@@ -40,6 +44,14 @@ public class PlayerBullet : MonoBehaviour
     public float GetDamage()
     {
         return damage;
+    }
+    public void SetSpeed(float spd)
+    {
+        projSpeed = spd;
+    }
+    public float GetSpeed()
+    {
+        return projSpeed;
     }
 
     public void SetHitFxPool(pool fxPool)

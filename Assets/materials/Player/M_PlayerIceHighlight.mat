@@ -20,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: M_PlayerShot
+  m_Name: M_PlayerIceHighlight
   m_Shader: {fileID: 4800000, guid: 8d2bb70cbf9db8d4da26e15b26e74248, type: 3}
   m_ValidKeywords:
   - _EMISSION
@@ -29,7 +29,7 @@ Material:
   m_InvalidKeywords: []
   m_LightmapFlags: 0
   m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 0
+  m_DoubleSidedGI: 1
   m_CustomRenderQueue: 3000
   stringTagMap:
     RenderType: Transparent
@@ -102,7 +102,7 @@ Material:
     - _BumpScale: 1
     - _ClearCoatMask: 0
     - _ClearCoatSmoothness: 0
-    - _Cull: 2
+    - _Cull: 1
     - _Cutoff: 0.5
     - _DetailAlbedoMapScale: 1
     - _DetailNormalMapScale: 1
@@ -128,8 +128,8 @@ Material:
     - _WorkflowMode: 1
     - _ZWrite: 0
     m_Colors:
-    - _BaseColor: {r: 0.5613207, g: 0.8231429, b: 1, a: 0.6666667}
-    - _Color: {r: 0.5613207, g: 0.8231429, b: 1, a: 0.6666667}
-    - _EmissionColor: {r: 0.06835584, g: 0.28382537, b: 0.28382537, a: 1}
+    - _BaseColor: {r: 0.5613207, g: 0.8231429, b: 1, a: 0.24705882}
+    - _Color: {r: 0.5613207, g: 0.8231429, b: 1, a: 0.24705882}
+    - _EmissionColor: {r: 0.3339622, g: 0.62423265, b: 1, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
   m_BuildTextureStacks: []

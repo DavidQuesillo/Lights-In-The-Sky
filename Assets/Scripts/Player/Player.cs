@@ -422,7 +422,7 @@ public class Player : MonoBehaviour
 
     private void WeaponSwitch(int weaponIndex)
     {
-        if (currentWeapon > weapons.Length)
+        if (weaponIndex >= weapons.Length)
         {
 
             Debug.Log("weapon missing in list");

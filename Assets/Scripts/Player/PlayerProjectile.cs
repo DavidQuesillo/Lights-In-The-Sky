@@ -44,15 +44,18 @@ public class PlayerProjectile : Weapon
     protected virtual void CreateBullet()
     {
         //there has been changes since initial copypaste from the original in Fire
-        GameObject shot = projPool.RequestPoolObject(); //remember to change this for pool modularity
+        GameObject shot = projPool.RequestPoolObject();
         shot.transform.rotation = rotationRef.rotation;
         shot.transform.position = shootPoint.position;
         shot.GetComponent<PlayerBullet>().SetDamage(damage);
         shot.GetComponent<PlayerBullet>().SetHitFxPool(hitFxPool);
         shot.GetComponent<PlayerBullet>().SetKillFxPool(killFxPool);
         shot.GetComponent<Rigidbody>().velocity = Vector3.zero;
+        //trying a flexible method where weapon tells speed and proj uses it in its own way  /////      //////
+        shot.GetComponent<PlayerBullet>().SetSpeed(projectileSpeed);
         shot.SetActive(true);
-        shot.GetComponent<Rigidbody>().AddForce(cam.forward * projectileSpeed, ForceMode.VelocityChange);
+        //shot.GetComponent<Rigidbody>().AddForce(cam.forward * projectileSpeed, ForceMode.VelocityChange);
+        
     }
 
     #region old fire

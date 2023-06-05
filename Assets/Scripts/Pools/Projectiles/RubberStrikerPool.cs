@@ -36,7 +36,7 @@ public class RubberStrikerPool : pool
         
     }
 
-    public override void AddObjToPool(int amount)
+    /*public override void AddObjToPool(int amount)
     {
         for (int i = 0; i < amount; i++)
         {
@@ -44,7 +44,7 @@ public class RubberStrikerPool : pool
             gO.SetActive(false);
             objList.Add(gO);
         }
-    }
+    }*/
 
     public override GameObject RequestPoolObject()
     {

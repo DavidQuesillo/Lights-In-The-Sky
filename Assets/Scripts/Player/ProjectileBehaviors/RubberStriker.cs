@@ -38,7 +38,7 @@ public class RubberStriker : PlayerBullet
             RubberBreak();
         }
     }
-    protected override void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
         //base.OnTriggerEnter(other);
     }

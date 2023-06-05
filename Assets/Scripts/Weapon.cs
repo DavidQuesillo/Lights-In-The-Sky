@@ -21,8 +21,22 @@ public class Weapon : MonoBehaviour
     [SerializeField] protected bool fireHeld = false;
 
     [Header("Special VFX")]
-    [SerializeField] private pool hitFxPool;
-    [SerializeField] private pool killFxPool;
+    [SerializeField] protected pool hitFxPool;
+    [SerializeField] protected pool killFxPool;
+    /*[SerializeField] protected Transform hitPoolParent;
+    [SerializeField] protected Transform killPoolParent;*/
+
+    private void Awake()
+    {
+        /*if (hitFxPool != null)
+        {
+            hitFxPool.assignedParent = hitPoolParent;
+        }
+        if (killFxPool != null)
+        {
+            killFxPool.assignedParent = killPoolParent;
+        }*/        
+    }
 
     // Update is called once per frame
     void Update()
@@ -69,6 +83,7 @@ public class Weapon : MonoBehaviour
 
     protected bool GetIfCooldownPassedWhileSwapped()
     {
+        print("cooldown checked");
         if (Time.time - timeOfSwap < currentCooldown)
         {
             return true;

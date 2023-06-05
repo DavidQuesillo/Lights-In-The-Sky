@@ -4,19 +4,29 @@ using UnityEngine;
 
 public class PlayerProjectile : Weapon
 {
+    [SerializeField] private pool projPool;
+    //[SerializeField] protected Transform projPoolParent;
+    [Header("Projectile Exclusives")]
     [SerializeReference] private Transform rotationRef;
     [SerializeReference] private Transform shootPoint;
-    [SerializeField] private pool projPool;
+    
+    /*[SerializeField] private pool hitFxPool;
+    [SerializeField] private pool killFxPool;*/
+
+    private void Awake()
+    {
+        //projPool.assignedParent = projPoolParent;
+    }
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        StartCoroutine(ContinuousFire());
     }
     private void OnEnable()
     {
-        StopCoroutine(ContinuousFire());
-        StartCoroutine(ContinuousFire());
+        //StopCoroutine(ContinuousFire());
+        //StartCoroutine(ContinuousFire());
         if (GetIfCooldownPassedWhileSwapped())
         {
             currentCooldown = 0f;
@@ -38,6 +48,8 @@ public class PlayerProjectile : Weapon
         shot.transform.rotation = rotationRef.rotation;
         shot.transform.position = shootPoint.position;
         shot.GetComponent<PlayerBullet>().SetDamage(damage);
+        shot.GetComponent<PlayerBullet>().SetHitFxPool(hitFxPool);
+        shot.GetComponent<PlayerBullet>().SetKillFxPool(killFxPool);
         shot.GetComponent<Rigidbody>().velocity = Vector3.zero;
         shot.SetActive(true);
         shot.GetComponent<Rigidbody>().AddForce(cam.forward * projectileSpeed, ForceMode.VelocityChange);

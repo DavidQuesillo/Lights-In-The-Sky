@@ -12,20 +12,22 @@ public class PlayerImpaler : Weapon
     // Start is called before the first frame update
     void Start()
     {
-        projPool = FindObjectOfType<EarthPillarPool>(); //should replace with something that creates it,
+        //projPool = FindObjectOfType<EarthPillarPool>(); //should replace with something that creates it,
                                                         //probably with a new poolManager script or something
+                                                        //thot of smth its almost implemented rn - its done
+        currentCooldown = 0f;                                                
+        StartCoroutine(ContinuousFire());
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        //StopCoroutine(ContinuousFire());        
     }
 
     private void OnEnable()
     {
-        StopCoroutine(ContinuousFire());
-        StartCoroutine(ContinuousFire());
+        
         if (GetIfCooldownPassedWhileSwapped())
         {
             currentCooldown = 0f;
@@ -55,7 +57,7 @@ public class PlayerImpaler : Weapon
             
     }*/
 
-    private void ErectPillar()
+    /*private void ErectPillar() //this just has the same thing as Fire() I moved it all there
     {        
         RaycastHit hit;
         if (!GameManager.instance.paused)
@@ -72,11 +74,11 @@ public class PlayerImpaler : Weapon
             pillar.gameObject.SetActive(true);            
         }
         currentCooldown = fireRate;
-    }
+    }*/
 
     protected override void Fire()
     {
-        base.Fire();
+        //base.Fire();
         RaycastHit hit;
         if (!GameManager.instance.paused)
         {

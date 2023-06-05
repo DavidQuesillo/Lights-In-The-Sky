@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class IceDagger : PlayerProjectile
+public class IceDagger : PlayerBullet
 {
     // Start is called before the first frame update
     void Start()
@@ -14,10 +14,32 @@ public class IceDagger : PlayerProjectile
     void Update()
     {
         
-    }
+    }    
 
-    protected override void Fire()
-    {
-        //base.Fire();
+    private void OnTriggerEnter(Collider other)
+    {                
+        if (other.CompareTag("Enemy"))
+        {
+            if (other.GetComponent<EnemyBase>().GetHP() <= damage)
+            {
+                //GameObject particle = IceDagParticlesPool.Instance.RequestPoolObject();
+
+                GameObject killParticle = IceDagKillParticlesPool.Instance.RequestPoolObject();
+                killParticle.transform.SetPositionAndRotation(transform.position, Quaternion.LookRotation(-transform.forward));
+                //killParticle.GetComponent<VisualEffect>()?.Play();
+                //killParticle.GetComponent<VisualEffect>().Stop()
+                killParticle.GetComponent<AudioSource>()?.Play();
+                Debug.Log(other.name);
+                gameObject.SetActive(false);
+                return;
+            }
+        }
+
+        GameObject particle = IceDagParticlesPool.Instance.RequestPoolObject();
+        particle.transform.SetPositionAndRotation(transform.position, Quaternion.LookRotation(-transform.forward));
+        particle.GetComponent<AudioSource>()?.Play();
+        //Debug.Log(other.name);
+        gameObject.SetActive(false);
+        //Destroy(gameObject, 0.02f);
     }
 }

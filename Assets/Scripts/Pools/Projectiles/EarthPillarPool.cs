@@ -30,13 +30,7 @@ public class EarthPillarPool : pool
         AddObjToPool(poolsize);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    public override void AddObjToPool(int amount)
+    /*public override void AddObjToPool(int amount)
     {
         for (int i = 0; i < amount; i++)
         {
@@ -44,7 +38,7 @@ public class EarthPillarPool : pool
             gO.SetActive(false);
             objList.Add(gO);
         }
-    }
+    }*/
 
     public override GameObject RequestPoolObject()
     {

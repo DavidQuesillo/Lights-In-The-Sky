@@ -13,7 +13,7 @@ public class PlayerHitscan : Weapon
     // Start is called before the first frame update
     void Start()
     {
-        currentCooldown = fireRate;
+        currentCooldown = 0f;
     }
 
     // Update is called once per frame
@@ -28,6 +28,7 @@ public class PlayerHitscan : Weapon
     private void OnDisable()
     {
         lr.enabled = false;
+        projectile.SetActive(false);
     }
 
     protected override void Fire()

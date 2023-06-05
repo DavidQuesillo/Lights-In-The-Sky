@@ -6,8 +6,9 @@ public class pool : MonoBehaviour
 {
     public GameObject obj;
     public List<GameObject> objList;
-
+    public Transform assignedParent; //purely for organization in the scene
     public int poolsize = 5;
+    [SerializeField] private bool usesAssignedParent = true;
 
     private static pool instance;
     public static pool Instance { get { return instance; } }
@@ -30,20 +31,27 @@ public class pool : MonoBehaviour
         AddObjToPool(poolsize);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public virtual void AddObjToPool(int amount)
     {
-        for (int i = 0; i < amount; i++)
+        if (usesAssignedParent)
         {
-            GameObject gO = Instantiate(obj, transform.position, Quaternion.identity, transform);
-            gO.SetActive(false);
-            objList.Add(gO);
+            for (int i = 0; i < amount; i++)
+            {
+                GameObject gO = Instantiate(obj, transform.position, Quaternion.identity, assignedParent);
+                gO.SetActive(false);
+                objList.Add(gO);
+            }            
         }
+        else
+        {
+            for (int i = 0; i < amount; i++)
+            {
+                GameObject gO = Instantiate(obj, transform.position, Quaternion.identity, transform);
+                gO.SetActive(false);
+                objList.Add(gO);
+            }
+        }
+        
     }
 
     public virtual GameObject RequestPoolObject()

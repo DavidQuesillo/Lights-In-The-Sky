@@ -43,7 +43,7 @@ public class ImpalerPillar : PlayerBullet
         gameObject.SetActive(false);
     }
 
-    protected override void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Enemy"))
         {

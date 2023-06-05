@@ -93,7 +93,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9170623644877333062}
   - component: {fileID: 9170623644877333063}
-  - component: {fileID: 8803276999761644296}
+  - component: {fileID: 440411416799355203}
   - component: {fileID: 561679216287617056}
   - component: {fileID: 5851907522242936386}
   m_Layer: 10
@@ -135,7 +135,7 @@ Rigidbody:
   m_Interpolate: 1
   m_Constraints: 112
   m_CollisionDetection: 2
---- !u!114 &8803276999761644296
+--- !u!114 &440411416799355203
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -144,15 +144,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 9170623644877333060}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cc23154e4ac937d4291b94278812e1b9, type: 3}
+  m_Script: {fileID: 11500000, guid: 350e3f163f060244c9555a8781b03dfe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damage: 0
   ignoreMask:
     serializedVersion: 2
     m_Bits: 384
   particles: {fileID: 2011074189752715552, guid: 37731abcb4bc2c947b85f5b11e60ec6e,
     type: 3}
   lifetime: 2
+  hitFxPool: {fileID: 0}
+  killFxPool: {fileID: 0}
 --- !u!82 &561679216287617056
 AudioSource:
   m_ObjectHideFlags: 0

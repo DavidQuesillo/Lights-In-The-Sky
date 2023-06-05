@@ -36,15 +36,15 @@ public class ElecRayKillParticlesPool : pool
         
     }
 
-    public override void AddObjToPool(int amount)
+    /*public override void AddObjToPool(int amount)
     {
         for (int i = 0; i < amount; i++)
         {
-            GameObject gO = Instantiate(obj, transform);
+            GameObject gO = Instantiate(obj);
             gO.SetActive(false);
             objList.Add(gO);
         }
-    }
+    }*/
 
     public override GameObject RequestPoolObject()
     {

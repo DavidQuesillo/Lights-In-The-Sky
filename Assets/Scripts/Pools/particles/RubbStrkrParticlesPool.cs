@@ -2,15 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class IceDaggerPool : pool
+public class RubbStrkrParticlesPool : pool
 {
     //public GameObject obj;
     //public List<GameObject> objList;
 
     //public int poolsize = 5;
 
-    private static IceDaggerPool instance;
-    public static new IceDaggerPool Instance { get { return instance; } }
+    private static RubbStrkrParticlesPool instance;
+    public static new RubbStrkrParticlesPool Instance { get { return instance; } }
 
     private void Awake()
     {
@@ -30,15 +30,21 @@ public class IceDaggerPool : pool
         AddObjToPool(poolsize);
     }
 
-    /*public override void AddObjToPool(int amount)
+    // Update is called once per frame
+    void Update()
+    {
+        
+    }
+
+    public override void AddObjToPool(int amount)
     {
         for (int i = 0; i < amount; i++)
         {
-            GameObject gO = Instantiate(obj, assignedParent);
+            GameObject gO = Instantiate(obj, transform);
             gO.SetActive(false);
             objList.Add(gO);
         }
-    }*/
+    }
 
     public override GameObject RequestPoolObject()
     {
@@ -46,12 +52,12 @@ public class IceDaggerPool : pool
         {
             if(objList[i].activeSelf == false)
             {
-                //objList[i].SetActive(true);
+                objList[i].SetActive(true);
                 return objList[i]; //ends the function if an inactive object is found. it returns that single object and ends the iteration
             }
         }
         AddObjToPool(1);
-        //objList[objList.Count - 1].SetActive(true);
+        objList[objList.Count - 1].SetActive(true);
         return objList[objList.Count - 1]; //creates a new object and adds it to the pool to return it to the function
     }
 }

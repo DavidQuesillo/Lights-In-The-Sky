@@ -21,8 +21,8 @@ public class PlayerRubber : Weapon
     }
     private void OnEnable()
     {
-        StopCoroutine(ContinuousFire());
-        StartCoroutine(ContinuousFire());
+        //StopCoroutine(ContinuousFire());
+        //StartCoroutine(ContinuousFire());
         if (GetIfCooldownPassedWhileSwapped())
         {
             currentCooldown = 0f;
@@ -42,7 +42,13 @@ public class PlayerRubber : Weapon
         currentCooldown = fireRate;
     }
 
-    private IEnumerator ContinuousFire()
+    protected override void Fire()
+    {
+        //base.Fire();
+        ShootStriker();
+    }
+
+    /*private IEnumerator ContinuousFire()
     {
         while (true)
         {
@@ -60,5 +66,5 @@ public class PlayerRubber : Weapon
             }
             yield return null;
         }
-    }
+    }*/
 }

@@ -79,7 +79,8 @@ public class Player : MonoBehaviour
         cam = Camera.main.transform;
         for (int i = 0; i < weapons.Length; i++)
         {
-            weapons[i].gameObject.SetActive(false);
+            //weapons[i].gameObject.SetActive(false);
+            weapons[i].gameObject.SetActive(true);
             weapons[i].SetAnim(anim);
         }
         currentWeapon = 0;
@@ -126,7 +127,8 @@ public class Player : MonoBehaviour
         weapons[currentWeapon].GetComponent<Weapon>().canAttack = canShoot;
         if (canShoot)
         {
-            if (Input.GetKey(KeyCode.Mouse0))
+            //if (Input.GetKey(KeyCode.Mouse0))
+            if (fireHeld)
             {
                 anim.SetBool("Shooting", true);
             }
@@ -420,12 +422,20 @@ public class Player : MonoBehaviour
 
     private void WeaponSwitch(int weaponIndex)
     {
+        if (currentWeapon > weapons.Length)
+        {
+
+            Debug.Log("weapon missing in list");
+            return;
+        }
         if (currentWeapon != weaponIndex)
         {            
             weapons[currentWeapon].StopFiring();
-            weapons[currentWeapon].gameObject.SetActive(false);
+            //weapons[currentWeapon].gameObject.SetActive(false);
+            weapons[currentWeapon].enabled = false;
             currentWeapon = weaponIndex;
-            weapons[currentWeapon].gameObject.SetActive(true);
+            //weapons[currentWeapon].gameObject.SetActive(true);
+            weapons[currentWeapon].enabled = true;
             if (fireHeld)
             {
                 weapons[currentWeapon].StartFiring();

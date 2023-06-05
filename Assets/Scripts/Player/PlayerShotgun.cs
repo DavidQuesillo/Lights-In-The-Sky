@@ -22,15 +22,15 @@ public class PlayerShotgun : Weapon
     void Start()
     {
         currentCooldown = 0f;
-        
+        //StopCoroutine(VanishRays());
+        StartCoroutine(VanishRays());
+        //StopCoroutine(ContinuousFire());
+        StartCoroutine(ContinuousFire());
     }
 
     private void OnEnable()
     {
-        StopCoroutine(VanishRays());
-        StartCoroutine(VanishRays());
-        StopCoroutine(ContinuousFire());
-        StartCoroutine(ContinuousFire());
+        
         if (GetIfCooldownPassedWhileSwapped())
         {
             currentCooldown = 0f;
@@ -61,7 +61,7 @@ public class PlayerShotgun : Weapon
 
         timeOfSwap = Time.time;
         fireHeld = false;
-    }
+    }    
 
     private void FireShotgun()
     {
@@ -307,7 +307,7 @@ public class PlayerShotgun : Weapon
             projectile.SetActive(false);
         }*/
         #endregion
-
+        FireShotgun();
         
     }
 
@@ -341,7 +341,7 @@ public class PlayerShotgun : Weapon
     ///////////////////////// comented off
     }*/
 
-    private IEnumerator ContinuousFire()
+    /*private IEnumerator ContinuousFire()
     {
         while (true)
         {
@@ -358,7 +358,7 @@ public class PlayerShotgun : Weapon
             }            
             yield return null;
         }
-    }
+    }*/
 
     private IEnumerator VanishRays()
     {

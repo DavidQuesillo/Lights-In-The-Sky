@@ -13130,6 +13130,8 @@ MonoBehaviour:
   projectileSpeed: 0
   debugColor: {r: 1, g: 0.9931958, b: 0.4292453, a: 1}
   animIndex: 3
+  weaponName: Thunder Shotgun
+  uiIcon: {fileID: 21300000, guid: e7eb61eed5f4ece4ab1cd972e2441213, type: 3}
   anim: {fileID: 0}
   canAttack: 1
   fireHeld: 0
@@ -23535,6 +23537,8 @@ MonoBehaviour:
   projectileSpeed: 0
   debugColor: {r: 0, g: 0, b: 0, a: 0}
   animIndex: 0
+  weaponName: Storm Conductor
+  uiIcon: {fileID: 21300000, guid: aba6aa4cb80243d4594ef0ef06a4ffbb, type: 3}
   anim: {fileID: 0}
   canAttack: 1
   fireHeld: 0
@@ -64781,6 +64785,8 @@ MonoBehaviour:
   projectileSpeed: 0
   debugColor: {r: 0, g: 0, b: 0, a: 0}
   animIndex: 4
+  weaponName: Earth Impaler
+  uiIcon: {fileID: 21300000, guid: 9903bcb09a3afcc44931f2319aee4ca7, type: 3}
   anim: {fileID: 0}
   canAttack: 1
   fireHeld: 0
@@ -65350,6 +65356,8 @@ MonoBehaviour:
   projectileSpeed: 90
   debugColor: {r: 0, g: 0, b: 0, a: 0}
   animIndex: 5
+  weaponName: Rubber Striker
+  uiIcon: {fileID: 21300000, guid: 07d1b073d911fdb4d906032ad1b0e345, type: 3}
   anim: {fileID: 0}
   canAttack: 1
   fireHeld: 0
@@ -69964,6 +69972,8 @@ MonoBehaviour:
   projectileSpeed: 100
   debugColor: {r: 0, g: 0, b: 0, a: 0}
   animIndex: 2
+  weaponName: Ice Dagger
+  uiIcon: {fileID: 21300000, guid: 0ad7d3baeccc0ad4a823f0be30b1486c, type: 3}
   anim: {fileID: 0}
   canAttack: 1
   fireHeld: 0
@@ -83650,6 +83660,8 @@ MonoBehaviour:
   projectileSpeed: 0
   debugColor: {r: 0.5663247, g: 0.5849056, b: 0.12967247, a: 1}
   animIndex: 1
+  weaponName: Electric Beam
+  uiIcon: {fileID: 21300000, guid: 40190a0372296da4a8f454385f412619, type: 3}
   anim: {fileID: 0}
   canAttack: 1
   fireHeld: 0
@@ -98948,6 +98960,8 @@ MonoBehaviour:
   projectileSpeed: 70
   debugColor: {r: 0, g: 0, b: 0, a: 0}
   animIndex: 0
+  weaponName: Mountain Crusher
+  uiIcon: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
   anim: {fileID: 0}
   canAttack: 1
   fireHeld: 0

@@ -14,6 +14,8 @@ public class Weapon : MonoBehaviour
     [SerializeField] protected float projectileSpeed;
     [SerializeField] protected Color debugColor;
     [SerializeField] protected int animIndex; //the number of the "weapon" var in the animator for this weapon
+    [SerializeField] protected string weaponName;
+    [SerializeField] protected Sprite uiIcon;
     [SerializeField] protected Animator anim;
     protected float currentCooldown;
     protected float timeOfSwap; //implementing a mechanic so swapping doesnt remove cooldown
@@ -42,6 +44,15 @@ public class Weapon : MonoBehaviour
     void Update()
     {
         Fire();
+    }
+
+    public string GetWeaponName()
+    {
+        return weaponName;
+    }
+    public Sprite GetUiIcon()
+    {
+        return uiIcon;
     }
 
     public void SetAnim(Animator animSet)

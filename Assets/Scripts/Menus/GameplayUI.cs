@@ -10,6 +10,7 @@ public class GameplayUI : MonoBehaviour
     [Header("WeaponBar")]
     [SerializeField] private RectTransform weaponsPos;
     [SerializeField] private Image[] weaponsList = new Image[0];
+    [SerializeField] private TextMeshProUGUI[] weaponsNames = new TextMeshProUGUI[0];
     [SerializeField] private Color disabledColor;
     [SerializeField] private Color enabledColor;
     private int currentWeapon = 0;
@@ -49,7 +50,12 @@ public class GameplayUI : MonoBehaviour
         WeaponUiTimer();
         HpUiTimer();
     }
-
+    
+    public void InitWeaponInUi(int weaponIndex, string name, Sprite icon)
+    {
+        weaponsList[weaponIndex].sprite = icon;
+        weaponsNames[weaponIndex].text = name;
+    }
     public void SwitchActiveWeapon(int weapon)
     {
         if (!displayingWeapons)

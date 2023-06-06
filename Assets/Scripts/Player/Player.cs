@@ -82,6 +82,7 @@ public class Player : MonoBehaviour
             //weapons[i].gameObject.SetActive(false);
             weapons[i].gameObject.SetActive(true);
             weapons[i].SetAnim(anim);
+            GameManager.instance.UiScript.InitWeaponInUi(i, weapons[i].GetWeaponName(), weapons[i].GetUiIcon());
         }
         currentWeapon = 0;
         weapons[0].gameObject.SetActive(true);

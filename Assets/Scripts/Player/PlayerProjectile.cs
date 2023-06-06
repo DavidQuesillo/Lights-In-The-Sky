@@ -7,8 +7,8 @@ public class PlayerProjectile : Weapon
     [SerializeField] private pool projPool;
     //[SerializeField] protected Transform projPoolParent;
     [Header("Projectile Exclusives")]
-    [SerializeReference] private Transform rotationRef;
-    [SerializeReference] private Transform shootPoint;
+    [SerializeField] private Transform rotationRef;
+    [SerializeField] private Transform shootPoint;
     
     /*[SerializeField] private pool hitFxPool;
     [SerializeField] private pool killFxPool;*/

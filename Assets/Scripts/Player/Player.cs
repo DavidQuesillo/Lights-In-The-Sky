@@ -306,7 +306,8 @@ public class Player : MonoBehaviour
     private void OnWeapon2() { WeaponSwitch(1);}
     private void OnWeapon3() { WeaponSwitch(2);}
     private void OnWeapon4() { WeaponSwitch(3);}
-    private void OnWeapon5() { WeaponSwitch(4); }
+    private void OnWeapon5() { WeaponSwitch(4);}
+    private void OnWeapon6() { WeaponSwitch(5);}
     #endregion
 
     private void Flight()

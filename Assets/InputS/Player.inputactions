@@ -19,7 +19,7 @@
                     "type": "Value",
                     "id": "cc8e1f53-23ea-4c4f-b634-fed3fb9ed9ae",
                     "expectedControlType": "Stick",
-                    "processors": "",
+                    "processors": "NormalizeVector2",
                     "interactions": "",
                     "initialStateCheck": true
                 },

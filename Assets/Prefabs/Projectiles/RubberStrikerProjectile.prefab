@@ -244,7 +244,7 @@ MonoBehaviour:
   hitFxPool: {fileID: 0}
   killFxPool: {fileID: 0}
   bounceLimit: 5
-  bonusDmgPerBounce: 10
+  bonusDmgPerBounce: 12
 --- !u!82 &561679216287617056
 AudioSource:
   m_ObjectHideFlags: 0

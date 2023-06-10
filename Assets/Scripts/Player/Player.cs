@@ -18,7 +18,7 @@ public class Player : MonoBehaviour
     [SerializeField] private Transform hands;
     [SerializeField] private Renderer HandsModel;
     [Header("Weapons")]
-    [SerializeField] private Weapon[] weapons = new Weapon[0];
+    [SerializeField] private List<Weapon> weapons = new List<Weapon>();
     [SerializeField] private Sprite[] reticles = new Sprite[2];
     [SerializeField] private Color[] reticleColor = new Color[2];
     [SerializeField] private Image reticleHUD;
@@ -73,11 +73,38 @@ public class Player : MonoBehaviour
     Vector2 rotation = Vector2.zero;
     #endregion
 
+    #region debug functions
+    public void AssignNewArsenal(List<Weapon> newArsenal)
+    {
+        weapons[currentWeapon].StopFiring();
+        //currentWeapon = 0;
+        WeaponSwitch(0);
+        foreach (var item in weapons)
+        {
+            item.gameObject.SetActive(false);
+        }
+        weapons  = newArsenal;
+        /*foreach (var item in weapons)
+        {
+            //item.gameObject.SetActive(true);
+            //GameManager.instance.UiScript.InitWeaponInUi(, weapons[i].GetWeaponName(), weapons[i].GetUiIcon());
+        }*/
+        for (int i = 0; i < weapons.Count; i++)
+        {
+            weapons[i].gameObject.SetActive(true);
+            GameManager.instance.UiScript.InitWeaponInUi(i, weapons[i].GetWeaponName(), weapons[i].GetUiIcon());
+        }
+        
+
+        
+    }
+    #endregion
+
     // Start is called before the first frame update
     void Start()
     {
         cam = Camera.main.transform;
-        for (int i = 0; i < weapons.Length; i++)
+        for (int i = 0; i < weapons.Count; i++)
         {
             //weapons[i].gameObject.SetActive(false);
             weapons[i].gameObject.SetActive(true);
@@ -424,7 +451,7 @@ public class Player : MonoBehaviour
 
     private void WeaponSwitch(int weaponIndex)
     {
-        if (weaponIndex >= weapons.Length)
+        if (weaponIndex >= weapons.Count)
         {
 
             Debug.Log("weapon missing in list");

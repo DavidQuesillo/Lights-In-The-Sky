@@ -21,6 +21,7 @@ public class Weapon : MonoBehaviour
     protected float timeOfSwap; //implementing a mechanic so swapping doesnt remove cooldown
     public bool canAttack = true;
     [SerializeField] protected bool fireHeld = false;
+    protected Coroutine firingCoroutine; //this is necessary to stop and restart it properly
 
     [Header("Special VFX")]
     [SerializeField] protected pool hitFxPool;

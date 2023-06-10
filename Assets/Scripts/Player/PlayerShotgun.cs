@@ -17,20 +17,46 @@ public class PlayerShotgun : Weapon
     [SerializeField] private float spread = 0.2f;
     [SerializeField] private float lightningEntropy = 0.2f;
     private bool raysVisible = false;
+    private Coroutine lightningCoroutine; //specific for use in VanishRays() coroutine
 
     // Start is called before the first frame update
     void Start()
     {
         currentCooldown = 0f;
         //StopCoroutine(VanishRays());
-        StartCoroutine(VanishRays());
         //StopCoroutine(ContinuousFire());
+        
+        StartCoroutine(VanishRays());
         StartCoroutine(ContinuousFire());
+
+        /*firingCoroutine = StartCoroutine(ContinuousFire());
+        lightningCoroutine = StartCoroutine(VanishRays());*/
     }
 
     private void OnEnable()
     {
-        
+        //this only exist for debugging where the player's weapons list can change during gameplay.
+        //while it works identically, its preferable to stick with the initial flow as it doesn't
+        //require performing many processes this does. Besides, its just for debugging after all
+        /*if (firingCoroutine == null)
+        {
+            firingCoroutine = StartCoroutine(ContinuousFire());
+        }
+        else
+        {
+            StopCoroutine(firingCoroutine);
+            firingCoroutine = StartCoroutine(ContinuousFire());
+        }
+        if (lightningCoroutine == null)
+        {
+            lightningCoroutine = StartCoroutine(VanishRays());
+        }
+        else
+        {
+            StopCoroutine(lightningCoroutine);
+            lightningCoroutine = StartCoroutine(VanishRays());
+        }*/
+
         if (GetIfCooldownPassedWhileSwapped())
         {
             currentCooldown = 0f;

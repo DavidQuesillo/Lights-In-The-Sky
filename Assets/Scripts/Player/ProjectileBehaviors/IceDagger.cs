@@ -28,12 +28,13 @@ public class IceDagger : PlayerBullet
             {
                 //GameObject particle = IceDagParticlesPool.Instance.RequestPoolObject();
 
+                //might wanna change this but theres really no need to
                 GameObject killParticle = IceDagKillParticlesPool.Instance.RequestPoolObject();
                 killParticle.transform.SetPositionAndRotation(transform.position, Quaternion.LookRotation(-transform.forward));
                 //killParticle.GetComponent<VisualEffect>()?.Play();
                 //killParticle.GetComponent<VisualEffect>().Stop()
                 killParticle.GetComponent<AudioSource>()?.Play();
-                Debug.Log(other.name);
+                //Debug.Log(other.name);
                 gameObject.SetActive(false);
                 return;
             }

@@ -16,7 +16,7 @@ public class PlayerImpaler : Weapon
                                                         //probably with a new poolManager script or something
                                                         //thot of smth its almost implemented rn - its done
         currentCooldown = 0f;                                                
-        StartCoroutine(ContinuousFire());
+        StartCoroutine(ContinuousFire()); //must be commented for debug flow
     }
 
     // Update is called once per frame
@@ -27,7 +27,19 @@ public class PlayerImpaler : Weapon
 
     private void OnEnable()
     {
-        
+        //this only exist for debugging where the player's weapons list can change during gameplay.
+        //while it works identically, its preferable to stick with the initial flow as it doesn't
+        //require performing many processes this does. Besides, its just for debugging after all
+        /*if (firingCoroutine == null)
+        {
+            firingCoroutine = StartCoroutine(ContinuousFire());
+        }
+        else
+        {
+            StopCoroutine(firingCoroutine);
+            firingCoroutine = StartCoroutine(ContinuousFire());
+        }*/
+
         if (GetIfCooldownPassedWhileSwapped())
         {
             currentCooldown = 0f;

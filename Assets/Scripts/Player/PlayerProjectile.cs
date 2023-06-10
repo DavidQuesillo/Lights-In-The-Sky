@@ -27,6 +27,20 @@ public class PlayerProjectile : Weapon
     {
         //StopCoroutine(ContinuousFire());
         //StartCoroutine(ContinuousFire());
+
+        //this only exist for debugging where the player's weapons list can change during gameplay.
+        //while it works identically, its preferable to stick with the initial flow as it doesn't
+        //require performing many processes this does. Besides, its just for debugging after all
+        /*if (firingCoroutine == null)
+        {
+            firingCoroutine = StartCoroutine(ContinuousFire());
+        }
+        else
+        {
+            StopCoroutine(firingCoroutine);
+            firingCoroutine = StartCoroutine(ContinuousFire());
+        }*/
+
         if (GetIfCooldownPassedWhileSwapped())
         {
             currentCooldown = 0f;

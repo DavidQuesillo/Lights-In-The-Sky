@@ -10,6 +10,8 @@ TagManager:
   - Enemy
   - Boss
   - EnemyActivate
+  - Explosion
+  - Shredder
   layers:
   - Default
   - TransparentFX
@@ -24,7 +26,7 @@ TagManager:
   - PlayerBullets
   - TriggerCollisionCheck
   - BulletDestroyingProj
-  - 
+  - Explosions
   - 
   - 
   - 

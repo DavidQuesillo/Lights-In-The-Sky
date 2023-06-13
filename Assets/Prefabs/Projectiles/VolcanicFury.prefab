@@ -108,13 +108,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7077319853943527384}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0, y: 0, z: -0.1002}
-  m_LocalScale: {x: 0.39012, y: 0.46865118, z: 0.64211404}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1.0423051, y: 1.0423051, z: 1.0423051}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 7077319854027173423}
-  m_RootOrder: 1
+  m_Father: {fileID: 7077319854102801693}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &7077319853943527399
 MeshFilter:
@@ -199,7 +199,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7077319852988772454}
-  - {fileID: 7077319853943527385}
   - {fileID: 7077319854102801693}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -330,9 +329,9 @@ GameObject:
   - component: {fileID: 7077319854102801690}
   - component: {fileID: 7077319854102801688}
   - component: {fileID: 7172635845932153899}
-  m_Layer: 10
+  m_Layer: 13
   m_Name: Explosion
-  m_TagString: PlayerShot
+  m_TagString: Explosion
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -348,9 +347,10 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
   m_ConstrainProportionsScale: 1
-  m_Children: []
+  m_Children:
+  - {fileID: 7077319853943527385}
   m_Father: {fileID: 7077319854027173423}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &7077319854102801691
 MeshFilter:

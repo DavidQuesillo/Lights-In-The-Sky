@@ -115,7 +115,7 @@ public class GoldenValkyrie : EnemyBase
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("PlayerShot"))
+        if (other.CompareTag("PlayerShot") || other.CompareTag("Explosion"))
         {
             TakeDamage(other.GetComponent<PlayerBullet>().GetDamage());
         }

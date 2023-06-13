@@ -5313,6 +5313,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dissipateTimer: 5
   rb: {fileID: 4875291719653333619}
+  meshRend: {fileID: 6099918505599828971}
   shieldDmg: 40
 --- !u!82 &-6304979110876042011
 AudioSource:

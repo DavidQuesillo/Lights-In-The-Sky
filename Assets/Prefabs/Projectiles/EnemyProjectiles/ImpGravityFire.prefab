@@ -167,6 +167,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dissipateTimer: 5
   rb: {fileID: 5471786671539727154}
+  meshRend: {fileID: 5471786671335249581}
   shieldDmg: 15
 --- !u!135 &1876975127214229970
 SphereCollider:

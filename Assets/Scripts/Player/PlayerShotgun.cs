@@ -63,21 +63,6 @@ public class PlayerShotgun : Weapon
         }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        /*if (canAttack)
-        {
-            //Fire();
-            if (currentCooldown > 0f)
-            {
-                currentCooldown -= Time.deltaTime;
-                //Debug.Log("cooling down");
-            }
-            print("shotgun cd: " + currentCooldown.ToString());
-        }*/
-    }
-
     private void OnDisable()
     {
         for (int i = 0; i < lr.Count; i++)

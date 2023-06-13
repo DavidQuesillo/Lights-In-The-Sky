@@ -230,7 +230,7 @@ public class Valkyrie : EnemyBase
             canTakeDamage = true;
             StartCoroutine(GetInPosition());
         }
-        if (other.CompareTag("PlayerShot"))
+        if (other.CompareTag("PlayerShot") || other.CompareTag("Explosion"))
         {
             TakeDamage(other.GetComponent<PlayerBullet>().GetDamage());
         }

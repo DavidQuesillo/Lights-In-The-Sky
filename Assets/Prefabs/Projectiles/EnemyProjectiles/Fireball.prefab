@@ -147,6 +147,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dissipateTimer: 5
   rb: {fileID: 4068481308584652442}
+  meshRend: {fileID: 2122253794921101390}
   shieldDmg: 30
 --- !u!114 &2387188547914837800
 MonoBehaviour:

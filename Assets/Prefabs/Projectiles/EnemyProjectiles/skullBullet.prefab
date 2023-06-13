@@ -227,6 +227,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dissipateTimer: 15
   rb: {fileID: 3902451785124036522}
+  meshRend: {fileID: 377611729159486201}
   shieldDmg: 70
   maxSize: 6
   growthSpeed: 1.26

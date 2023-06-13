@@ -132,6 +132,11 @@ public class Cyclops : EnemyBase
         }*/
 
         //GameObject shot = Instantiate(shotPrefab, shootPoint.position, shootPoint.rotation);
+        if (!canAttack)
+        {
+            wanderTimer = Random.Range(moveTime + -moveVarRange, moveTime + moveVarRange);
+            return;
+        }
         GameObject shot = CyclopsShotPool.Instance.RequestPoolObject();
         shot.transform.position = shootPoint.position;
         Rigidbody shotRb = shot.GetComponent<Rigidbody>();
@@ -200,7 +205,7 @@ public class Cyclops : EnemyBase
             mr.enabled = true;
             inPosition = true;
         }
-        if (other.CompareTag("PlayerShot"))
+        if (other.CompareTag("PlayerShot") || other.CompareTag("Explosion") || other.CompareTag("Shredder"))
         {
             TakeDamage(other.GetComponent<PlayerBullet>().GetDamage());
         }

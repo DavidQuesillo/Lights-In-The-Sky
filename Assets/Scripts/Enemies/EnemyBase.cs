@@ -24,6 +24,7 @@ public class EnemyBase : MonoBehaviour
     protected bool canTakeDamage = true;
     [SerializeField] protected float wanderTimer = 0f;
     protected Vector3 moveDir;
+    [SerializeField] protected bool canAttack = true;
     [SerializeField] protected bool attacking = false;
     [SerializeField] protected sideComingFrom whereFrom = sideComingFrom.Forward;
 
@@ -45,7 +46,14 @@ public class EnemyBase : MonoBehaviour
 
     protected virtual void Attack()
     {
-
+        if (!canAttack)
+        {
+            return;
+        }
+    }
+    public void LockAttack()
+    {
+        canAttack = false;
     }
 
     protected virtual void Relocate()
@@ -78,10 +86,24 @@ public class EnemyBase : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("PlayerShot"))
+        if (other.CompareTag("PlayerShot") || other.CompareTag("Explosion") || other.CompareTag("Shredder"))
         {
             TakeDamage(other.gameObject.GetComponent<PlayerBullet>().GetDamage());
             Debug.Log("Damage taken");
+        }        
+    }
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.CompareTag("Shredder"))
+        {
+            canAttack = false;
+        }
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Shredder"))
+        {
+            canAttack = true;
         }
     }
 

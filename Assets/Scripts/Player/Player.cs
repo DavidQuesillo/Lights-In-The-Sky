@@ -627,10 +627,14 @@ public class Player : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("EnemyShot"))
+        if (other.CompareTag("EnemyShot") || other.CompareTag("Explosion"))
         {
             TakeDamage();
         }
+        /*else if (other.CompareTag("Explosion"))
+        {
+            TakeDamage();
+        }*/
     }
 
     private IEnumerator InvulFrames()

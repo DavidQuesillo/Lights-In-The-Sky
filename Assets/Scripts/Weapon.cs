@@ -118,6 +118,7 @@ public class Weapon : MonoBehaviour
                 {
                     if (currentCooldown <= 0f)
                     {
+                        print("parent firing");
                         Fire();
                         currentCooldown = fireRate;
                     }

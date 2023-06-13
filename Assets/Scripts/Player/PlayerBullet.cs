@@ -16,15 +16,26 @@ public class PlayerBullet : MonoBehaviour
     [SerializeField] protected pool hitFxPool;
     [SerializeField] protected pool killFxPool;
     protected float lifeTimer;
+    private Coroutine lifetickdown;
 
     private void Start()
     {
         //StopCoroutine(lifeTimeDisabler());
-        StartCoroutine(lifeTimeDisabler());
+        //StartCoroutine(lifeTimeDisabler());
     }
     private void OnEnable()
     {
         lifeTimer = lifetime;
+        if (lifetickdown == null)
+        {
+            lifetickdown = StartCoroutine(lifeTimeDisabler());
+        }
+        else
+        {
+            StopCoroutine(lifetickdown);
+            lifetickdown = StartCoroutine(lifeTimeDisabler());
+        }
+        
         /*StopCoroutine(lifeTimeDisabler());
         StartCoroutine(lifeTimeDisabler());*/
     }
@@ -36,6 +47,15 @@ public class PlayerBullet : MonoBehaviour
             gameObject.SetActive(false);
         }*/
     }
+    public void SetLifetime(float newLifetime)
+    {
+        lifetime = newLifetime;
+    }
+    public void RemoveLifetime()
+    {
+        StopCoroutine(lifetickdown);
+    }
+
     public void SetDamage(float dmg)
     {
         damage = dmg;
@@ -131,10 +151,10 @@ Destroy(gameObject, 0.02f);*/
     #endregion
 
     protected IEnumerator lifeTimeDisabler()
-    {
-        //lifeTimer -= Time.deltaTime;
+    {        
         while (true)
-        {            
+        {
+            lifeTimer -= Time.deltaTime;
             if (lifeTimer <= 0f)
             {
                 gameObject.SetActive(false);

@@ -137,7 +137,7 @@ public class Imp : EnemyBase
             StartCoroutine(ActiveDelay());
             Debug.Log("Activating");
         }*/
-        if (other.CompareTag("PlayerShot"))
+        if (other.CompareTag("PlayerShot") || other.CompareTag("Explosion"))
         {
             TakeDamage(other.GetComponent<PlayerBullet>().GetDamage());
         }

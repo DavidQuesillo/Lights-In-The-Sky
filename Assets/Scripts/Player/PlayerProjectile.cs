@@ -53,6 +53,14 @@ public class PlayerProjectile : Weapon
         {
             Fire();
         }*/
+        if (fireHeld)
+        {
+            anim.SetBool("Shooting", true);
+        }
+        else
+        {
+            anim.SetBool("Shooting", false);
+        } //this weapon probably should switch to using FireOnce trigger, especially if it gets the new animation
     }
 
     protected virtual void CreateBullet()

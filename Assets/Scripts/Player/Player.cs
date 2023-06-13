@@ -156,14 +156,14 @@ public class Player : MonoBehaviour
         if (canShoot)
         {
             //if (Input.GetKey(KeyCode.Mouse0))
-            if (fireHeld)
+            /*if (fireHeld)
             {
                 anim.SetBool("Shooting", true);
             }
             else
             {
                 anim.SetBool("Shooting", false);
-            }
+            }*/ //should be handled independently by weapon scripts for unique firing animations
         }
 
         if (canMove)

@@ -40,6 +40,7 @@ public class Valkyrie : EnemyBase
 
         //debug
         canTakeDamage = true;
+        canAttack = true;
         health = baseHealth;
         anim.SetBool("Dead", false);
         GetComponent<Collider>().enabled = true;
@@ -119,6 +120,10 @@ public class Valkyrie : EnemyBase
     protected override void Attack()
     {
         //base.Attack();
+        if (!canAttack)
+        {
+            return;
+        }
 
         if (Random.Range(-1f, 1f) < 0f)
         {
@@ -233,6 +238,19 @@ public class Valkyrie : EnemyBase
         if (other.CompareTag("PlayerShot") || other.CompareTag("Explosion"))
         {
             TakeDamage(other.GetComponent<PlayerBullet>().GetDamage());
+        }
+        if (other.CompareTag("Shredder"))
+        {
+            //LockAttack();
+            canAttack = false;
+        }
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Shredder"))
+        {
+            //LockAttack();
+            canAttack = true;
         }
     }
 

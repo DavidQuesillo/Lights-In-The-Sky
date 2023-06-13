@@ -25,6 +25,7 @@ public class Cyclops : EnemyBase
         anim.SetBool("Dead", false);
         playerInRange = false;
         canTakeDamage = true;
+        canAttack = true;
         GetComponent<Collider>().enabled = true;
     }
 
@@ -100,7 +101,7 @@ public class Cyclops : EnemyBase
         else
         {
             //rb.AddForce(moveDir, ForceMode.VelocityChange);
-            if (playerInRange)
+            if (playerInRange || canAttack)
             {
                 Melee();
             }   
@@ -205,9 +206,14 @@ public class Cyclops : EnemyBase
             mr.enabled = true;
             inPosition = true;
         }
-        if (other.CompareTag("PlayerShot") || other.CompareTag("Explosion") || other.CompareTag("Shredder"))
+        if (other.CompareTag("PlayerShot") || other.CompareTag("Explosion"))
         {
             TakeDamage(other.GetComponent<PlayerBullet>().GetDamage());
+        }
+        if (other.CompareTag("Shredder"))
+        {
+            //LockAttack();
+            canAttack = false;
         }
     }
     private void OnTriggerExit(Collider other)
@@ -216,6 +222,10 @@ public class Cyclops : EnemyBase
         {
             Debug.Log("Exited the zone");
             gameObject.SetActive(false);
+        }
+        if (other.CompareTag("Shredder"))
+        {
+            canAttack = true;
         }
     }
 }

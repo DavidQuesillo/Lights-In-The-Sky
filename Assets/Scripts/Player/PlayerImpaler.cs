@@ -91,6 +91,8 @@ public class PlayerImpaler : Weapon
     protected override void Fire()
     {
         //base.Fire();
+        anim.SetBool("Shooting", true);
+        anim.SetTrigger("FireOnce");
         RaycastHit hit;
         if (!GameManager.instance.paused)
         {
@@ -103,9 +105,15 @@ public class PlayerImpaler : Weapon
             pillar.transform.position = hit.point;
             pillar.transform.rotation = Quaternion.LookRotation(-hit.normal);
             pillar.GetComponent<PlayerBullet>().SetDamage(damage);
-            pillar.gameObject.SetActive(true);
+            pillar.gameObject.SetActive(true);            
         }
         currentCooldown = fireRate;
+        //anim.SetBool("Shooting", false);
+    }
+    public override void StopFiring()
+    {
+        base.StopFiring();
+        anim.SetBool("Shooting", false);
     }
 
     /*private IEnumerator ContinuousFire()

@@ -28,6 +28,14 @@ public class PlayerShredder : Weapon
     void Update()
     {
         //print(currentCooldown.ToString());
+        if (fireHeld)
+        {
+            anim.SetBool("Shooting", true);
+        }
+        else
+        {
+            anim.SetBool("Shooting", false);
+        }
     }
 
     protected override void Fire()

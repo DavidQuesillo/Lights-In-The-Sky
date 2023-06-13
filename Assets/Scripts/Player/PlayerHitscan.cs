@@ -23,6 +23,14 @@ public class PlayerHitscan : Weapon
         {
             Fire();
         }
+        if (fireHeld)
+        {
+            anim.SetBool("Shooting", true);
+        }
+        else
+        {
+            anim.SetBool("Shooting", false);
+        }
     }
 
     private void OnDisable()

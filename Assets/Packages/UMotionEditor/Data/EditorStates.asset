@@ -16,6 +16,7 @@ MonoBehaviour:
     LoadedProjectGUID:
       valueInternal: 399b4ac30e38362408f21d36733cccbf
     RecentlyOpenedProjectPath:
-      valueInternal: Assets\Animations\Player
+      valueInternal: Assets\Animations\Enemies
     RecentlyOpenedProjectGUIDsList:
     - valueInternal: 399b4ac30e38362408f21d36733cccbf
+    - valueInternal: 3abe2cdcb502f164bb4006a7b1a6941d

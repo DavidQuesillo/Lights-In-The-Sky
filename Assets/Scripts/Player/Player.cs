@@ -19,8 +19,8 @@ public class Player : MonoBehaviour
     [SerializeField] private Renderer HandsModel;
     [Header("Weapons")]
     [SerializeField] private List<Weapon> weapons = new List<Weapon>();
-    [SerializeField] private Sprite[] reticles = new Sprite[2];
-    [SerializeField] private Color[] reticleColor = new Color[2];
+    [SerializeField] private Sprite[] reticles = new Sprite[6];
+    [SerializeField] private Color[] reticleColor = new Color[6];
     [SerializeField] private Image reticleHUD;
     private int currentWeapon;
     public bool canLookAround = true;
@@ -93,6 +93,8 @@ public class Player : MonoBehaviour
         {
             weapons[i].gameObject.SetActive(true);
             GameManager.instance.UiScript.InitWeaponInUi(i, weapons[i].GetWeaponName(), weapons[i].GetUiIcon());
+            reticles[i] = weapons[i].GetCrosshair();
+            reticleColor[i] = weapons[i].GetReticleColor();
         }
         
 
@@ -110,6 +112,8 @@ public class Player : MonoBehaviour
             weapons[i].gameObject.SetActive(true);
             weapons[i].SetAnim(anim);
             GameManager.instance.UiScript.InitWeaponInUi(i, weapons[i].GetWeaponName(), weapons[i].GetUiIcon());
+            reticles[i] = weapons[i].GetCrosshair();
+            reticleColor[i] = weapons[i].GetReticleColor();
         }
         currentWeapon = 0;
         weapons[0].gameObject.SetActive(true);

@@ -86,6 +86,7 @@ MonoBehaviour:
   aus: {fileID: -523927393010704340}
   shootPoint: {fileID: 7770761000078462810}
   isPartOfWave: 1
+  initialPosition: {x: 0, y: 0, z: 0}
   health: 25
   baseHealth: 25
   speed: 300
@@ -94,6 +95,7 @@ MonoBehaviour:
   moveVarRange: 7
   inPosition: 1
   wanderTimer: 1
+  canAttack: 1
   attacking: 0
   whereFrom: 0
   anim: {fileID: 7770760999689772208}

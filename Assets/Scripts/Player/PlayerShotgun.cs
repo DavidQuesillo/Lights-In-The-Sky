@@ -72,7 +72,18 @@ public class PlayerShotgun : Weapon
 
         timeOfSwap = Time.time;
         fireHeld = false;
-    }    
+    }
+    private void Update()
+    {
+        if (fireHeld)
+        {
+            anim.SetBool("Shooting", true);
+        }
+        else
+        {
+            anim.SetBool("Shooting", false);
+        }
+    }
 
     private void FireShotgun()
     {

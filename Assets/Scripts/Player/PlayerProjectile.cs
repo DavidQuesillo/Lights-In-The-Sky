@@ -9,6 +9,8 @@ public class PlayerProjectile : Weapon
     [Header("Projectile Exclusives")]
     [SerializeField] private Transform rotationRef;
     [SerializeField] private Transform shootPoint;
+    [SerializeField] private bool animatesOnShoot; //decides whether the weapon uses a held animation or an animation that plays with each shot
+    [SerializeField] private bool alternatesHands; //to decide if this weapon's animation has alternating hand motions or a unified two-handed motion. Not yet implemented
     
     /*[SerializeField] private pool hitFxPool;
     [SerializeField] private pool killFxPool;*/
@@ -53,6 +55,27 @@ public class PlayerProjectile : Weapon
         {
             Fire();
         }*/
+        /*if (!animatesOnShoot)
+        {
+            if (fireHeld)
+            {
+                anim.SetBool("Shooting", true);
+            }
+            else
+            {
+                anim.SetBool("Shooting", false);
+            }
+        }*/
+        if (fireHeld)
+        {
+            anim.SetBool("Shooting", true);
+        }
+        else
+        {
+            anim.SetBool("Shooting", false);
+        }
+        //this weapon probably should switch to using FireOnce trigger, especially if it gets the new animation
+
     }
 
     protected virtual void CreateBullet()
@@ -68,6 +91,10 @@ public class PlayerProjectile : Weapon
         //trying a flexible method where weapon tells speed and proj uses it in its own way  /////      //////
         shot.GetComponent<PlayerBullet>().SetSpeed(projectileSpeed);
         shot.SetActive(true);
+        if (animatesOnShoot)
+        {
+            anim.SetTrigger("FireOnce");
+        }
         //shot.GetComponent<Rigidbody>().AddForce(cam.forward * projectileSpeed, ForceMode.VelocityChange);
         
     }

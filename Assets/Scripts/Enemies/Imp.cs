@@ -45,6 +45,7 @@ public class Imp : EnemyBase
         anim.SetBool("Dead", false);
         GetComponent<Collider>().enabled = true;
         canTakeDamage = true;
+        canAttack = true;
         StartCoroutine(UpdateFlyVector());
         //canTakeDamage = true;
         StartCoroutine(RepeatAttack());
@@ -141,12 +142,22 @@ public class Imp : EnemyBase
         {
             TakeDamage(other.GetComponent<PlayerBullet>().GetDamage());
         }
+        if (other.CompareTag("Shredder"))
+        {
+            //LockAttack();
+            canAttack = false;
+        }
     }
     private void OnTriggerExit(Collider other)
     {
         if (other.CompareTag("EnemyActivate"))
         {
             gameObject.SetActive(false);
+        }
+        if (other.CompareTag("Shredder"))
+        {
+            //LockAttack();
+            canAttack = true;
         }
     }
 
@@ -178,7 +189,11 @@ public class Imp : EnemyBase
                 wanderTimer = moveTime;
                 while (wanderTimer > 0f)
                 {
-                    wanderTimer -= Time.deltaTime;
+                    if (canAttack)
+                    {
+                        wanderTimer -= Time.deltaTime;
+                    }
+                    //wanderTimer -= Time.deltaTime;
                     yield return null;
                 }
                 attacking = true;

@@ -88,6 +88,11 @@ public class PlayerImpaler : Weapon
         currentCooldown = fireRate;
     }*/
 
+    public override void StartFiring()
+    {
+        base.StartFiring();
+        anim.SetBool("Shooting", true);
+    }
     protected override void Fire()
     {
         //base.Fire();

@@ -6,7 +6,7 @@ public class PlayerImpaler : Weapon
 {
     [SerializeField] LayerMask ignoreMask;
     //[SerializeField] private Transform shootPoint;
-    [SerializeField] private AudioSource aus;
+    //[SerializeField] private AudioSource aus;
     [SerializeField] private pool projPool;
 
     // Start is called before the first frame update
@@ -102,7 +102,7 @@ public class PlayerImpaler : Weapon
         if (!GameManager.instance.paused)
         {
             //lr.enabled = true;
-            aus.Play();
+            //aus.Play();
         }
         if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, shotRange, ignoreMask.value))
         {

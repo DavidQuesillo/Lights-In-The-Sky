@@ -13,6 +13,10 @@ public class RubberStriker : PlayerBullet
     [SerializeField] private int bounceLimit = 5;
     [SerializeField] private float bonusDmgPerBounce = 2f; //dmg added with each bounce
     private int remainingBounces;
+    [Header("Audio")]
+    [SerializeField] private AudioSource aus;
+    [SerializeField] private AudioClip bounceSound;
+    [SerializeField] private AudioClip hitSound;
     //[SerializeField] private Rigidbody rb;
     //private float startSpeed;
 
@@ -51,6 +55,14 @@ public class RubberStriker : PlayerBullet
         {
             velPreBounce = rb.velocity;
             damage += bonusDmgPerBounce;
+            if (collision.gameObject.CompareTag("Enemy"))
+            {
+                aus.PlayOneShot(hitSound);
+            }
+            else
+            {
+                aus.PlayOneShot(bounceSound);
+            }
         }
     }
     private void OnTriggerEnter(Collider other)

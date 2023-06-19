@@ -245,6 +245,9 @@ MonoBehaviour:
   killFxPool: {fileID: 0}
   bounceLimit: 5
   bonusDmgPerBounce: 12
+  aus: {fileID: 561679216287617056}
+  bounceSound: {fileID: 8300000, guid: 9262379442b06254b8f3a53c5832308e, type: 3}
+  hitSound: {fileID: 8300000, guid: de3a4e26c93a3ec43a882eb75ddc1744, type: 3}
 --- !u!82 &561679216287617056
 AudioSource:
   m_ObjectHideFlags: 0
@@ -255,15 +258,15 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: fa705e9a74b03dc47bfdb54164a4ca5f, type: 3}
-  m_PlayOnAwake: 1
-  m_Volume: 0.051
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 1
   m_Pitch: 1
   Loop: 0
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
-  Priority: 221
+  Priority: 211
   DopplerLevel: 1
   MinDistance: 1
   MaxDistance: 500
@@ -301,7 +304,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 1
+      value: 0.999
       inSlope: 0
       outSlope: 0
       tangentMode: 0

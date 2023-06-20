@@ -14,9 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   GeneralStates:
     LoadedProjectGUID:
-      valueInternal: 
+      valueInternal: b86b191d18d1ce741b92fd08f7e3077d
     RecentlyOpenedProjectPath:
-      valueInternal: Assets\Animations\Player
+      valueInternal: Assets\Animations\Enemies
     RecentlyOpenedProjectGUIDsList:
+    - valueInternal: b86b191d18d1ce741b92fd08f7e3077d
     - valueInternal: 62857c544d4b1e341ab342daaf2ca8a6
+    - valueInternal: 4d4511d134b7bbd48b2a6d060d497ee7
     - valueInternal: 3abe2cdcb502f164bb4006a7b1a6941d

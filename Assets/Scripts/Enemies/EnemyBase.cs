@@ -12,8 +12,7 @@ public class EnemyBase : MonoBehaviour
     [SerializeField] protected AudioClip deathSoundFX;
     [SerializeField] protected AudioSource aus;
     [SerializeField] protected Transform shootPoint;
-    [SerializeField] private bool isPartOfWave;
-    [SerializeField] protected Vector3 initialPosition;
+    
     [SerializeField] protected float health;
     [SerializeField] protected float baseHealth;
     [SerializeField] protected float speed;
@@ -27,6 +26,11 @@ public class EnemyBase : MonoBehaviour
     [SerializeField] protected bool canAttack = true;
     [SerializeField] protected bool attacking = false;
     [SerializeField] protected sideComingFrom whereFrom = sideComingFrom.Forward;
+
+    [Header("Arena Mode")]
+    [SerializeField] private bool isPartOfWave;
+    [SerializeField] protected Vector3 initialPosition;
+    [SerializeField] protected int killScore;
 
     /*protected void Awake()
     {

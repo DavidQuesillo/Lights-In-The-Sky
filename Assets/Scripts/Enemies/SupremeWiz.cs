@@ -3,13 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.VFX;
 
-public class ShadowWiz : EnemyBase
+public class SupremeWiz : EnemyBase
 {
     [SerializeField] private Animator anim;
     [Header("Explosion Spell Behavior")]
-    [SerializeField] private GameObject spellAtk; //the designated explosion object. Since each of these enemies only has one, its easier to have them each carry their own. It might be more optimal to have them shared one pooled explosion in the future but this is simpler
-    [SerializeField] private GameObject trackingEffect; //the object that indicates where the attack is being casted
-    [SerializeField] private bool trackingPlayer; //whether or not the enemy is currently casting the spell and tracking the player's position on it
+    [SerializeField] private GameObject[] spellAtks; //the designated explosion object. Since each of these enemies only has one, its easier to have them each carry their own. It might be more optimal to have them shared one pooled explosion in the future but this is simpler
+    [SerializeField] private GameObject[] spellEffects; //the object that indicates where the attack is being casted
+    [SerializeField] private Vector3 minSpellBounds;
+    [SerializeField] private Vector3 maxSpellBounds;
+    [SerializeField] private bool castingSpell; //whether or not the enemy is currently casting the spell and tracking the player's position on it
     [SerializeField] private float castingTime; //the amount of time the attack will track the player before detonating
     private float trackingTimer; //the timer that will count down
     private bool exploding; //the boolean that will pause functioning while the explosion is going off and the enemy is holding the pose
@@ -50,7 +52,7 @@ public class ShadowWiz : EnemyBase
         StartCoroutine(UpdateFlyVector());
         StartCoroutine(RepeatAttack());
 
-        GameObject spawnVfx = ShadMageSpawnVFXPool.Instance.RequestPoolObject();
+        GameObject spawnVfx = ShadMageSpawnVFXPool.Instance.RequestPoolObject(); //replace with proper own one
         spawnVfx.transform.position = transform.position;
         spawnVfx.GetComponent<VisualEffect>().Play();
         aus.PlayOneShot(spawnSoundFX);
@@ -78,12 +80,13 @@ public class ShadowWiz : EnemyBase
             //Debug.Log((moveDir * speed * Time.deltaTime).ToString());
             //Debug.Log(moveDir);
             
-            //rb.rotation = Quaternion.LookRotation(GameManager.instance.player.transform.position - rb.position, Vector3.up);
-        }
-        if (!exploding)
-        {
             rb.rotation = Quaternion.LookRotation(GameManager.instance.player.transform.position - rb.position, Vector3.up);
         }
+        /*if (!exploding)
+        {
+            rb.rotation = Quaternion.LookRotation(GameManager.instance.player.transform.position - rb.position, Vector3.up);
+        }*/
+        
         /*else if (attacking)
         {
             rb.velocity = Vector3.zero;
@@ -93,24 +96,43 @@ public class ShadowWiz : EnemyBase
         }*/
     }
 
-    private void AttackTrack()
-    {        
-        spellAtk.transform.position = GameManager.instance.player.transform.position;
-        trackingEffect.SetActive(true);
-        trackingEffect.transform.position = GameManager.instance.player.transform.position;
-        print("tracking player");
+    private void PlaceAttacks()
+    {
+        for (int i = 0; i < spellAtks.Length; i++)
+        {
+            Vector3 pos = new Vector3(Random.Range(minSpellBounds.x, maxSpellBounds.x),
+                Random.Range(minSpellBounds.y, maxSpellBounds.y), Random.Range(minSpellBounds.z, maxSpellBounds.z));
+
+            spellAtks[i].transform.position = pos;
+            spellEffects[i].transform.position = pos;
+            spellEffects[i].SetActive(true);
+        }
         anim.SetBool("Casting", true);
+        
+        /*foreach (var spell in spellAtks)
+        {
+            
+
+            spellAtk.transform.position = GameManager.instance.player.transform.position;
+            trackingEffect.SetActive(true);
+            trackingEffect.transform.position = GameManager.instance.player.transform.position;
+            print("tracking player");
+            anim.SetBool("Casting", true);
+        }*/
     }
 
     protected override void Attack()
     {
         //base.Attack();
-        trackingPlayer = false;
+        castingSpell = false;
         explodeTimer = explodeDelay;
         //exploding = true;
         //testing
-        spellAtk.SetActive(true);
-        trackingEffect.SetActive(false);
+        for (int i = 0; i < spellAtks.Length; i++)
+        {
+            spellAtks[i].SetActive(true);
+            spellEffects[i].SetActive(false);
+        }        
         anim.SetBool("Detonating", true);
         Debug.Log("BOOM!!!!!!");
     }
@@ -130,11 +152,14 @@ public class ShadowWiz : EnemyBase
     {
         base.Death();
         anim.SetBool("Dead", true);
-        trackingPlayer = false;
+        castingSpell = false;
         exploding = false;
         attacking = false;
-        spellAtk.SetActive(false);
-        trackingEffect.SetActive(false);
+        for (int i = 0; i < spellAtks.Length; i++)
+        {
+            spellAtks[i].SetActive(false);
+            spellEffects[i].SetActive(false);
+        }
         GetComponent<Collider>().enabled = false;
     }
     /*private void Detonate()
@@ -161,7 +186,11 @@ public class ShadowWiz : EnemyBase
                     exploding = false;
                     attacking = false;
                     anim.SetBool("Detonating", false);
-                    spellAtk.SetActive(false);
+                    for (int i = 0; i < spellAtks.Length; i++)
+                    {
+                        spellAtks[i].SetActive(false);
+                    }
+                    //spellAtk.SetActive(false);
                 }
                 yield return null;
             }
@@ -204,11 +233,12 @@ public class ShadowWiz : EnemyBase
                 }*/
                 //Attack();
                 rb.velocity = Vector3.zero;                                
-                trackingPlayer = true;    
+                castingSpell = true;    
                 trackingTimer = 0f;
+                PlaceAttacks();
                 while (trackingTimer < castingTime)
                 {
-                    AttackTrack();
+                    //PlaceAttacks();
                     trackingTimer += Time.deltaTime;
                     yield return null;
                 }

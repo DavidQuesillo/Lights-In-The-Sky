@@ -72,7 +72,7 @@ public class GoldenValkyrie : EnemyBase
 
     private void ChasePlayer()
     {
-        Debug.Log("Chasing player");
+        //Debug.Log("Chasing player");
         rb.velocity = (GameManager.instance.player.transform.position - rb.position) * speed;
     }
     protected override void Relocate()

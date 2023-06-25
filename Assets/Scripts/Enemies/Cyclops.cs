@@ -7,7 +7,7 @@ public class Cyclops : EnemyBase
 {
     [SerializeField] private SkinnedMeshRenderer mr;
     [SerializeField] private Animator anim;
-    private bool playerInRange;
+    [SerializeField] private bool playerInRange;
 
     private void OnEnable()
     {
@@ -101,8 +101,9 @@ public class Cyclops : EnemyBase
         else
         {
             //rb.AddForce(moveDir, ForceMode.VelocityChange);
-            if (playerInRange || canAttack)
+            if (playerInRange && canAttack)
             {
+                print("melee called");
                 Melee();
             }   
             if (attacking)

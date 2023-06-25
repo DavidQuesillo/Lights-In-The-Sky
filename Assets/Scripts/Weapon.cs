@@ -104,7 +104,7 @@ public class Weapon : MonoBehaviour
 
     protected bool GetIfCooldownPassedWhileSwapped()
     {
-        print("cooldown checked");
+        //print("cooldown checked");
         if (Time.time - timeOfSwap < currentCooldown)
         {
             return true;

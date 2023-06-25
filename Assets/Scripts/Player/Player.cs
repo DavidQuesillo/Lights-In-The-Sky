@@ -466,13 +466,17 @@ public class Player : MonoBehaviour
             weapons[currentWeapon].StopFiring();
             //weapons[currentWeapon].gameObject.SetActive(false);
             weapons[currentWeapon].enabled = false;
+            fireHeld = false;
             currentWeapon = weaponIndex;
             //weapons[currentWeapon].gameObject.SetActive(true);
             weapons[currentWeapon].enabled = true;
-            if (fireHeld)
+
+            //player will not be able to shoot continuously as they switch weapons
+            /*if (fireHeld)
             {
                 weapons[currentWeapon].StartFiring();
-            }
+            }*/
+
             reticleHUD.sprite = reticles[currentWeapon];
             reticleHUD.color = reticleColor[currentWeapon];
             anim.SetInteger("Weapon", weapons[currentWeapon].GetAnimIndex());

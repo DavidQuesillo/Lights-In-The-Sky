@@ -230,11 +230,11 @@ MonoBehaviour:
   deathSoundFX: {fileID: 0}
   aus: {fileID: 4732442128525442355}
   shootPoint: {fileID: 0}
-  health: 0
-  baseHealth: 0
-  speed: 0
+  health: 20
+  baseHealth: 200
+  speed: 250
   projectileSpeed: 0
-  moveTime: 0
+  moveTime: 5
   moveVarRange: 0
   inPosition: 0
   wanderTimer: 0
@@ -243,7 +243,7 @@ MonoBehaviour:
   whereFrom: 0
   isPartOfWave: 0
   initialPosition: {x: 0, y: 0, z: 0}
-  killScore: 0
+  killScore: 25
   anim: {fileID: 4732442127110862767}
   spellAtks:
   - {fileID: 189515893695078440}
@@ -257,16 +257,16 @@ MonoBehaviour:
   - {fileID: 8648771287274734057}
   - {fileID: 4788267757006009538}
   - {fileID: 5949348258107480486}
-  minSpellBounds: {x: 0, y: 0, z: 0}
-  maxSpellBounds: {x: 0, y: 0, z: 0}
+  minSpellBounds: {x: -19.44, y: -6.18, z: -19.1}
+  maxSpellBounds: {x: 26.4, y: 25.59, z: 29.9}
   castingSpell: 0
-  castingTime: 0
+  castingTime: 3.7
   explodeDelay: 0.8
-  explosionLifetime: 0
-  maxSpeed: 0
+  explosionLifetime: 3
+  maxSpeed: 500
   boundaryMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 257
   sameDirTimer: 1
 --- !u!54 &4732442128525442365
 Rigidbody:

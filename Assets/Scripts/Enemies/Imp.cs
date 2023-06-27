@@ -7,12 +7,14 @@ public class Imp : EnemyBase
 {
     [SerializeField] private Animator anim;
     [SerializeField] private SkinnedMeshRenderer mr, mr2;
-    [SerializeField] private LayerMask boundaryMask;
-    [SerializeField] private float maxSpeed;
-    [SerializeField] private float sameDirTimer = 1f;
+    [SerializeField] private LayerMask boundaryMask;    
+    [Header("Firing")]
     [SerializeField] private int barrageAmount = 7;
     [SerializeField] private float barrageSpread = 0.4f;
     private int barrageProg;
+    [Header("Flight")]
+    [SerializeField] private float sameDirTimer = 1f;
+    [SerializeField] private float maxSpeed;
     private float flyTimer;
 
     // Start is called before the first frame update
@@ -47,7 +49,6 @@ public class Imp : EnemyBase
         canTakeDamage = true;
         canAttack = true;
         StartCoroutine(UpdateFlyVector());
-        //canTakeDamage = true;
         StartCoroutine(RepeatAttack());
     }
     // Update is called once per frame

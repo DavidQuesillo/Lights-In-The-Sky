@@ -450,6 +450,13 @@ AnimationClip:
     path: batbody
     classID: 137
     script: {fileID: 0}
+  - curve:
+    - time: 0
+      value: {fileID: 2100000, guid: b53d0db1150b7e049bb6595116084afc, type: 2}
+    attribute: m_Materials.Array.data[0]
+    path: wings
+    classID: 137
+    script: {fileID: 0}
   m_SampleRate: 60
   m_WrapMode: 0
   m_Bounds:
@@ -481,6 +488,13 @@ AnimationClip:
     - serializedVersion: 2
       path: 3025390828
       attribute: 1
+      script: {fileID: 0}
+      typeID: 137
+      customType: 21
+      isPPtrCurve: 1
+    - serializedVersion: 2
+      path: 1778862215
+      attribute: 0
       script: {fileID: 0}
       typeID: 137
       customType: 21
@@ -586,6 +600,7 @@ AnimationClip:
     pptrCurveMapping:
     - {fileID: 2100000, guid: 4ce01c090657fdb4fab6744f89ada7f4, type: 2}
     - {fileID: 2100000, guid: b83525664e9640942adfe6c7e560b9a3, type: 2}
+    - {fileID: 2100000, guid: b53d0db1150b7e049bb6595116084afc, type: 2}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}

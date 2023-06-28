@@ -6,6 +6,9 @@ using UnityEngine.VFX;
 public class ShadowWiz : EnemyBase
 {
     [SerializeField] private Animator anim;
+    [SerializeField] private Material livingMat; //the non-transparent material
+    [SerializeField] private Material deadMat; //the transparent material for fading on death
+    [SerializeField] private Renderer mr;
     [Header("Explosion Spell Behavior")]
     [SerializeField] private GameObject spellAtk; //the designated explosion object. Since each of these enemies only has one, its easier to have them each carry their own. It might be more optimal to have them shared one pooled explosion in the future but this is simpler
     [SerializeField] private GameObject trackingEffect; //the object that indicates where the attack is being casted
@@ -36,6 +39,12 @@ public class ShadowWiz : EnemyBase
     private float flyTimer;
     [SerializeField] private float sameDirTimer = 1f;
 
+    //corooutine storage for cancelling on death
+    /*private Coroutine explosiontimer;
+    private Coroutine atktimer;
+    private Coroutine flyvector;
+    private Coroutine attackloop;*/
+
 
     // Start is called before the first frame update
     void Start()
@@ -54,6 +63,8 @@ public class ShadowWiz : EnemyBase
         spawnVfx.transform.position = transform.position;
         spawnVfx.GetComponent<VisualEffect>().Play();
         aus.PlayOneShot(spawnSoundFX);
+
+        mr.material = livingMat;
 
         health = baseHealth;
         rb.velocity = Vector3.zero;
@@ -136,6 +147,12 @@ public class ShadowWiz : EnemyBase
         spellAtk.SetActive(false);
         trackingEffect.SetActive(false);
         GetComponent<Collider>().enabled = false;
+        mr.material = deadMat;
+
+        /*StopCoroutine(explosiontimer);
+        StopCoroutine(atktimer);
+        StopCoroutine(flyvector);
+        StopCoroutine(attackloop);*/
     }
     /*private void Detonate()
     {

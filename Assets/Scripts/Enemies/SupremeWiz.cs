@@ -6,6 +6,9 @@ using UnityEngine.VFX;
 public class SupremeWiz : EnemyBase
 {
     [SerializeField] private Animator anim;
+    [SerializeField] private Material livingMat; //the non-transparent material
+    [SerializeField] private Material deadMat; //the transparent material for fading on death
+    [SerializeField] private Renderer mr;
     [Header("Explosion Spell Behavior")]
     [SerializeField] private GameObject[] spellAtks; //the designated explosion object. Since each of these enemies only has one, its easier to have them each carry their own. It might be more optimal to have them shared one pooled explosion in the future but this is simpler
     [SerializeField] private GameObject[] spellEffects; //the object that indicates where the attack is being casted
@@ -38,6 +41,11 @@ public class SupremeWiz : EnemyBase
     private float flyTimer;
     [SerializeField] private float sameDirTimer = 1f;
 
+    /*private Coroutine explosiontimer;
+    private Coroutine atktimer;
+    private Coroutine flyvector;
+    private Coroutine attackloop;*/
+
 
     // Start is called before the first frame update
     void Start()
@@ -57,6 +65,8 @@ public class SupremeWiz : EnemyBase
         spawnVfx.GetComponent<VisualEffect>().Play();
         aus.PlayOneShot(spawnSoundFX);
 
+        mr.material = livingMat;
+        
         health = baseHealth;
         rb.velocity = Vector3.zero;
         anim.SetBool("Dead", false);
@@ -160,7 +170,13 @@ public class SupremeWiz : EnemyBase
             spellAtks[i].SetActive(false);
             spellEffects[i].SetActive(false);
         }
+        mr.material = deadMat;
         GetComponent<Collider>().enabled = false;
+
+        /*StopCoroutine(explosiontimer);
+        StopCoroutine(atktimer);
+        StopCoroutine(flyvector);
+        StopCoroutine(attackloop);*/
     }
     /*private void Detonate()
     {

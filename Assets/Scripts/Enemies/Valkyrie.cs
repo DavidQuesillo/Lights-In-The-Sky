@@ -104,7 +104,8 @@ public class Valkyrie : EnemyBase
                 }
             }
             Attack();
-            wanderTimer = Random.Range(moveTime + -moveVarRange, moveTime + moveVarRange); //debug for loop behavior
+            //wanderTimer = Random.Range(moveTime + -moveVarRange, moveTime + moveVarRange); //debug for loop behavior
+            wanderTimer = moveTime;
             FindNewPosition();
             rb.DOMove(moveDir, speed).SetEase(speedCurve);
         }

@@ -558,7 +558,7 @@ public class Player : MonoBehaviour
     {
         //shieldUI.fillAmount = shieldMeter * 0.01f;
 
-        if (Input.GetKey(KeyCode.Mouse1) && shieldMeter > 0f && !shieldDepleted)
+        if (Input.GetKey(KeyCode.Mouse1) && shieldMeter > 0f && !shieldDepleted && health <= 0)
         {
             canShoot = false;
             shield.SetActive(true);

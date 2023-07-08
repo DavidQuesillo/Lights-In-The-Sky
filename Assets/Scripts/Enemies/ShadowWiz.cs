@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.VFX;
+using DG.Tweening;
 
 public class ShadowWiz : EnemyBase
 {
@@ -12,6 +13,7 @@ public class ShadowWiz : EnemyBase
     [Header("Explosion Spell Behavior")]
     [SerializeField] private GameObject spellAtk; //the designated explosion object. Since each of these enemies only has one, its easier to have them each carry their own. It might be more optimal to have them shared one pooled explosion in the future but this is simpler
     [SerializeField] private GameObject trackingEffect; //the object that indicates where the attack is being casted
+    [SerializeField] private List<VisualEffect> castVFX;
     [SerializeField] private bool trackingPlayer; //whether or not the enemy is currently casting the spell and tracking the player's position on it
     [SerializeField] private float castingTime; //the amount of time the attack will track the player before detonating
     private float trackingTimer; //the timer that will count down
@@ -76,11 +78,6 @@ public class ShadowWiz : EnemyBase
         GetComponent<Collider>().enabled = true;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
     private void FixedUpdate()
     {
         if (!attacking && !exploding)
@@ -174,6 +171,10 @@ public class ShadowWiz : EnemyBase
                 {
                     //Detonate();
                     Attack();
+                    foreach (var fx in castVFX)
+                    {
+                        fx.gameObject.SetActive(false);
+                    }
                     yield return new WaitForSeconds(explosionLifetime);
                     exploding = false;
                     attacking = false;
@@ -223,6 +224,11 @@ public class ShadowWiz : EnemyBase
                 rb.velocity = Vector3.zero;                                
                 trackingPlayer = true;    
                 trackingTimer = 0f;
+                foreach (var fx in castVFX)
+                {
+                    fx.gameObject.SetActive(true);
+                    fx.transform.DORotate(Vector3.up*720f + Vector3.up*Random.Range(-30f, 10f), castingTime + explodeDelay, RotateMode.FastBeyond360).SetEase(Ease.InExpo);
+                }
                 while (trackingTimer < castingTime)
                 {
                     AttackTrack();

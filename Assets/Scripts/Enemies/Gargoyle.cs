@@ -4,13 +4,14 @@ using UnityEngine;
 
 public class Gargoyle : EnemyBase
 {
+    [Header("Enemy Unique")]
     [SerializeField] private Light dangerLight;
     [SerializeField] private Material fadingStoneEyes; //this material will cover an unlit material that will gradually be uncovered as the attack happens
     [SerializeField] private bool playerInSight;    
     [SerializeField] private float maxLightIntensity; //the intensity that the light reaches when attack is about to happen
     [SerializeField] private float timeBetweenAtks;
     [SerializeField] private float btwnAtksTimer;
-
+    [SerializeField] private LayerMask layersLand; //the layers that the gargoyle can fly to if it hits them on attack ray
     
     void Start()
     {
@@ -39,11 +40,16 @@ public class Gargoyle : EnemyBase
             if (hit.collider.CompareTag("Player"))
             {
                 hit.collider.GetComponent<Player>().TakeDamage();
+                if (Physics.Raycast(rb.position, GameManager.instance.player.transform.position - rb.position, out hit, 99999f, layersLand))
+                {
+                    rb.position = hit.point;
+                    rb.rotation = Quaternion.LookRotation(hit.normal);
+                }
             }
         }
     }
 
-    // Update is called once per frame
+    // Update is called once per fram
     void Update()
     {
         

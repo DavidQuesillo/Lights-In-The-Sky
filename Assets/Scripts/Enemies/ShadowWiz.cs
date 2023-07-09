@@ -23,6 +23,11 @@ public class ShadowWiz : EnemyBase
     [SerializeField] private float explosionLifetime; //the amount of time the explosion will stay active
     private float boomLifeTimer; //the timer that will count down the explosion lifetime
     // private float flyTimer; //the timer that will count down how long the enemy flies in one direction
+    [Header("Visual Explosion Components")]
+    [SerializeField] private List<VisualEffect> rings;
+    [SerializeField] private List<GameObject> boomSpheres; //list bc additive alpha required several to be visible
+    [SerializeField] private float finalBoomScale; //the magnitude of the scale of the sphere at the end of the explosion
+    [SerializeField] private AnimationCurve boomCurve;
 
     [Header("Movement")]
     [SerializeField] private float maxSpeed;
@@ -115,6 +120,31 @@ public class ShadowWiz : EnemyBase
         //base.Attack();
         trackingPlayer = false;
         explodeTimer = explodeDelay;
+        foreach (var fx in castVFX)
+        {
+            fx.gameObject.SetActive(false);
+        }
+        for (int i = 0; i < rings.Count; i++)
+        {
+            if (i % 2 == 0 || i == 0)
+            {
+                rings[i].transform.rotation = new Quaternion(-0.382683426f, 0, 0, 0.923879564f);
+                rings[i].transform.DOLocalRotate(Vector3.forward * 1080f, explosionLifetime, RotateMode.FastBeyond360).SetEase(Ease.Linear);
+            }
+            else
+            {
+                rings[i].transform.rotation = new Quaternion(0.382683426f, 0, 0, 0.923879564f);
+                rings[i].transform.DOLocalRotate(-Vector3.forward * 1080f, explosionLifetime, RotateMode.FastBeyond360).SetEase(Ease.Linear);
+            }
+            rings[i].Play();
+        }
+        boomSpheres[0].transform.localScale = Vector3.one * 0.2f;
+        boomSpheres[0].transform.DOScale(finalBoomScale, 0.2f).SetEase(Ease.OutExpo);
+        foreach (var sphere in boomSpheres)
+        {
+            sphere.GetComponent<Renderer>().material.DOFade(1f, 0f);
+            sphere.GetComponent<Renderer>().material.DOFade(0f, explosionLifetime).SetEase(boomCurve);
+        }
         //exploding = true;
         //testing
         spellAtk.SetActive(true);
@@ -171,11 +201,11 @@ public class ShadowWiz : EnemyBase
                 {
                     //Detonate();
                     Attack();
-                    foreach (var fx in castVFX)
-                    {
-                        fx.gameObject.SetActive(false);
-                    }
+                    
+                    
+                    
                     yield return new WaitForSeconds(explosionLifetime);
+
                     exploding = false;
                     attacking = false;
                     anim.SetBool("Detonating", false);

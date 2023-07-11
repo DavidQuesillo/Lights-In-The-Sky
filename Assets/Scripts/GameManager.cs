@@ -26,6 +26,8 @@ public class GameManager : MonoBehaviour
     public bool paused = false;
     //public bool gameover = false;
 
+    [SerializeField] private List<HiScore> scoreboard;
+
     private void Awake()
     {
         instance = this;
@@ -33,6 +35,19 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 1f;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+        if (Data.GetScoreData().GetFullScoreboardData() != null)
+        {
+            scoreboard = Data.GetScoreData().GetFullScoreboardData();
+        }
+        else
+        {
+            print("couldnt get scoreboard");
+        }
+    }
+
+    public void DebugHiscoreSet() //press a key and save a hardcoded score into the board
+    {
+
     }
 
     public void ChangeGameState(EGameStates newState)

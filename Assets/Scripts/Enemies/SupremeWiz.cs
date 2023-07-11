@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.VFX;
+using DG.Tweening;
 
 public class SupremeWiz : EnemyBase
 {
@@ -22,7 +23,14 @@ public class SupremeWiz : EnemyBase
     private float explodeTimer; //the timer that will count down based on explode delay
     [SerializeField] private float explosionLifetime; //the amount of time the explosion will stay active
     private float boomLifeTimer; //the timer that will count down the explosion lifetime
-    // private float flyTimer; //the timer that will count down how long the enemy flies in one direction
+                                 // private float flyTimer; //the timer that will count down how long the enemy flies in one direction
+    [Header("Visual Explosion Components")]
+    [SerializeField] private List<VisualEffect> castVFX;
+    [SerializeField] private List<VisualEffect> rings;
+    [SerializeField] private List<GameObject> boomSpheres; //list bc additive alpha required several to be visible
+    [SerializeField] private float finalBoomScale; //the magnitude of the scale of the sphere at the end of the explosion
+    [SerializeField] private AnimationCurve boomCurve;
+
 
     [Header("Movement")]
     [SerializeField] private float maxSpeed;
@@ -92,11 +100,11 @@ public class SupremeWiz : EnemyBase
             
             rb.rotation = Quaternion.LookRotation(GameManager.instance.player.transform.position - rb.position, Vector3.up);
         }
-        /*if (!exploding)
+        if (!exploding)
         {
             rb.rotation = Quaternion.LookRotation(GameManager.instance.player.transform.position - rb.position, Vector3.up);
-        }*/
-        
+        }
+
         /*else if (attacking)
         {
             rb.velocity = Vector3.zero;
@@ -138,6 +146,32 @@ public class SupremeWiz : EnemyBase
         explodeTimer = explodeDelay;
         //exploding = true;
         //testing
+        foreach (var fx in castVFX)
+        {
+            fx.gameObject.SetActive(false);
+        }
+        for (int i = 0; i < rings.Count; i++)
+        {
+            if (i % 2 == 0 || i == 0)
+            {
+                rings[i].transform.rotation = new Quaternion(-0.382683426f, 0, 0, 0.923879564f);
+                rings[i].transform.DOLocalRotate(Vector3.forward * 1080f, explosionLifetime, RotateMode.FastBeyond360).SetEase(Ease.Linear);
+            }
+            else
+            {
+                rings[i].transform.rotation = new Quaternion(0.382683426f, 0, 0, 0.923879564f);
+                rings[i].transform.DOLocalRotate(-Vector3.forward * 1080f, explosionLifetime, RotateMode.FastBeyond360).SetEase(Ease.Linear);
+            }
+            rings[i].Play();
+        }
+        boomSpheres[0].transform.localScale = Vector3.one * 0.2f;
+        boomSpheres[0].transform.DOScale(finalBoomScale, 0.2f).SetEase(Ease.OutExpo);
+        foreach (var sphere in boomSpheres)
+        {
+            sphere.GetComponent<Renderer>().material.DOFade(1f, 0f);
+            sphere.GetComponent<Renderer>().material.DOFade(0f, explosionLifetime).SetEase(boomCurve);
+        }
+
         for (int i = 0; i < spellAtks.Length; i++)
         {
             spellAtks[i].SetActive(true);
@@ -252,6 +286,11 @@ public class SupremeWiz : EnemyBase
                 castingSpell = true;    
                 trackingTimer = 0f;
                 PlaceAttacks();
+                foreach (var fx in castVFX)
+                {
+                    fx.gameObject.SetActive(true);
+                    fx.transform.DORotate(Vector3.up * 720f + Vector3.up * Random.Range(-30f, 10f), castingTime + explodeDelay, RotateMode.FastBeyond360).SetEase(Ease.InExpo);
+                }
                 while (trackingTimer < castingTime)
                 {
                     //PlaceAttacks();

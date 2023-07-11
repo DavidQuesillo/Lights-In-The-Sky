@@ -12,8 +12,7 @@ public class ShadowWiz : EnemyBase
     [SerializeField] private Renderer mr;
     [Header("Explosion Spell Behavior")]
     [SerializeField] private GameObject spellAtk; //the designated explosion object. Since each of these enemies only has one, its easier to have them each carry their own. It might be more optimal to have them shared one pooled explosion in the future but this is simpler
-    [SerializeField] private GameObject trackingEffect; //the object that indicates where the attack is being casted
-    [SerializeField] private List<VisualEffect> castVFX;
+    [SerializeField] private GameObject trackingEffect; //the object that indicates where the attack is being casted    
     [SerializeField] private bool trackingPlayer; //whether or not the enemy is currently casting the spell and tracking the player's position on it
     [SerializeField] private float castingTime; //the amount of time the attack will track the player before detonating
     private float trackingTimer; //the timer that will count down
@@ -24,6 +23,7 @@ public class ShadowWiz : EnemyBase
     private float boomLifeTimer; //the timer that will count down the explosion lifetime
     // private float flyTimer; //the timer that will count down how long the enemy flies in one direction
     [Header("Visual Explosion Components")]
+    [SerializeField] private List<VisualEffect> castVFX;
     [SerializeField] private List<VisualEffect> rings;
     [SerializeField] private List<GameObject> boomSpheres; //list bc additive alpha required several to be visible
     [SerializeField] private float finalBoomScale; //the magnitude of the scale of the sphere at the end of the explosion

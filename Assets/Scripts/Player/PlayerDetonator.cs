@@ -34,8 +34,7 @@ public class PlayerDetonator : Weapon
     protected override void Fire()
     {
         base.Fire();
-        RaycastHit hit;
-        anim.SetBool("Shooting", true);
+        RaycastHit hit;        
         if (!GameManager.instance.paused)
         {
             //lr.enabled = true;
@@ -47,6 +46,8 @@ public class PlayerDetonator : Weapon
             {
                 if (hit.collider.CompareTag("EnemyShot"))
                 {
+                    //anim.SetBool("Shooting", true);
+                    anim.SetTrigger("FireOnce");
                     hit.collider.gameObject.SetActive(false);
                     GameObject explosion = explosionPool.RequestPoolObject();
                     explosion.transform.position = hit.transform.position;
@@ -162,6 +163,10 @@ public class PlayerDetonator : Weapon
                 projectile.transform.position = hit.point;
                 projectile.transform.rotation.SetLookRotation(projectile.transform.position - transform.position);*/
             }
+        }
+        else
+        {
+            currentCooldown = 0.001f;
         }
     }
 }

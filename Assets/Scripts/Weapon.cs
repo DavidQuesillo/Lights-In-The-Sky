@@ -18,7 +18,7 @@ public class Weapon : MonoBehaviour
     [SerializeField] protected Sprite uiIcon;
     [SerializeField] protected Sprite crosshair;
     [SerializeField] protected Animator anim;
-    protected float currentCooldown;
+    [SerializeField] protected float currentCooldown;
     protected float timeOfSwap; //implementing a mechanic so swapping doesnt remove cooldown
     public bool canAttack = true;
     [SerializeField] protected bool fireHeld = false;
@@ -105,6 +105,7 @@ public class Weapon : MonoBehaviour
     protected bool GetIfCooldownPassedWhileSwapped()
     {
         //print("cooldown checked");
+        return true;
         if (Time.time - timeOfSwap < currentCooldown)
         {
             return true;

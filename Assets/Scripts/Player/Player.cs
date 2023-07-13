@@ -45,8 +45,9 @@ public class Player : MonoBehaviour
     public bool canMove = true;
     [SerializeField] private float hSpeed;
     [SerializeField] private float vSpeed;
-    [SerializeField] private float hSlow;
-    [SerializeField] private float vSlow;
+    [SerializeField] private float hDash;
+    [SerializeField] private float vDash;
+    [SerializeField] private float dashDrain;
     [SerializeField] private float smoothingSpeed = 0.1f;
     private Vector2 smoothedVector;
     [SerializeField] private bool movingSlow;
@@ -82,6 +83,7 @@ public class Player : MonoBehaviour
         foreach (var item in weapons)
         {
             item.gameObject.SetActive(false);
+            item.SetAnim(anim);
         }
         weapons  = newArsenal;
         /*foreach (var item in weapons)
@@ -144,8 +146,17 @@ public class Player : MonoBehaviour
         }
         else
         {
-            //rb.velocity = (axisRef.forward * moveVector.y + axisRef.right * moveVector.x) * hSlow + new Vector3(0f, verticalValue * vSlow, 0f);
-            rb.velocity = (axisRef.forward * smoothedVector.y + axisRef.right * smoothedVector.x) * hSlow + new Vector3(0f, smoothedVertical * vSlow, 0f);
+            if (shieldMeter > 0f && !shieldDepleted)
+            {
+                //rb.velocity = (axisRef.forward * moveVector.y + axisRef.right * moveVector.x) * hSlow + new Vector3(0f, verticalValue * vSlow, 0f);
+                rb.velocity = (axisRef.forward * smoothedVector.y + axisRef.right * smoothedVector.x) * hDash + new Vector3(0f, smoothedVertical * vDash, 0f);
+                shieldMeter -= Time.deltaTime * dashDrain;
+                GameManager.instance.UiScript.UsingShield(shieldMeter);
+            }
+            else
+            {
+                shieldDepleted = true;
+            }
         }
         
         //rb.velocity = moveVector;
@@ -558,18 +569,20 @@ public class Player : MonoBehaviour
     {
         //shieldUI.fillAmount = shieldMeter * 0.01f;
 
-        if (Input.GetKey(KeyCode.Mouse1) && shieldMeter > 0f && !shieldDepleted && health <= 0)
+        if (Input.GetKey(KeyCode.Mouse1) && shieldMeter > 0f && !shieldDepleted && health >= 0)
         {
             canShoot = false;
             shield.SetActive(true);
-            weapons[currentWeapon].gameObject.SetActive(false);
+            //weapons[currentWeapon].gameObject.SetActive(false);
+            weapons[currentWeapon].canAttack = false;
             anim.SetBool("Shielding", true);
             shieldMeter -= Time.deltaTime * shieldDrain;
             GameManager.instance.UiScript.UsingShield(shieldMeter);
         }
         else
         {
-            weapons[currentWeapon].gameObject.SetActive(true);
+            //weapons[currentWeapon].gameObject.SetActive(true);
+            weapons[currentWeapon].canAttack = true;
             shield.SetActive(false);
             anim.SetBool("Shielding", false);
             canShoot = true;
